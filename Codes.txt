@@ -1,0 +1,3 @@
+*Create Data/Migrations *
+
+dotnet ef migrations add InitialCreate -p ECommerce.Infrastrucure -s ECommerce.API -o Data/Migrations

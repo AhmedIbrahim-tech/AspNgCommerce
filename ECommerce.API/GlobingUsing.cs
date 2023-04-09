@@ -1,3 +1,9 @@
 ﻿global using Microsoft.AspNetCore.Mvc;
 global using ECommerce.Infrastrucure.Data;
 global using Microsoft.EntityFrameworkCore;
+global using FluentValidation.AspNetCore;
+global using Microsoft.OpenApi.Models;
+global using ECommerce.Core.Interfaces.Services;
+global using ECommerce.Core.Interfaces.Repository;
+global using ECommerce.Core.Services;
+global using ECommerce.Infrastrucure.Repositories;

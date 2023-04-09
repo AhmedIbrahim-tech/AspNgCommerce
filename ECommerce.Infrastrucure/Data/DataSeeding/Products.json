@@ -1,0 +1,115 @@
+[
+	{
+		"Name": "Angular Speedster Board 2000",
+		"Description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia,molestiae quas vel sint commodi repudiandae consequuntur",
+		"Price": 200,
+		"PictureURL": "images/Products/sb-ang1.png",
+		"ProductTypeID": 1,
+		"ProductBrandID": 1
+	},
+	{
+		"Name": "Green Angular Board 3000",
+		"Description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia,molestiae quas vel sint commodi repudiandae consequuntur",
+		"Price": 150,
+		"PictureURL": "images/Products/sb-ang2.png",
+		"ProductTypeID": 1,
+		"ProductBrandID": 1
+	},
+	{
+		"Name": "Core Board Speed Rush 3",
+		"Description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia,molestiae quas vel sint commodi repudiandae consequuntur",
+		"Price": 180,
+		"PictureURL": "images/Products/sb-core1.png",
+		"ProductTypeID": 1,
+		"ProductBrandID": 2
+	},
+	{
+		"Name": "Net Core Super Board",
+		"Description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia,molestiae quas vel sint commodi repudiandae consequuntur",
+		"Price": 300,
+		"PictureURL": "images/Products/sb-ang2.png",
+		"ProductTypeID": 1,
+		"ProductBrandID": 2
+	},
+	{
+		"Name": "React Board Super Whizzy Fast",
+		"Description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia,molestiae quas vel sint commodi repudiandae consequuntur",
+		"Price": 250,
+		"PictureURL": "images/Products/sb-react1.png",
+		"ProductTypeID": 1,
+		"ProductBrandID": 4
+	},
+	{
+		"Name": "TypeScript Entity Board",
+		"Description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia,molestiae quas vel sint commodi repudiandae consequuntur",
+		"Price": 120,
+		"PictureURL": "images/Products/sb-ang1.png",
+		"ProductTypeID": 1,
+		"ProductBrandID": 2
+	},
+	{
+		"Name": "Core Blue Hat",
+		"Description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia,molestiae quas vel sint commodi repudiandae consequuntur",
+		"Price": 10,
+		"PictureURL": "images/Products/hat-core1.png",
+		"ProductTypeID": 2,
+		"ProductBrandID": 2
+	},
+	{
+		"Name": "Speedster Board 2000",
+		"Description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia,molestiae quas vel sint commodi repudiandae consequuntur",
+		"Price": 200,
+		"PictureURL": "images/Products/sb-ang1.png",
+		"ProductTypeID": 1,
+		"ProductBrandID": 1
+	},
+	{
+		"Name": "Green Board 3000",
+		"Description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia,molestiae quas vel sint commodi repudiandae consequuntur",
+		"Price": 150,
+		"PictureURL": "images/Products/sb-ang2.png",
+		"ProductTypeID": 1,
+		"ProductBrandID": 1
+	},
+	{
+		"Name": "Board Speed Rush 3",
+		"Description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia,molestiae quas vel sint commodi repudiandae consequuntur",
+		"Price": 180,
+		"PictureURL": "images/Products/sb-core1.png",
+		"ProductTypeID": 1,
+		"ProductBrandID": 2
+	},
+	{
+		"Name": "Super Board",
+		"Description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia,molestiae quas vel sint commodi repudiandae consequuntur",
+		"Price": 300,
+		"PictureURL": "images/Products/sb-ang2.png",
+		"ProductTypeID": 1,
+		"ProductBrandID": 3
+	},
+	{
+		"Name": "Board Super Whizzy Fast",
+		"Description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia,molestiae quas vel sint commodi repudiandae consequuntur",
+		"Price": 250,
+		"PictureURL": "images/Products/sb-react1.png",
+		"ProductTypeID": 4,
+		"ProductBrandID": 4
+	},
+	{
+		"Name": "Entity Board",
+		"Description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia,molestiae quas vel sint commodi repudiandae consequuntur",
+		"Price": 120,
+		"PictureURL": "images/Products/sb-ang1.png",
+		"ProductTypeID": 4,
+		"ProductBrandID": 4
+	},
+	{
+		"Name": "Blue Hat",
+		"Description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia,molestiae quas vel sint commodi repudiandae consequuntur",
+		"Price": 10,
+		"PictureURL": "images/Products/hat-core1.png",
+		"ProductTypeID": 3,
+		"ProductBrandID": 6
+	}
+
+]

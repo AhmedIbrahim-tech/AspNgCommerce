@@ -1,6 +1,4 @@
-using FluentValidation.AspNetCore;
-using Microsoft.OpenApi.Models;
-using System.Reflection;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -52,6 +50,19 @@ builder.Services.AddSwaggerGen(options =>
 
 #endregion
 
+#region Dependency Injection
+
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+//Repository
+builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+builder.Services.AddTransient<IProductRepository, ProductRepository>();
+
+//Services
+builder.Services.AddTransient<IProductServices, ProductServices>();
+
+#endregion
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -66,5 +77,25 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+
+#region Update Database
+
+using var scope = app.Services.CreateScope();
+var Services = scope.ServiceProvider;
+var context = Services.GetRequiredService<ApplicationDBContext>();
+var logger = Services.GetRequiredService<ILogger<Program>>();
+
+try
+{
+    await context.Database.MigrateAsync();
+    await StoreContextSeed.SeedAsync(context);
+}
+catch (Exception ex)
+{
+    logger.LogError(ex, "Error Occurred While Migrating Process");
+}
+
+
+#endregion
 
 app.Run();

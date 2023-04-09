@@ -4,4 +4,38 @@
 [ApiController]
 public class ProductController : ControllerBase
 {
+    private readonly IProductServices productServices;
+
+    public ProductController(IProductServices productServices)
+    {
+        this.productServices = productServices;
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> GetProducts()
+    {
+        var result = await productServices.GetAllProductsAsync();
+        return StatusCode(result.StatusCode, result);
+    }
+
+    [HttpGet("ProductTypes")]
+    public async Task<IActionResult> GetProductTypesAsync()
+    {
+        var result = await productServices.GetProductTypesAsync();
+        return StatusCode(result.StatusCode, result);
+    }
+
+    [HttpGet("ProductBrands")]
+    public async Task<IActionResult> GetProductBrandsAsync()
+    {
+        var result = await productServices.GetProductBrandsAsync();
+        return StatusCode(result.StatusCode, result);
+    }
+
+    [HttpGet("{id}")]
+    public async Task<IActionResult> GetProductById(int id)
+    {
+        var result = await productServices.GetProductByIdAsync(id);
+        return StatusCode(result.StatusCode, result);
+    }
 }
