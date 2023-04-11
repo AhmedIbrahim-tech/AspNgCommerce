@@ -3,7 +3,9 @@
 public interface IUnitOfWork : IDisposable
 {
     IProductRepository ProductRepository { get; }
-    IGenericRepository<Product> GenericRepository { get; }
+    IGenericRepository<Product> GProductRepository { get; }
+    IGenericRepository<ProductBrand> GProductBrandRepository { get; }
+    IGenericRepository<ProductType> GProductTypeRepository { get; }
 
     void SaveChanges();
     Task SaveChangesAsync();

@@ -1,10 +1,14 @@
-﻿namespace ECommerce.Core.Interfaces.Repository;
+﻿using ECommerce.Core.Interfaces.Specifications;
+
+namespace ECommerce.Core.Interfaces.Repository;
 
 public interface IGenericRepository<T> where T : BaseEntity
 {
-    IEnumerable<T> GetAll();
-    Task<T> GetById(int id);
-    Task Add(T entity);
-    Task Edit(T entity);
-    Task Delete(int id);
+    Task<IReadOnlyList<T>> ListAllAsync();
+    Task<T> GetByIdAsync(int id);
+    Task<T> GetEntityWithSpec(ISpecification<T> specification);
+    Task<IReadOnlyList<T>> ListAsync(ISpecification<T> specification);
+    //Task AddAsync(T entity);
+    //Task EditAsync(T entity); 
+    //Task DeleteAsync(int id);
 }

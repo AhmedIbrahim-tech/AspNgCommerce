@@ -63,6 +63,10 @@ builder.Services.AddTransient<IProductServices, ProductServices>();
 
 #endregion
 
+#region Auto Mapper
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+#endregion
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

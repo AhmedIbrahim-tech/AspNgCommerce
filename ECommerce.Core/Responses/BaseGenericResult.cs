@@ -4,7 +4,7 @@ namespace ECommerce.Core.Responses;
 
 public class BaseGenericResult<T> : BaseQueryResult
 {
-    public BaseGenericResult()
+    public BaseGenericResult(bool v, int oK)
     {
 
     }

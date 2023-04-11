@@ -1,4 +1,6 @@
-﻿namespace ECommerce.Infrastrucure.Repositories;
+﻿using ECommerce.Core.Interfaces.Specifications;
+
+namespace ECommerce.Infrastrucure.Repositories;
 
 public class GenericRepository<T> : IGenericRepository<T> where T : BaseEntity
 {
@@ -6,32 +8,47 @@ public class GenericRepository<T> : IGenericRepository<T> where T : BaseEntity
 
     public GenericRepository(ApplicationDBContext context)
     {
-        this._context = context;
+        _context = context;
     }
 
-    public IEnumerable<T> GetAll()
+    public async Task<IReadOnlyList<T>> ListAllAsync()
     {
-        return _context.Set<T>().AsEnumerable();
+        return await _context.Set<T>().ToListAsync();
     }
 
-    public async Task<T> GetById(int id)
+    public async Task<T> GetByIdAsync(int id)
     {
         return await _context.Set<T>().FindAsync(id);
     }
 
-    public async Task Add(T entity)
+    public async Task<T> GetEntityWithSpec(ISpecification<T> specification)
     {
-        await _context.Set<T>().AddAsync(entity);
+        return await AppSpecification(specification).FirstOrDefaultAsync();
     }
 
-    public async Task Edit(T entity)
+    public async Task<IReadOnlyList<T>> ListAsync(ISpecification<T> specification)
     {
-        _context.Set<T>().Update(entity);
+        return await AppSpecification(specification).ToListAsync();
     }
 
-    public async Task Delete(int id)
+    private IQueryable<T> AppSpecification(ISpecification<T> specification)
     {
-        T CurrentEntity = await GetById(id);
-        _context.Set<T>().Remove(CurrentEntity);
+        return SpecificationEvaluator<T>.GetQuery(_context.Set<T>().AsQueryable(), specification);
     }
+
+    //public async Task Add(T entity)
+    //{
+    //    await _context.Set<T>().AddAsync(entity);
+    //}
+
+    //public async Task Edit(T entity)
+    //{
+    //    _context.Set<T>().Update(entity);
+    //}
+
+    //public async Task Delete(int id)
+    //{
+    //    T CurrentEntity = await GetByIdAsync(id);
+    //    _context.Set<T>().Remove(CurrentEntity);
+    //}
 }
