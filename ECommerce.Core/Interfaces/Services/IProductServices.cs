@@ -2,7 +2,7 @@
 
 public interface IProductServices
 {
-    Task<BaseGenericResult<IReadOnlyList<ProductDto>>> GetAllProductsAsync();
+    Task<BaseGenericResult<Pagination<ProductDto>>> GetAllProductsAsync(ProductSpecParams productSpecParams);
     Task<BaseGenericResult<ProductDto>> GetProductByIdAsync(int id);
     Task<BaseGenericResult<IReadOnlyList<ProductType>>> GetProductTypesAsync();
     Task<BaseGenericResult<IReadOnlyList<ProductBrand>>> GetProductBrandsAsync();

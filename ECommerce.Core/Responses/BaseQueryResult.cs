@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ECommerce.Core.Responses;
+﻿namespace ECommerce.Core.Responses;
 
 public class BaseQueryResult
 {
@@ -16,9 +10,22 @@ public class BaseQueryResult
     {
         this.Status = Status;
         this.StatusCode = StatusCode;
-        this.Message = Message;
+        this.Message = Message ?? GetDefaultMessageForStatusCode(StatusCode);
         this.ValidationErrors = ValidationErrors;
     }
+
+    public string GetDefaultMessageForStatusCode(int statusCode)
+    {
+        return statusCode switch
+        {
+            400 => "A bad Request, You have Made",
+            401 => "Authorized you are not",
+            404 => "Response found it is not",
+            500 => "Server error occurred",
+            _ => null
+        };
+    }
+
     public bool Status { get; set; }
     public string Message { get; set; }
     public int StatusCode { get; set; }

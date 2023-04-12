@@ -1,4 +1,5 @@
 ﻿using ECommerce.Core.Interfaces.Specifications;
+using ECommerce.Infrastrucure.Specifications;
 
 namespace ECommerce.Infrastrucure.Repositories;
 
@@ -31,10 +32,17 @@ public class GenericRepository<T> : IGenericRepository<T> where T : BaseEntity
         return await AppSpecification(specification).ToListAsync();
     }
 
+    public async Task<int> CountAsync(ISpecification<T> specification)
+    {
+        return await AppSpecification(specification).CountAsync();
+    }
+
     private IQueryable<T> AppSpecification(ISpecification<T> specification)
     {
         return SpecificationEvaluator<T>.GetQuery(_context.Set<T>().AsQueryable(), specification);
     }
+
+
 
     //public async Task Add(T entity)
     //{

@@ -2,7 +2,7 @@
 
 [Route("api/[controller]")]
 [ApiController]
-public class ProductController : ControllerBase
+public class ProductController : BaseAPIController
 {
     private readonly IProductServices productServices;
 
@@ -12,9 +12,9 @@ public class ProductController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<IActionResult> GetProducts()
+    public async Task<IActionResult> GetProducts([FromQuery] ProductSpecParams productSpecParams)
     {
-        var result = await productServices.GetAllProductsAsync();
+        var result = await productServices.GetAllProductsAsync(productSpecParams);
         return StatusCode(result.StatusCode, result);
     }
 

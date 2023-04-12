@@ -4,3 +4,6 @@ global using ECommerce.Core.Interfaces.Services;
 global using ECommerce.Core.Responses;
 global using AutoMapper;
 global using ECommerce.Core.DTOS;
+global using ECommerce.Core.CustomEntities;
+global using ECommerce.Core.Interfaces.Specifications;
+global using System.Net;

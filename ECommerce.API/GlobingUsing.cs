@@ -10,3 +10,5 @@ global using ECommerce.Infrastrucure.Repositories;
 global using AutoMapper;
 global using ECommerce.Core.DTOS;
 global using ECommerce.Core.Entities;
+global using ECommerce.Core.Interfaces.Specifications;
+global using ECommerce.API.Middleware;

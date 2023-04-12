@@ -1,8 +1,4 @@
-﻿using ECommerce.Core.CustomEntities;
-using ECommerce.Core.Interfaces.Specifications;
-using System.Net;
-
-namespace ECommerce.Core.Services;
+﻿namespace ECommerce.Core.Services;
 
 public class ProductServices : IProductServices
 {
@@ -16,27 +12,22 @@ public class ProductServices : IProductServices
     }
 
     #region Get All Products
-    public async Task<BaseGenericResult<IReadOnlyList<ProductDto>>> GetAllProductsAsync()
+    public async Task<BaseGenericResult<Pagination<ProductDto>>> GetAllProductsAsync(ProductSpecParams productSpecParams)
     {
         try
         {
-            var Spec = new ProductWithTypesAndBrandsSpecification();
+            var Spec = new ProductWithTypesAndBrandsSpecification(productSpecParams);
+            var countSpec = new ProductWithFiltersForCountSepecification(productSpecParams);
+            var totalItems = await _unitOfWork.GProductRepository.CountAsync(countSpec);
+
             var result = await _unitOfWork.GProductRepository.ListAsync(Spec);
             var ListDto = _mapper.Map<IReadOnlyList<ProductDto>>(result);
-            var metadata = new Metadata
-            {
-                //TotalCount = result.TotalCount,
-                //PageSize = result.PageSize,
-                //CurrentPage = result.CurrentPage,
-                //TotalPages = result.TotalPages,
-                //HasNextPage = result.HasNextPage,
-                ////HasPreviousPage = result.HasPreviousPage,
-            };
-            return new(true, (int)HttpStatusCode.OK, "Data Loading Successfully", ListDto)
-            {
-                Meta = metadata
-            };
 
+            var pageList = new Pagination<ProductDto>(productSpecParams.PageIndex , productSpecParams.PageSize , totalItems , ListDto);
+
+
+            return new(true, (int)HttpStatusCode.OK, "Data Loading Successfully", pageList);
+            
         }
         catch (Exception ex)
         {
