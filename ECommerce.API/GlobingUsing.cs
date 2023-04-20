@@ -12,3 +12,4 @@ global using ECommerce.Core.DTOS;
 global using ECommerce.Core.Entities;
 global using ECommerce.Core.Interfaces.Specifications;
 global using ECommerce.API.Middleware;
+global using ECommerce.Core.QueryFilters;

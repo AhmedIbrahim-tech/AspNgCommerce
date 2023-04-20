@@ -22,7 +22,7 @@ public class PagedList<T> : List<T>
         AddRange(items);
     }
 
-    public static PagedList<T> Create(IEnumerable<T> source, int pageNumber, int pageSize)
+    public static PagedList<T> Create(IEnumerable<T> source, int pageNumber = 1, int pageSize = 10)
     {
         var count = source.Count();
         var items = source.Skip((pageNumber - 1) * pageSize).Take(pageSize).ToList();

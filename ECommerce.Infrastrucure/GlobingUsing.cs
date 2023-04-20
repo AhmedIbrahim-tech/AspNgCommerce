@@ -4,3 +4,7 @@ global using ECommerce.Core.Entities;
 global using ECommerce.Core.Interfaces.Repository;
 global using ECommerce.Infrastrucure.Data;
 global using Microsoft.EntityFrameworkCore.Metadata.Builders;
+global using Microsoft.AspNetCore.Mvc.Filters;
+global using Microsoft.AspNetCore.Mvc;
+global using ECommerce.Core.Exceptions;
+global using ECommerce.Core.QueryFilters;

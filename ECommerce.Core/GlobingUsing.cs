@@ -7,3 +7,4 @@ global using ECommerce.Core.DTOS;
 global using ECommerce.Core.CustomEntities;
 global using ECommerce.Core.Interfaces.Specifications;
 global using System.Net;
+global using ECommerce.Core.QueryFilters;
