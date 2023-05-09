@@ -11,21 +11,13 @@
 
             <h5 class="text-warning ms-3">Brands</h5>
             <ul class="list-group my-3">
-                <li class="list-group-item active">Lorem ipsum</li>
-                <li class="list-group-item">Lorem ipsum</li>
-                <li class="list-group-item">Lorem ipsum</li>
-                <li class="list-group-item">Lorem ipsum</li>
-                <li class="list-group-item">Lorem ipsum</li>
+                <li class="list-group-item" *ngFor="let item of brands">{{item.name}}</li>
             </ul>
 
             
             <h5 class="text-warning ms-3">Types</h5>
             <ul class="list-group my-3">
-                <li class="list-group-item">Lorem ipsum</li>
-                <li class="list-group-item">Lorem ipsum</li>
-                <li class="list-group-item">Lorem ipsum</li>
-                <li class="list-group-item">Lorem ipsum</li>
-
+                <li class="list-group-item" *ngFor="let item of types">{{item.name}}</li>
             </ul>
 
         </section>

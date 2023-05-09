@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Pagination } from 'src/app/shared/Models/Pagination';
 import { Product } from 'src/app/shared/Models/Product';
@@ -14,8 +14,11 @@ export class ShopService {
 
 
 
-  GetListOfProducts(){
-    return this.http.get<any>(environment.APIURL + 'product');
+  GetListOfProducts(BrandId?:number , TypeId?:number){
+    let param = new HttpParams();
+    if(BrandId) param = param.append("BrandId" , BrandId);
+    if(TypeId) param = param.append("TypeId" , TypeId);
+    return this.http.get<Pagination<any>>(environment.APIURL + 'product' , {params : param});
   }
 
   GetBrands(){

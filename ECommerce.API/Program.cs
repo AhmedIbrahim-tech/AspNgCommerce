@@ -9,6 +9,7 @@ builder.Services.AddControllers().AddNewtonsoftJson(options =>
     options.SerializerSettings.NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore;
 });
 #endregion
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
@@ -79,7 +80,7 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("CorsPolicy", policy =>
     {
-        policy.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:4200");
+    policy.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:4200");
     });
 });
 

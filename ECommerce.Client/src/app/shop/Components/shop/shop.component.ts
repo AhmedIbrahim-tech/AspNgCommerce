@@ -11,21 +11,30 @@ import { Type } from 'src/app/shared/Models/type';
   styleUrls: ['./shop.component.scss']
 })
 export class ShopComponent implements OnInit {
+  //#region Variable
+
   products: Product[] = [];
   brands: Brand[] = [];
   types: Type[] = [];
+
+  SelectTypeId: number = 0;
+  SelectBrandId: number = 0;
+
+  //#endregion
+
+
   constructor(private _serives: ShopService) { }
 
   ngOnInit(): void {
-    this.GetListOfPro();
+    this.GetListOfProducts();
     this.GetBrands();
     this.GetTypes();
   }
 
 
-  GetListOfPro() {
-    this._serives.GetListOfProducts().pipe(retry(3)).subscribe({
-      next: (response) => { this.products = response.data.data  , console.log(this.products);},
+  GetListOfProducts() {
+    this._serives.GetListOfProducts(this.SelectBrandId , this.SelectTypeId).pipe(retry(3)).subscribe({
+      next: (response) => { this.products = response.data.data },
       error: (error) => console.log(error),
       complete: () => { console.log("Data is Completed"); }
     })
@@ -33,7 +42,7 @@ export class ShopComponent implements OnInit {
 
   GetBrands() {
     this._serives.GetBrands().pipe(retry(3)).subscribe({
-      next: (response) => {this.brands = response.data , console.log("brands " + this.brands)},
+      next: response => this.brands = [{ id: 0, name: "All" }, ...response.data],
       error: (error) => console.log(error),
       complete: () => console.log("Data is Completed")
     })
@@ -41,10 +50,21 @@ export class ShopComponent implements OnInit {
 
   GetTypes() {
     this._serives.GetType().pipe(retry(3)).subscribe({
-      next: (response) => {this.types = response.data , console.log("types " + this.types)},
+      next: (response) => { this.types = [{ id: 0, name: "All" }, ...response.data] },
       error: (error) => console.log(error),
       complete: () => console.log("Data is Completed")
     })
+  }
+
+
+  onBrandSelected(brandId: number) {
+    this.SelectBrandId = brandId;
+    this.GetListOfProducts();
+  }
+
+  onTypeSelected(typeId: number) {
+    this.SelectTypeId = typeId;
+    this.GetListOfProducts();
   }
 
 }

@@ -5,3 +5,9 @@ Ng add ngx-bootstrap@8.0.0
 
 → Font Awesome ←
 npm install font-awesome
+
+
+CLI Commond
+- ng g m --routing          → Create Module with Routing
+- ng g s shop --skip-tests  → Create Service and Skip Test File
+- 
