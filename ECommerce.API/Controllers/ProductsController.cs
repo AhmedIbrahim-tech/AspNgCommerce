@@ -1,8 +1,4 @@
-﻿using ECommerce.Core.CustomEntities;
-using ECommerce.Core.Responses;
-using Microsoft.Extensions.Hosting;
-using Newtonsoft.Json;
-using System.Net;
+﻿using Newtonsoft.Json;
 
 namespace ECommerce.API.Controllers;
 
@@ -25,7 +21,7 @@ public class ProductsController : ControllerBase
 
     #region Get List Of Products
 
-    [HttpPost("Products")]
+    [HttpPost]
     public async Task<IActionResult> GetListOfProducts([FromBody] ProductsQueryFilter filter)
     {
         var result = await productServices.GetListOfProductsAsync(filter);

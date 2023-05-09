@@ -1,0 +1,7 @@
+cd '.\03_WorkShop\`[01`] Production\`[02`] BackEnd\01_Source Code\`[01`] Personal Projects\E-Commerce\.NET Api with Angular\E-Commerce api\ECommerce.Client\'
+
+→ Install ngx-bootstrap ←
+Ng add ngx-bootstrap@8.0.0
+
+→ Font Awesome ←
+npm install font-awesome

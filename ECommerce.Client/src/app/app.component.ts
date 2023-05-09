@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { IProduct } from './shared/Models/Product';
+import { Product } from './shared/Models/Product';
 import { Pagination } from './shared/Models/Pagination';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-root',
@@ -10,15 +11,21 @@ import { Pagination } from './shared/Models/Pagination';
 })
 export class AppComponent implements OnInit {
   title = 'ECommerce Application';
-  products : IProduct[] = [];
+  products: Product[] = [];
   constructor(private http:HttpClient){}
 
   ngOnInit(): void {
-    this.http.get<Pagination<IProduct[]>>("https://localhost:44332/api/Product?PageSize=50").subscribe({
-      next : (response) => {console.log(response); this.products = response.data },
+    this.GetListOfProducts();
+  }
+
+  GetListOfProducts(){
+    this.http.get<any>(`${environment.APIURL}Product?pageSize=50`).subscribe({
+      next : response => {
+        this.products = response.data.data
+        console.log(this.products)
+      },
       error : (error) => {console.log(error);},
       complete : () => { console.log("Request Completed"); }
     });
   }
-
 }
