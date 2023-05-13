@@ -21,6 +21,11 @@ public class ProductsController : ControllerBase
 
     #region Get List Of Products
 
+    /// <summary>
+    /// Get All Products By Use Repository Pattern
+    /// </summary>
+    /// <param name="filter"></param>
+    /// <returns></returns>
     [HttpPost]
     public async Task<IActionResult> GetListOfProducts([FromBody] ProductsQueryFilter filter)
     {

@@ -1,0 +1,48 @@
+*Create Data/Migrations *
+dotnet ef migrations add InitialCreate -p ECommerce.Infrastrucure -s ECommerce.API -o Data/Migrations
+
+CLI For .NET Core
+→ dotnet --info      // To Know How Many SDK of .NET Version You Have .
+→ dotnet -h          // To Get All SDK .NET Commands.
+
+
+
+
+
+Create NEW Project Of .NET
+→ dotnet new webapi -n E-Commerce.API
+→ dotnet sln add E-Commerce.API 
+
+
+→ API 
+Install-Package Microsoft.EntityFrameworkCore
+Install-Package Microsoft.EntityFrameworkCore.SqlServer
+Install-Package Microsoft.EntityFrameworkCore.Design
+Install-Package Microsoft.AspNetCore.Authentication.JwtBearer
+Install-Package Microsoft.AspNetCore.Mvc.NewtonsoftJson
+Install-Package AutoMapper.Extensions.Microsoft.DependencyInjection
+
+<ItemGroup>
+<ProjectReference Include="..\Infrastrucure\Infrastrucure.csproj" />
+</ItemGroup>
+
+
+→ Infrastructure
+Install-Package Microsoft.EntityFrameworkCore.SqlServer
+Install-Package Microsoft.EntityFrameworkCore.Design
+Install-Package Microsoft.EntityFrameworkCore.Tools
+Install-Package Microsoft.AspNetCore.Identity
+Install-Package Microsoft.IdentityModel.Tokens
+Install-Package StackExchange.Redis
+Install-Package Stripe.net
+Install-Package System.IdentityModel.Tokens.Jwt
+
+Install-Package AutoMapper.Extensions.Microsoft.DependencyInjection
+Install-Package FluentValidation.AspNetCore
+
+<ItemGroup>
+<ProjectReference Include="..\Core\Core.csproj" />
+</ItemGroup>
+
+→ Core 
+Install-Package Microsoft.AspNetCore.Identity.EntityFrameworkCore

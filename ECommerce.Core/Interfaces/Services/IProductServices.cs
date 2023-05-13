@@ -1,5 +1,4 @@
 ﻿namespace ECommerce.Core.Interfaces.Services;
-
 public interface IProductServices
 {
     Task<BaseGenericResult<Pagination<ProductDto>>> GetAllProductsAsync(ProductSpecParams productSpecParams);

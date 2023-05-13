@@ -126,7 +126,6 @@ catch (Exception ex)
     logger.LogError(ex, "Error Occurred While Migrating Process");
 }
 
-
 #endregion
 
 app.Run();

@@ -2,6 +2,7 @@
 
 [Route("api/[controller]")]
 [ApiController]
+
 public class ProductController : BaseAPIController
 {
     private readonly IProductServices productServices;
@@ -11,6 +12,11 @@ public class ProductController : BaseAPIController
         this.productServices = productServices;
     }
 
+    /// <summary>
+    /// Get All Products By Use Specification Pattern
+    /// </summary>
+    /// <param name="productSpecParams"></param>
+    /// <returns></returns>
     [HttpGet]
     public async Task<IActionResult> GetProducts([FromQuery] ProductSpecParams productSpecParams)
     {
