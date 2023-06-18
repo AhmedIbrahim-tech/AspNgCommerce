@@ -12,9 +12,9 @@ public class SpecificationEvaluator<TEntity> where TEntity : BaseEntity
             query = query.Where(specification.Criteria);
         }
 
-        if (specification.orderby != null)
+        if (specification.OrderBy != null)
         {
-            query = query.OrderBy(specification.orderby);
+            query = query.OrderBy(specification.OrderBy);
         }
 
         if (specification.orderbyDescending != null)

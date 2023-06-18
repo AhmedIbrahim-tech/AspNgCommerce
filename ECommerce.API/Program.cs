@@ -101,10 +101,12 @@ app.UseStatusCodePagesWithReExecute("/errors/{0}");
 #endregion
 
 app.UseHttpsRedirection();
-app.UseStaticFiles();
+
+app.UseStaticFiles(); // ? It's Important To Add Images
 
 app.UseCors("CorsPolicy");
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
