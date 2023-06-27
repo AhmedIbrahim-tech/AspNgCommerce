@@ -8,22 +8,24 @@ import { Type } from 'src/app/shared/Models/type';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ShopService {
-  constructor(private http: HttpClient) { }
-
-
+  constructor(private http: HttpClient) {}
 
   GetListOfProducts(shopparam: ShopParams) {
     let param = new HttpParams();
-    if (shopparam.brandId) param = param.append("BrandId", shopparam.brandId);
-    if (shopparam.typeId) param = param.append("TypeId", shopparam.typeId);
-    if (shopparam.sort) param = param.append("Sort", shopparam.sort);
-    if (shopparam.pageIndex) param = param.append("pageIndex", shopparam.pageIndex);
-    if (shopparam.pageSize) param = param.append("pageSize", shopparam.pageSize);
-    if (shopparam.Search) param = param.append("Search", shopparam.Search);
-    return this.http.get<Pagination<any>>(environment.APIURL + 'product', { params: param });
+    if (shopparam.brandId) param = param.append('BrandId', shopparam.brandId);
+    if (shopparam.typeId) param = param.append('TypeId', shopparam.typeId);
+    if (shopparam.sort) param = param.append('Sort', shopparam.sort);
+    if (shopparam.pageIndex)
+      param = param.append('pageIndex', shopparam.pageIndex);
+    if (shopparam.pageSize)
+      param = param.append('pageSize', shopparam.pageSize);
+    if (shopparam.Search) param = param.append('Search', shopparam.Search);
+    return this.http.get<Pagination<any>>(environment.APIURL + 'product', {
+      params: param,
+    });
   }
 
   GetBrands() {
@@ -32,5 +34,9 @@ export class ShopService {
 
   GetType() {
     return this.http.get<any>(environment.APIURL + 'product/ProductTypes');
+  }
+
+  getSingleProduct(id: number) {
+    return this.http.get<any>(environment.APIURL + 'product/' + id);
   }
 }

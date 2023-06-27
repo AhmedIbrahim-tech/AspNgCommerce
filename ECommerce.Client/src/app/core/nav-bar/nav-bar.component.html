@@ -57,9 +57,9 @@
     bg-white border-bottom fixed-top shadow-sm">
     <img src="/assets/images/logo.png" alt="logo" class="logo" style="max-height: 70px;" routerLink="/">
     <nav class="my-2 text-uppercase fs-4">
-        <a class="p-2 text-dark text-decoration-none" href="#" >Home</a>
-        <a class="p-2 text-dark text-decoration-none" href="#" >Shop</a>
-        <a class="p-2 text-dark text-decoration-none" href="#">Errors</a>
+        <a class="p-2" [routerLinkActiveOptions]="{exact:true}" routerLinkActive="active" routerLink="/" >Home</a>
+        <a class="p-2" routerLinkActive="active" routerLink="/shop" >Shop</a>
+        <a class="p-2" routerLinkActive="active" routerLink="/test-error">Errors</a>
     </nav>
 
     <div class="d-flex align-items-center">

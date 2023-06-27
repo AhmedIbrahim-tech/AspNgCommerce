@@ -6,21 +6,26 @@ import { ShopComponent } from './Components/shop/shop.component';
 import { AppRoutingModule } from '../app-routing.module';
 import { ProductItemComponent } from './Components/product-item/product-item.component';
 import { SharedModule } from '../shared/shared.module';
+import { ProductDetailsComponent } from './Components/product-details/product-details.component';
+import { RouterModule } from '@angular/router';
 
 
 @NgModule({
   declarations: [
     ShopComponent,
-    ProductItemComponent
+    ProductItemComponent,
+    ProductDetailsComponent
   ],
   imports: [
+    RouterModule,
     CommonModule,
     ShopRoutingModule,
     AppRoutingModule,
-    SharedModule
+    SharedModule,
   ],
   exports : [
-    ShopComponent
+    ShopComponent,
+    ProductDetailsComponent
   ]
 })
 export class ShopModule { }
