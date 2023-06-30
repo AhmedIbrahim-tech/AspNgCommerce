@@ -2,12 +2,12 @@
 
 public class Pagination<T> where T : class
 {
-    public Pagination(int CurrentPage, int pageSize, int totalCount, IReadOnlyList<T> Data)
+    public Pagination(int pageIndex, int pageSize, int count, IReadOnlyList<T> data)
     {
-        this.PageIndex = CurrentPage;
+        this.PageIndex = pageIndex;
         this.PageSize = pageSize;
-        this.Count = totalCount;
-        this.Data = Data;
+        this.Count = count;
+        this.Data = data;
     }
 
     public int PageIndex { get; set; }

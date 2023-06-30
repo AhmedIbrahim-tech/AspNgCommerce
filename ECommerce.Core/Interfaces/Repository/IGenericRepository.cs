@@ -1,6 +1,4 @@
-﻿using ECommerce.Core.Interfaces.Specifications;
-
-namespace ECommerce.Core.Interfaces.Repository;
+﻿namespace ECommerce.Core.Interfaces.Repository;
 
 public interface IGenericRepository<T> where T : BaseEntity
 {

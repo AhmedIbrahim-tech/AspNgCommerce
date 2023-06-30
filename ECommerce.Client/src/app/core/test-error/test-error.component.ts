@@ -17,34 +17,31 @@ export class TestErrorComponent implements OnInit {
   }
 
   get404Error(){
-    this.http.get(environment.APIURL + 'Buggy/NotFound').subscribe({
-      next: (response) => {console.log(response)},
+    this.http.get(environment.APIURL + '/Buggy/NotFound').subscribe({
+      next: (response:any) => {console.log(response)},
       error: (error) => {console.log(error)}
     })
   }
 
   get500Error(){
-    this.http.get(environment.APIURL + 'Buggy/ServerError').subscribe({
-      next: (response) => {console.log(response)},
+    this.http.get(environment.APIURL + '/Buggy/ServerError').subscribe({
+      next: (response:any) => {console.log(response.data)},
       error: (error) => {console.log(error)}
     })
   }
 
   get400Error(){
-    this.http.get(environment.APIURL + 'Buggy/BadRequest').subscribe({
-      next: (response) => {console.log(response)},
+    this.http.get(environment.APIURL + '/Buggy/BadRequest').subscribe({
+      next: (response:any) => {console.log(response.data)},
       error: (error) => {console.log(error)}
     })
   }
 
-
   get400ValidationError() {
-    this.http.get(environment.APIURL + 'products/ninetynine').subscribe(res => {
-      console.log(res);
-    }, error => {
-      console.log(error);
-      this.validationErrors = error.errors;
-    });
+    this.http.get(environment.APIURL + '/SpecificationsProduct/GetByID/ninetynine').subscribe({
+      next: (response: any) => { console.log(response.data) },
+      error: (error) => { console.log(error) }
+    })
   }
 
 }

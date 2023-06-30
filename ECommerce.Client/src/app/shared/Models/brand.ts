@@ -1,6 +1,4 @@
-export interface Brand {
+export interface IBrand {
     id: number;
     name: string;
 }
-
-export class Brand implements Brand {}

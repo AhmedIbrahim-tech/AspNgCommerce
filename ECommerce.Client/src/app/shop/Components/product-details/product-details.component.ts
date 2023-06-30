@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ShopService } from '../../Services/shop.service';
 import { ActivatedRoute } from '@angular/router';
-import { Product } from 'src/app/shared/Models/Product';
+import { IProduct } from 'src/app/shared/Models/Product';
 
 @Component({
   selector: 'app-product-details',
@@ -10,21 +10,21 @@ import { Product } from 'src/app/shared/Models/Product';
 })
 export class ProductDetailsComponent implements OnInit {
 
-  product?: Product;
+  product?: IProduct;
   quantity = 1;
-  constructor(private _ShopService:ShopService,private _activeRoute:ActivatedRoute) { }
+  constructor(private _ShopService: ShopService, private _activeRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.loadproduct();
   }
 
-  loadproduct(){
+  loadproduct() {
     const id = this._activeRoute.snapshot.paramMap.get('id');
     if (id) {
       this._ShopService.getSingleProduct(+id).subscribe({
-        next: (product) => {this.product = product,console.log("load product"+this.product)},
-        error: (error) => {console.log(error)},
-        complete: () => {console.log('load product complete')}
+        next: (response: any) => { this.product = response.data },
+        error: (error) => { console.log(error) },
+        // complete: () => { console.log('load product complete') }
       })
     }
   }

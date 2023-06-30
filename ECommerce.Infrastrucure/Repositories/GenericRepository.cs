@@ -1,7 +1,4 @@
-﻿using ECommerce.Core.Interfaces.Specifications;
-using ECommerce.Infrastrucure.Specifications;
-
-namespace ECommerce.Infrastrucure.Repositories;
+﻿namespace ECommerce.Infrastrucure.Repositories;
 
 public class GenericRepository<T> : IGenericRepository<T> where T : BaseEntity
 {

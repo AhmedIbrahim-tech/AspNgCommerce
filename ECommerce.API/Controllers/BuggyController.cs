@@ -1,10 +1,5 @@
-﻿using ECommerce.Core.Responses;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-
-namespace ECommerce.API.Controllers
+﻿namespace ECommerce.API.Controllers
 {
-    [Route("api/[controller]")]
     [ApiController]
     public class BuggyController : BaseAPIController
     {
@@ -14,32 +9,34 @@ namespace ECommerce.API.Controllers
         {
             this.context = context;
         }
-        [HttpGet("NotFound")]
+
+
+        [HttpGet(Router.Error.NotFound)]
         public IActionResult GetNotFoundRequest()
         {
-            var thing = context.Products.Find(50);
-            if(thing == null) { return NotFound(new BaseGenericResult<object>(404)); }
+            var thing = context.Products.Find(99);
+            if (thing == null) { return NotFound(new BaseGenericResult<object>(404)); }
             return Ok();
         }
 
-        [HttpGet("ServerError")]
+        [HttpGet(Router.Error.ServerError)]
         public IActionResult GetServerErrorRequest()
         {
-            var thing = context.Products.Find(50);
-            var thingtoReturn = thing.ToString();
+            var item = context.Products.Find(99);
+            var itemOperation = item.ToString();
             return Ok();
         }
 
-        [HttpGet("BadRequest")]
+        [HttpGet(Router.Error.BadRequest)]
         public IActionResult GetBadRequest()
         {
-            return BadRequest();
+            return BadRequest(new BaseGenericResult<object>(400));
         }
 
-        [HttpGet("BadRequest/{id}")]
+        [HttpGet(Router.Error.GetBadRequestById)]
         public IActionResult GetBadRequest(int id)
         {
-            return Ok();
+            return BadRequest();
         }
     }
 }

@@ -1,13 +1,16 @@
-﻿using Newtonsoft.Json;
+﻿#region Fields
+using Newtonsoft.Json;
 
 namespace ECommerce.API.Controllers;
 
-#region Contractor
 
 [Route("api/[controller]")]
 [ApiController]
 public class ProductsController : ControllerBase
 {
+    #endregion
+
+    #region Contractor (s)
     private readonly IProductsServices productServices;
     private readonly IMapper _mapper;
 
@@ -19,19 +22,15 @@ public class ProductsController : ControllerBase
 
     #endregion
 
-    #region Get List Of Products
+    #region Handle of Function (s)
 
-    /// <summary>
-    /// Get All Products By Use Repository Pattern
-    /// </summary>
-    /// <param name="filter"></param>
-    /// <returns></returns>
+    #region Get List Of Products
     [HttpPost]
     public async Task<IActionResult> GetListOfProducts([FromBody] ProductsQueryFilter filter)
     {
         var result = await productServices.GetListOfProductsAsync(filter);
-        var Dto = _mapper.Map<IEnumerable<ProductDto>>(result.Data);
-     
+        var Dto = _mapper.Map<IEnumerable<ProductDTo>>(result.Data);
+
         #region Meta data
 
         var metadata = new Metadata
@@ -46,8 +45,8 @@ public class ProductsController : ControllerBase
         Response.Headers.Add("X-Pagination", JsonConvert.SerializeObject(metadata));
 
         #endregion
-        
-        var response = new BaseGenericResult<IEnumerable<ProductDto>>(result.Status , result.StatusCode , result.Message , Dto) { Meta = metadata};
+
+        var response = new BaseGenericResult<IEnumerable<ProductDTo>>(result.Status, result.StatusCode, result.Message, Dto) { Meta = metadata };
 
         return StatusCode(response.StatusCode, response);
     }
@@ -60,10 +59,10 @@ public class ProductsController : ControllerBase
     public async Task<IActionResult> GetProductByIDAsync(int id)
     {
         var result = await productServices.GetProductByIDAsync(id);
-       
-        var resultDto = _mapper.Map<ProductDto>(result.Data);
 
-        var response = new BaseGenericResult<ProductDto>(result.Status, result.StatusCode, result.Message, resultDto);
+        var resultDto = _mapper.Map<ProductDTo>(result.Data);
+
+        var response = new BaseGenericResult<ProductDTo>(result.Status, result.StatusCode, result.Message, resultDto);
 
         return StatusCode(response.StatusCode, response);
     }
@@ -72,3 +71,5 @@ public class ProductsController : ControllerBase
 
 
 }
+
+#endregion

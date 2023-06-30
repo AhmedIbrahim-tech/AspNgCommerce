@@ -11,6 +11,8 @@ public class ProductConfiguration : IEntityTypeConfiguration<Product>
         builder.Property(x => x.PictureURL).IsRequired();
         builder.HasOne(x => x.ProductBrand).WithMany().HasForeignKey(x => x.ProductBrandID);
         builder.HasOne(x => x.ProductType).WithMany().HasForeignKey(x => x.ProductTypeID);
+
+        #region HasData
         //builder.HasData
         //    (
         //        new Product
@@ -166,5 +168,7 @@ public class ProductConfiguration : IEntityTypeConfiguration<Product>
 
         //        }
         //    );
+
+        #endregion    
     }
 }

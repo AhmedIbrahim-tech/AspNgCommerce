@@ -1,9 +1,10 @@
-﻿using ECommerce.Core.CustomEntities;
-
-namespace ECommerce.Core.Responses;
+﻿namespace ECommerce.Core.Responses;
 
 public class BaseGenericResult<T> : BaseQueryResult
 {
+    public BaseGenericResult()
+    {
+    }
 
     public BaseGenericResult(int StatusCode, string Message = null)
     {
@@ -23,5 +24,5 @@ public class BaseGenericResult<T> : BaseQueryResult
     }
     public T Data { get; set; }
 
-    public Metadata Meta { get; set; }
+    public object Meta { get; set; }
 }

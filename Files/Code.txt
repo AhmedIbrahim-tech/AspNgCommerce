@@ -1,13 +1,28 @@
-cd '.\03_WorkShop\`[01`] Production\`[02`] BackEnd\01_Source Code\`[01`] Personal Projects\E-Commerce\.NET Api with Angular\E-Commerce api\ECommerce.Client\'
-
 → Install ngx-bootstrap ←
-Ng add ngx-bootstrap@8.0.0
+ng add ngx-bootstrap
+
+8 With Angular 13
+9 With Angular 14
+10 With Angular 15
+
 
 → Font Awesome ←
 npm install font-awesome
 
 
-CLI Commond
-- ng g m --routing          → Create Module with Routing
-- ng g s shop --skip-tests  → Create Service and Skip Test File
-- 
+→ CLI Commond ←
+- ng g m Core --routing     → Create Module with Routing
+- ng g s Shop --skip-tests  → Create Service and Skip Test File
+- ng g interceptor error    → To Handle Error 
+
+
+
+
+
+
+- Core 
+-- Navbar Component
+
+- Shared
+-- Models
+-- 

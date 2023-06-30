@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Product } from 'src/app/shared/Models/Product';
+import { IProduct } from 'src/app/shared/Models/Product';
 import { ShopService } from '../../Services/shop.service';
 
 @Component({
@@ -8,11 +8,10 @@ import { ShopService } from '../../Services/shop.service';
   styleUrls: ['./product-item.component.scss']
 })
 export class ProductItemComponent implements OnInit {
-  @Input() product?: Product;
+  @Input() product?: IProduct;
   constructor(private _serives:ShopService) { }
 
   ngOnInit(): void {
-    
   }
 
 

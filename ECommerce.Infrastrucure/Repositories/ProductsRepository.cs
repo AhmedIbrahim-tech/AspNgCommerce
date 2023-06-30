@@ -10,7 +10,7 @@ public class ProductsRepository : IProductsRepository
 
     public async Task<IEnumerable<Product>> GetListOfProductsAsync()
     {
-        return await _context.Products.Include(x=>x.ProductType).Include(x=>x.ProductBrand).ToListAsync();
+        return await _context.Products.Include(x => x.ProductType).Include(x => x.ProductBrand).ToListAsync();
     }
 
     public async Task<Product> GetProductByIDAsync(int id)

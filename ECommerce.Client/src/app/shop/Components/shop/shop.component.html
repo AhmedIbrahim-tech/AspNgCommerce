@@ -1,5 +1,7 @@
 <div class="container">
     <div class="row">
+
+        <!-- #region Sidebar-->
         <section class="col-3">
             <h5 class="text-warning ms-3">Sort</h5>
             <select class="form-select mb-4" (change)="OnSortSelected($event)">
@@ -24,30 +26,37 @@
 
         </section>
 
-        <!-- {{products | json}} -->
+        <!-- #endregion -->
 
         <section class="col-9 ">
+
+            <!-- #region Search -->
             <div class="d-flex justify-content-between align-items-center pb-2">
-                <app-paging-header [totalCount]="TotalCount" [pageNumber]="shopparam.pageIndex" [pageSize]="shopparam.pageSize"></app-paging-header>
+                <app-paging-header [totalCount]="TotalCount" [pageNumber]="shopparam.pageNumber" [pageSize]="shopparam.pageSize"></app-paging-header>
                 <div class="d-flex mt-4">
                     <input type="text" (keyup.enter)="OnSearch()" placeholder="Search" class="form-control me-2" #search>
                     <button (click)="OnSearch()" class="btn btn-outline-primary mx-2">Search</button>
                     <button (click)="OnRest()" class="btn btn-outline-success">Reset</button>
                 </div>
             </div>
+            <!-- #endregion -->
 
+            <!-- #region product-item -->
             <div class="row row-cols-3 g-3 mb-4 mt-5">
                 <div class="col" *ngFor="let product of products">
                     <app-product-item [product]="product"></app-product-item>
                 </div>
             </div>
+            <!-- #endregion -->
 
-            <div class="d-flex justify-content-center">
+            <!-- #region Pager -->
+            <div class="d-flex justify-content-center" *ngIf="TotalCount > 0">
+                <app-pager [PageSize]="shopparam.pageSize" [TotalCount]="TotalCount" (pageChanged)="onPageChanged($event)"></app-pager>
             </div>
+            <!-- #endregion -->
+
         </section>
     </div>
-    <div class="d-flex justify-content-center" *ngIf="TotalCount > 0">
-        <app-pager [PageSize]="shopparam.pageSize" [TotalCount]="TotalCount" (pageChanged)="onPageChanged($event)"></app-pager>
-    </div>
+
 
 </div>

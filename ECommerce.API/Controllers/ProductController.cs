@@ -1,47 +1,59 @@
-﻿namespace ECommerce.API.Controllers;
+﻿#region Fields
+namespace ECommerce.API.Controllers;
 
-[Route("api/[controller]")]
 [ApiController]
 
 public class ProductController : BaseAPIController
 {
-    private readonly IProductServices productServices;
+    #endregion
 
+    #region Contractor (s)
+
+    private readonly IProductServices productServices;
     public ProductController(IProductServices productServices)
     {
         this.productServices = productServices;
     }
 
-    /// <summary>
-    /// Get All Products By Use Specification Pattern
-    /// </summary>
-    /// <param name="productSpecParams"></param>
-    /// <returns></returns>
-    [HttpGet]
-    public async Task<IActionResult> GetProducts([FromQuery] ProductSpecParams productSpecParams)
+    #endregion
+
+    #region Handle of Function (s)
+
+    #region Display List of Product With Filters
+    [HttpGet(Router.SpecProduct.ListProduct)]
+    public async Task<IActionResult> GetProducts([FromQuery] ProductSpecParams productSpecPrams)
     {
-        var result = await productServices.GetAllProductsAsync(productSpecParams);
+        var result = await productServices.GetAllProductsAsync(productSpecPrams);
         return StatusCode(result.StatusCode, result);
     }
+    #endregion
 
-    [HttpGet("ProductTypes")]
+    #region Display List of Product Types
+    [HttpGet(Router.SpecProduct.ProductTypes)]
     public async Task<IActionResult> GetProductTypesAsync()
     {
         var result = await productServices.GetProductTypesAsync();
         return StatusCode(result.StatusCode, result);
     }
+    #endregion
 
-    [HttpGet("ProductBrands")]
+    #region Display List of Product Brands
+    [HttpGet(Router.SpecProduct.ProductBrands)]
     public async Task<IActionResult> GetProductBrandsAsync()
     {
         var result = await productServices.GetProductBrandsAsync();
         return StatusCode(result.StatusCode, result);
     }
+    #endregion
 
-    [HttpGet("{id}")]
+    #region Display One Product By Using Id
+    [HttpGet(Router.SpecProduct.GetById)]
     public async Task<IActionResult> GetProductById(int id)
     {
         var result = await productServices.GetProductByIdAsync(id);
         return StatusCode(result.StatusCode, result);
     }
+    #endregion 
+
 }
+#endregion

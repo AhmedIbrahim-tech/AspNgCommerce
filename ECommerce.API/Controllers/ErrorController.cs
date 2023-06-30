@@ -1,8 +1,6 @@
-﻿using ECommerce.Core.Responses;
-
-namespace ECommerce.API.Controllers
+﻿namespace ECommerce.API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("errors/{code}")]
     [ApiController]
     public class ErrorController : BaseAPIController
     {

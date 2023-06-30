@@ -4,6 +4,7 @@ public class ProductTypesConfiguration : IEntityTypeConfiguration<ProductType>
 {
     public void Configure(EntityTypeBuilder<ProductType> builder)
     {
+        #region HasData
         //builder.HasData
         //    (
         //        new ProductType
@@ -29,6 +30,7 @@ public class ProductTypesConfiguration : IEntityTypeConfiguration<ProductType>
         //            Name = "Gloves"
 
         //        }
-        //    );
+        //    ); 
+        #endregion
     }
 }

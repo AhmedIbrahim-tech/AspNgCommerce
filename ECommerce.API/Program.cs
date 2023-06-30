@@ -23,19 +23,6 @@ builder.Services.AddDbContext<ApplicationDBContext>(option =>
 
 #endregion
 
-#region Add Fluent Validation
-
-//builder.Services
-//    .AddMvc(options => options.Filters.Add<ValidationFilter>())
-//    .AddFluentValidation(options => options.RegisterValidatorsFromAssemblies(AppDomain.CurrentDomain.GetAssemblies()));
-
-builder.Services.AddFluentValidation(options =>
-{
-    options.RegisterValidatorsFromAssemblies(AppDomain.CurrentDomain.GetAssemblies());
-});
-
-#endregion
-
 #region Swagger Doc
 
 builder.Services.AddSwaggerGen(options =>
@@ -56,22 +43,8 @@ builder.Services.AddSwaggerGen(options =>
 
 #region Dependency Injection
 
-builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+builder.Services.AddCoreDependencies().AddInfrastructureDependencies();
 
-//Repository
-builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
-builder.Services.AddTransient<IProductRepository, ProductRepository>();
-builder.Services.AddScoped<IProductsRepository, ProductsRepository>();
-builder.Services.AddScoped<IProductsServices, ProductsServices>();
-
-
-//Services
-builder.Services.AddTransient<IProductServices, ProductServices>();
-
-#endregion
-
-#region Auto Mapper
-builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 #endregion
 
 #region CORS Support
@@ -80,7 +53,7 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("CorsPolicy", policy =>
     {
-    policy.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:4200");
+        policy.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:4200"); //AllowAnyOrigin
     });
 });
 
@@ -102,12 +75,16 @@ app.UseStatusCodePagesWithReExecute("/errors/{0}");
 
 app.UseHttpsRedirection();
 
-app.UseStaticFiles(); // ? It's Important To Add Images
+app.UseStaticFiles(); // It's Important To Add Images
 
+#region CORS Support
 app.UseCors("CorsPolicy");
+#endregion
 
+#region Auth
 app.UseAuthentication();
 app.UseAuthorization();
+#endregion
 
 app.MapControllers();
 

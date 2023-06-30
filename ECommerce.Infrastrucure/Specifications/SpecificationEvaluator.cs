@@ -1,33 +1,33 @@
-﻿using ECommerce.Core.Interfaces.Specifications;
-
-namespace ECommerce.Infrastrucure.Specifications;
+﻿namespace ECommerce.Infrastrucure.Specifications;
 
 public class SpecificationEvaluator<TEntity> where TEntity : BaseEntity
 {
-    public static IQueryable<TEntity> GetQuery(IQueryable<TEntity> inputquery, ISpecification<TEntity> specification)
+    public static IQueryable<TEntity> GetQuery(IQueryable<TEntity> inputQuery, ISpecification<TEntity> spec)
     {
-        var query = inputquery;
-        if (specification.Criteria != null)
+        var query = inputQuery;
+
+        if (spec.Criteria != null)
         {
-            query = query.Where(specification.Criteria);
+            query = query.Where(spec.Criteria);
         }
 
-        if (specification.OrderBy != null)
+        if (spec.OrderBy != null)
         {
-            query = query.OrderBy(specification.OrderBy);
+            query = query.OrderBy(spec.OrderBy);
         }
 
-        if (specification.orderbyDescending != null)
+        if (spec.OrderByDesc != null)
         {
-            query = query.OrderByDescending(specification.orderbyDescending);
+            query = query.OrderByDescending(spec.OrderByDesc);
         }
 
-        if (specification.IsPaginationEnabled)
+        if (spec.IsPagingEnabled)
         {
-            query = query.Skip(specification.Skip).Take(specification.Take);
+            query = query.Skip(spec.Skip).Take(spec.Take);
         }
 
-        query = specification.Includes.Aggregate(query, (current, includes) => current.Include(includes));
+        query = spec.Includes.Aggregate(query, (current, include) => current.Include(include));
+
         return query;
     }
 }

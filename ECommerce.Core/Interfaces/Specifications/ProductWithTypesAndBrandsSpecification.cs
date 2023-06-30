@@ -2,31 +2,31 @@
 
 public class ProductWithTypesAndBrandsSpecification : BaseSpecification<Product>
 {
-    public ProductWithTypesAndBrandsSpecification(ProductSpecParams param)
-        : base (x=> 
-        (string.IsNullOrEmpty(param.Search) || x.Name.ToLower().Contains(param.Search)) &&
-        (!param.BrandId.HasValue || x.ProductBrandID == param.BrandId) && 
-        (!param.TypeId.HasValue || x.ProductTypeID == param.TypeId)
+    public ProductWithTypesAndBrandsSpecification(ProductSpecParams productParams)
+        : base(x =>
+            (string.IsNullOrEmpty(productParams.Search) || x.Name.ToLower().Contains
+            (productParams.Search)) &&
+            (!productParams.BrandId.HasValue || x.ProductBrandID == productParams.BrandId) &&
+            (!productParams.TypeId.HasValue || x.ProductTypeID == productParams.TypeId)
         )
     {
-        AddIncludes(x => x.ProductType);
-        AddIncludes(x => x.ProductBrand);
-        AddorderbyExpression(x => x.Name);
-        AddorderbyDescendingExpression(x => x.Name);
-        ApplyPaging(param.PageSize * (param.PageIndex - 1), param.PageSize);
+        AddInclude(x => x.ProductType);
+        AddInclude(x => x.ProductBrand);
+        AddOrderBy(x => x.Name);
+        ApplyPaging(productParams.PageSize * (productParams.PageIndex - 1), productParams.PageSize);
 
-        if (!string.IsNullOrEmpty(param.Sort))
+        if (!string.IsNullOrEmpty(productParams.Sort))
         {
-            switch (param.Sort)
+            switch (productParams.Sort)
             {
                 case "priceAsc":
-                    AddorderbyExpression(x=>x.Price);
+                    AddOrderBy(p => p.Price);
                     break;
                 case "priceDesc":
-                    AddorderbyDescendingExpression(x => x.Price);
+                    AddOrderByDesc(p => p.Price);
                     break;
                 default:
-                    AddorderbyExpression(x => x.Name);
+                    AddOrderBy(n => n.Name);
                     break;
             }
         }
@@ -34,7 +34,8 @@ public class ProductWithTypesAndBrandsSpecification : BaseSpecification<Product>
 
     public ProductWithTypesAndBrandsSpecification(int id) : base(x => x.Id == id)
     {
-        AddIncludes(x => x.ProductType);
-        AddIncludes(x => x.ProductBrand);
+        AddInclude(x => x.ProductType);
+        AddInclude(x => x.ProductBrand);
     }
+
 }
