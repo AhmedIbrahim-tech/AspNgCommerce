@@ -9,6 +9,12 @@ ng add ngx-bootstrap
 → Font Awesome ←
 npm install font-awesome
 
+→ toastr Notifaction ←
+npm install ngx-toastr
+
+→ breadcrumb←
+npm i xng-breadcrumb
+
 
 → CLI Commond ←
 - ng g m Core --routing     → Create Module with Routing

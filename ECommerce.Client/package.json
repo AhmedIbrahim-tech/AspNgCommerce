@@ -19,6 +19,7 @@
     "@angular/platform-browser-dynamic": "^14.2.0",
     "@angular/router": "^14.2.0",
     "bootstrap": "^5.2.3",
+    "breadcrumb": "^1.0.0",
     "font-awesome": "^4.7.0",
     "ngx-bootstrap": "^9.0.0",
     "ngx-toastr": "^14.3.0",
