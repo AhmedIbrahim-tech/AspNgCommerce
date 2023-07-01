@@ -6,6 +6,7 @@ import { ProductItemComponent } from './Components/product-item/product-item.com
 import { SharedModule } from '../shared/shared.module';
 import { ProductDetailsComponent } from './Components/product-details/product-details.component';
 import { RouterModule } from '@angular/router';
+import { CarouselModule } from 'ngx-bootstrap/carousel';
 
 
 @NgModule({
@@ -19,10 +20,12 @@ import { RouterModule } from '@angular/router';
     CommonModule,
     ShopRoutingModule,
     SharedModule,
+    CarouselModule.forRoot()
   ],
   exports : [
     ShopComponent,
-    ProductDetailsComponent
+    ProductDetailsComponent,
+    CarouselModule
   ]
 })
 export class ShopModule { }

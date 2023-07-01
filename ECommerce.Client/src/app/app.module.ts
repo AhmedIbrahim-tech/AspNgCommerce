@@ -5,9 +5,9 @@ import { AppComponent } from './app/app.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { CoreModule } from './core/core.module';
 import {HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
-import { ShopModule } from './shop/shop.module';
 import { HomeModule } from './home/home.module';
-import { ErrorInterceptor } from './core/interceptors/error.interceptor';
+import { ErrorInterceptor } from './core/interceptors/Error/error.interceptor';
+import { LoadingInterceptor } from './core/interceptors/Loading/loading.interceptor';
 
 @NgModule({
   declarations: [
@@ -19,11 +19,11 @@ import { ErrorInterceptor } from './core/interceptors/error.interceptor';
     BrowserAnimationsModule,
     HttpClientModule,
     CoreModule,
-    // ShopModule,
     HomeModule
   ],
   providers: [
     {provide:HTTP_INTERCEPTORS,useClass:ErrorInterceptor,multi:true},
+    {provide:HTTP_INTERCEPTORS,useClass:LoadingInterceptor,multi:true},
   ],
   bootstrap: [AppComponent]
 })

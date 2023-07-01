@@ -1,11 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ShopComponent } from './shop/Components/shop/shop.component';
-import { TestErrorComponent } from './core/test-error/test-error.component';
-import { ServerErrorComponent } from './core/server-error/server-error.component';
-import { NotFoundComponent } from './core/not-found/not-found.component';
 import { HomeComponent } from './home/home/home.component';
-import { ProductDetailsComponent } from './shop/Components/product-details/product-details.component';
+import { NotFoundComponent } from './core/Components/not-found/not-found.component';
+import { ServerErrorComponent } from './core/Components/server-error/server-error.component';
+import { TestErrorComponent } from './core/Components/test-error/test-error.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
