@@ -20,8 +20,8 @@ npm i xng-breadcrumb
 - ng g m Core --routing     → Create Module with Routing
 - ng g s Shop --skip-tests  → Create Service and Skip Test File
 - ng g interceptor error    → To Handle Error 
-
-
+- npm i ngx-spinner@14.0.0
+- docker-compose up --detach
 
 
 

@@ -12,10 +12,12 @@ public static class ModuleInfrastructureDependencies
         services.AddTransient<IProductRepository, ProductRepository>();
         services.AddTransient<IProductsRepository, ProductsRepository>();
         services.AddTransient<IProductsServices, ProductsServices>();
-
+        services.AddTransient<IBasketRepository, BasketRepository>();
 
         //Services
         services.AddTransient<IProductServices, ProductServices>();
+
+
 
         #endregion
 

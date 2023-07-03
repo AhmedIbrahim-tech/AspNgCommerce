@@ -11,11 +11,15 @@ const routes: Routes = [
     path: 'shop',
     loadChildren: () => import('./shop/shop.module').then(m => m.ShopModule)
   },
+  {
+    path:'basket',
+    loadChildren: () => import('./basket/basket.module').then(m => m.BasketModule)
+  },
   // {path:'shop' , component:ShopComponent},
   // {path:'shop/:id' , component:ProductDetailsComponent},
-  {path:'test-error' , component:TestErrorComponent},
-  {path:'server-error' , component:ServerErrorComponent},
-  {path:'not-found' , component:NotFoundComponent},
+  { path: 'test-error', component: TestErrorComponent },
+  { path: 'server-error', component: ServerErrorComponent },
+  { path: 'not-found', component: NotFoundComponent },
   { path: '**', redirectTo: '', pathMatch: 'full' },
 ];
 

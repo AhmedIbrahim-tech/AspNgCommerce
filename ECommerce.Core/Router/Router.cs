@@ -25,6 +25,18 @@ public static class Router
     }
     #endregion
 
+
+    #region Basket
+    public static class Basket
+    {
+        public const string Prefix = Rule + "Basket/";
+
+        public const string GetBasket = Prefix + "GetBasket";
+        public const string UpdateBasket = Prefix + "UpdateBasket";
+        public const string DeleteBasket = Prefix + "DeleteBasket";
+    }
+    #endregion
+
     #region Error
     public static class Error
     {
