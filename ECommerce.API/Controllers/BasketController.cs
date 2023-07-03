@@ -39,6 +39,7 @@ namespace ECommerce.API.Controllers
             var result = await _basketRepository.DeleteBasketAsync(id);
             return Ok(result);
         }
+
         #endregion
     }
 }
