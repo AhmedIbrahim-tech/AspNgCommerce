@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { IProduct } from '../shared/Models/Product';
 import { Pagination } from '../shared/Models/Pagination';
+import { BasketService } from '../basket/Services/basket.service';
 
 @Component({
   selector: 'app-root',
@@ -12,10 +13,13 @@ import { Pagination } from '../shared/Models/Pagination';
 export class AppComponent implements OnInit {
   title = 'ECommerce Application';
   products: IProduct[] = [];
-  constructor(private http:HttpClient){}
+  constructor(private http:HttpClient, private basketservices: BasketService){}
 
   ngOnInit(): void {
     this.GetListOfProducts();
+
+    const basketId = localStorage.getItem("basket_id");
+    if(basketId) this.basketservices.getBasket(basketId);
   }
 
   GetListOfProducts(){

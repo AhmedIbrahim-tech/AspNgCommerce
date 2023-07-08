@@ -15,8 +15,10 @@ const routes: Routes = [
     path:'basket',
     loadChildren: () => import('./basket/basket.module').then(m => m.BasketModule)
   },
-  // {path:'shop' , component:ShopComponent},
-  // {path:'shop/:id' , component:ProductDetailsComponent},
+  {
+    path:'checkout',
+    loadChildren: () => import('./checkout/checkout.module').then(m => m.CheckoutModule)
+  },
   { path: 'test-error', component: TestErrorComponent },
   { path: 'server-error', component: ServerErrorComponent },
   { path: 'not-found', component: NotFoundComponent },

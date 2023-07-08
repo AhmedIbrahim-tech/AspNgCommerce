@@ -1,33 +1,28 @@
-// import {v4 as uuidv4} from 'uuid/v4';
-// import { uuid } from 'uuidv4';
 import * as cuid from 'cuid';
 
-export interface IBasket {
+
+export interface BasketItem {
+  id: number;
+  productName: string;
+  price: number;
+  quantity: number;
+  pictureUrl: string;
+  brand: string;
+  type: string;
+}
+
+export interface Basket {
     id: string;
-    items: IBasketItem[];
-    clientSecret?: string;
-    paymentIntentId?: string;
-    deliveryMethodId?: number;
-    shippingPrice?: number;
+    items: BasketItem[];
   }
 
-export interface IBasketItem {
-    id: number;
-    productName: string;
-    price: number;
-    quantity: number;
-    pictureUrl: string;
-    brand: string;
-    type: string;
-  }
-
-export class Basket implements IBasket {
+export class Basket implements Basket {
     id = cuid();
-    items: IBasketItem[] = [];
+    items: BasketItem[] = [];
    }
 
-export interface IBasketTotals {
-  shipping: number;
-  subtotal: number;
-  total: number;
-}
+   export interface BasketTotals{
+    shipping : number;
+    subtotal:number;
+    total:number;
+   }

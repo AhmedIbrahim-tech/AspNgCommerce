@@ -6,12 +6,16 @@ import { SharedRoutingModule } from './shared-routing.module';
 import { PagerComponent } from './Components/pager/pager.component';
 import { PagingHeaderComponent } from './Components/paging-header/paging-header.component';
 import { CarouselModule } from 'ngx-bootstrap/carousel';
+import { OrderTotalsComponent } from './Components/order-totals/order-totals.component';
+import { BasketSummaryComponent } from './Components/basket-summary/basket-summary.component';
 
 
 @NgModule({
   declarations: [
     PagingHeaderComponent,
-    PagerComponent
+    PagerComponent,
+    OrderTotalsComponent,
+    BasketSummaryComponent
   ],
   imports: [
     CommonModule,
@@ -23,7 +27,8 @@ import { CarouselModule } from 'ngx-bootstrap/carousel';
     PaginationModule,
     PagingHeaderComponent,
     PagerComponent,
-    CarouselModule
+    CarouselModule,
+    OrderTotalsComponent
   ]
 })
 export class SharedModule { }
