@@ -1,10 +1,13 @@
-﻿namespace ECommerce.Infrastrucure.Data;
+﻿using ECommerce.Core.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
-public class ApplicationDBContext : DbContext
+namespace ECommerce.Infrastrucure.Data;
+
+public class ApplicationDBContext : IdentityDbContext<AppUser>
 {
     public ApplicationDBContext()
     {
-        
+
     }
     public ApplicationDBContext(DbContextOptions<ApplicationDBContext> options) : base(options)
     {
@@ -15,6 +18,7 @@ public class ApplicationDBContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        base.OnModelCreating(modelBuilder);
         modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
     }
 }

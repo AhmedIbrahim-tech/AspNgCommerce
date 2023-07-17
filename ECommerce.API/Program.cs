@@ -1,3 +1,5 @@
+using ECommerce.Core.Identity;
+using Microsoft.AspNetCore.Identity;
 using StackExchange.Redis;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -67,6 +69,19 @@ builder.Services.AddCors(options =>
 
 #endregion
 
+#region Authentication
+
+builder.Services.AddIdentityCore<AppUser>(options =>
+{
+
+})
+.AddEntityFrameworkStores<ApplicationDBContext>()
+.AddSignInManager<SignInManager<AppUser>>();
+
+builder.Services.AddAuthentication();
+builder.Services.AddAuthorization();
+#endregion
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -89,7 +104,7 @@ app.UseStaticFiles(); // It's Important To Add Images
 app.UseCors("CorsPolicy");
 #endregion
 
-#region Auth
+#region Authentication
 app.UseAuthentication();
 app.UseAuthorization();
 #endregion
@@ -101,12 +116,16 @@ app.MapControllers();
 using var scope = app.Services.CreateScope();
 var Services = scope.ServiceProvider;
 var context = Services.GetRequiredService<ApplicationDBContext>();
+
+// Identity
+var usermanager = Services.GetRequiredService<UserManager<AppUser>>();
 var logger = Services.GetRequiredService<ILogger<Program>>();
 
 try
 {
     await context.Database.MigrateAsync();
     await StoreContextSeed.SeedAsync(context);
+    await AppIdentityDbContextSeed.SeedUserAsync(usermanager);
 }
 catch (Exception ex)
 {
