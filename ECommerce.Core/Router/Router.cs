@@ -37,6 +37,20 @@ public static class Router
     }
     #endregion
 
+    #region Account
+    public static class Account
+    {
+        public const string Prefix = Rule + "Account/";
+
+        public const string Login = Prefix + "login";
+        public const string Register = Prefix + "register";
+        public const string CurrentUser = Prefix + "CurrentUser";
+        public const string EmailExists = Prefix + "emailexists";
+        public const string InitializationAddress = Prefix + "address";
+        public const string UpdateAddress = Prefix + "UpdateAddress";
+    }
+    #endregion
+
     #region Error
     public static class Error
     {

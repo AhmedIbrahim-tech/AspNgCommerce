@@ -1,4 +1,8 @@
+using ECommerce.Infrastrucure.Services;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
 using StackExchange.Redis;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -23,6 +27,29 @@ builder.Services.AddDbContext<ApplicationDBContext>(option =>
         builder.Configuration.GetConnectionString("DefaultConnection"),
             b => b.MigrationsAssembly(typeof(ApplicationDBContext).Assembly.FullName)));
 
+builder.Services.AddIdentityCore<AppUser>(opt =>
+{
+
+})
+    .AddEntityFrameworkStores<ApplicationDBContext>()
+    .AddSignInManager<SignInManager<AppUser>>();
+
+var jwt = builder.Configuration.GetSection("Token");
+
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options =>
+    {
+        options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
+        {
+            ValidateIssuerSigningKey = true,
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwt["key"])),
+            ValidIssuer = jwt["Issuer"],
+            ValidateIssuer = true,
+            ValidateAudience = false
+        };
+    });
+
+builder.Services.AddAuthorization();
 #endregion
 
 #region Swagger Doc
@@ -34,11 +61,33 @@ builder.Services.AddSwaggerGen(options =>
         Version = "v1",
         Title = "ECommerce"
     });
-
-
-    //var xmlfile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
-    //var xmlpath = Path.Combine(AppContext.BaseDirectory, xmlfile);
-    //options.IncludeXmlComments(xmlpath);
+    // Swagger 2.+ support
+    options.AddSecurityDefinition("Bearer", new Microsoft.OpenApi.Models.OpenApiSecurityScheme
+    {
+        Name = "Authorization",
+        Type = SecuritySchemeType.ApiKey,
+        Scheme = "Bearer",
+        BearerFormat = "JWT",
+        In = ParameterLocation.Header,
+        Description = "JWT Authorization header using the Bearer scheme. Example: \"Authorization: Bearer {token}\""
+    });
+    options.AddSecurityRequirement(new OpenApiSecurityRequirement()
+    {
+        {
+            new OpenApiSecurityScheme
+            {
+                Reference = new OpenApiReference
+                {
+                    Type = ReferenceType.SecurityScheme,
+                    Id = "Bearer"
+                },
+                //Scheme = "oauth2",
+                Name = "Bearer",
+                In = ParameterLocation.Header,
+            },
+            new string[] {}
+        }
+    });
 });
 
 #endregion
@@ -54,6 +103,9 @@ builder.Services.AddSingleton<IConnectionMultiplexer>(c =>
     return ConnectionMultiplexer.Connect(options);
 });
 #endregion
+
+builder.Services.AddScoped<ITokenService, TokenService>();
+
 
 #region CORS Support
 
@@ -82,7 +134,6 @@ app.UseStatusCodePagesWithReExecute("/errors/{0}");
 #endregion
 
 app.UseHttpsRedirection();
-
 app.UseStaticFiles(); // It's Important To Add Images
 
 #region CORS Support
@@ -91,6 +142,7 @@ app.UseCors("CorsPolicy");
 
 #region Auth
 app.UseAuthentication();
+app.UseRouting();
 app.UseAuthorization();
 #endregion
 
@@ -100,13 +152,16 @@ app.MapControllers();
 
 using var scope = app.Services.CreateScope();
 var Services = scope.ServiceProvider;
+var loggerFactory = Services.GetRequiredService<ILoggerFactory>();
 var context = Services.GetRequiredService<ApplicationDBContext>();
+//var userManager = Services.GetRequiredService<UserManager<AppUser>>();
 var logger = Services.GetRequiredService<ILogger<Program>>();
 
 try
 {
     await context.Database.MigrateAsync();
     await StoreContextSeed.SeedAsync(context);
+    //await UserIdentitySeed.SeedUserAsync(userManager);
 }
 catch (Exception ex)
 {

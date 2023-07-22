@@ -8,27 +8,35 @@ import { PagingHeaderComponent } from './Components/paging-header/paging-header.
 import { CarouselModule } from 'ngx-bootstrap/carousel';
 import { OrderTotalsComponent } from './Components/order-totals/order-totals.component';
 import { BasketSummaryComponent } from './Components/basket-summary/basket-summary.component';
-
+import { ReactiveFormsModule } from '@angular/forms';
+import { TextInputComponent } from './Components/text-input/text-input.component';
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 
 @NgModule({
   declarations: [
     PagingHeaderComponent,
     PagerComponent,
     OrderTotalsComponent,
-    BasketSummaryComponent
+    BasketSummaryComponent,
+    TextInputComponent
   ],
   imports: [
     CommonModule,
     SharedRoutingModule,
     PaginationModule.forRoot(),
-    CarouselModule.forRoot()
+    CarouselModule.forRoot(),
+    ReactiveFormsModule,
+    BsDropdownModule.forRoot()
   ],
   exports: [
     PaginationModule,
     PagingHeaderComponent,
     PagerComponent,
     CarouselModule,
-    OrderTotalsComponent
+    OrderTotalsComponent,
+    ReactiveFormsModule,
+    BsDropdownModule
+
   ]
 })
 export class SharedModule { }

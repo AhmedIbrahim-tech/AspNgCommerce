@@ -10,6 +10,7 @@ import { SectionHeaderComponent } from './Components/section-header/section-head
 import { ServerErrorComponent } from './Components/server-error/server-error.component';
 import { TestErrorComponent } from './Components/test-error/test-error.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { SharedModule } from '../shared/shared.module';
 // import { BreadcrumbModule } from 'xng-breadcrumb';
 
 
@@ -30,7 +31,8 @@ import { NgxSpinnerModule } from 'ngx-spinner';
       positionClass:'toast-top-right',
       preventDuplicates: true,
     }),
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    SharedModule
   ],
   exports: [
     NavBarComponent,

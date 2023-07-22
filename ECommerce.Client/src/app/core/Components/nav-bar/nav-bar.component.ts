@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AccountService } from 'src/app/account/Service/account.service';
 import { BasketService } from 'src/app/basket/Services/basket.service';
 import { BasketItem } from 'src/app/shared/Models/Basket';
 
@@ -9,7 +10,7 @@ import { BasketItem } from 'src/app/shared/Models/Basket';
 })
 export class NavBarComponent implements OnInit {
 
-  constructor(public basketService : BasketService) { }
+  constructor(public basketService : BasketService , public accountservices : AccountService) { }
 
   ngOnInit(): void {
   }

@@ -6,6 +6,12 @@ public class BaseQueryResult
     {
 
     }
+    public BaseQueryResult(int StatusCode, string Message = null)
+    {
+        this.StatusCode = StatusCode;
+        this.Message = Message ?? GetDefaultMessageForStatusCode(StatusCode);
+
+    }
     public BaseQueryResult(bool Status, int StatusCode, string Message, List<ValidationError> ValidationErrors = null)
     {
         this.Status = Status;

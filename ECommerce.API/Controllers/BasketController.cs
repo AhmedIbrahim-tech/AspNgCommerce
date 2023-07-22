@@ -8,9 +8,12 @@ namespace ECommerce.API.Controllers
 
         #region Contractor (s)
         private readonly IBasketRepository _basketRepository;
-        public BasketController(IBasketRepository basketRepository)
+        private readonly IMapper _mapper;
+
+        public BasketController(IBasketRepository basketRepository, IMapper mapper)
         {
             _basketRepository = basketRepository;
+            _mapper = mapper;
         }
         #endregion
 
@@ -25,9 +28,10 @@ namespace ECommerce.API.Controllers
 
         #region Update Basket
         [HttpPost(Router.Basket.UpdateBasket)]
-        public async Task<IActionResult> UpdatedBasket(CustomerBasket basket)
+        public async Task<IActionResult> UpdatedBasket(CustomerBasketDto basket)
         {
-            var result = await _basketRepository.UpdateBasketAsync(basket);
+            var mapper = _mapper.Map<CustomerBasket>(basket);
+            var result = await _basketRepository.UpdateBasketAsync(mapper);
             return Ok(result);
         }
         #endregion
