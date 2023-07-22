@@ -1,11 +1,6 @@
-﻿
-#region Fields
-namespace ECommerce.API.Controllers;
+﻿namespace ECommerce.API.Controllers;
 
 [ApiController]
-
-#endregion
-
 public class AccountController : BaseAPIController
 {
     #region Constructor (s)
