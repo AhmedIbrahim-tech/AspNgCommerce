@@ -29,7 +29,7 @@ public class DeliveryMethodConfiguration : IEntityTypeConfiguration<DeliveryMeth
                 },
                 new DeliveryMethod
                 {
-                    Id = 1,
+                    Id = 3,
                     ShortName = "UPS3",
                     DeliveryTime = "5-10 Days",
                     Description = "Slower but cheap",
@@ -37,7 +37,7 @@ public class DeliveryMethodConfiguration : IEntityTypeConfiguration<DeliveryMeth
                 },
                 new DeliveryMethod
                 {
-                    Id = 1,
+                    Id = 4,
                     ShortName = "FREE",
                     DeliveryTime = "Free! You get what you pay for",
                     Description = "1-2 Weeks",

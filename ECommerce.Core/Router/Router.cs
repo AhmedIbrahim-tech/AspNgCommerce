@@ -51,6 +51,18 @@ public static class Router
     }
     #endregion
 
+    #region Order
+    public static class Order
+    {
+        public const string Prefix = Rule + "Order/";
+
+        public const string Create = Prefix + "CreateOrder";
+        public const string GetOrdersForUser = Prefix + "GetOrdersForUser";
+        public const string GetOrderByIdForUser = Prefix + "GetOrderByIdForUser" + "/" + SingleRoute;
+        public const string DeliveryMethod = Prefix + "DeliveryMethod";
+    }
+    #endregion
+
     #region Error
     public static class Error
     {

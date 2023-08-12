@@ -43,19 +43,19 @@ public class GenericRepository<T> : IGenericRepository<T> where T : BaseEntity
 
 
 
-    //public async Task Add(T entity)
-    //{
-    //    await _context.Set<T>().AddAsync(entity);
-    //}
+    public async Task AddAsync(T entity)
+    {
+        await _context.Set<T>().AddAsync(entity);
+    }
 
-    //public async Task Edit(T entity)
-    //{
-    //    _context.Set<T>().Update(entity);
-    //}
+    public async Task EditAsync(T entity)
+    {
+        _context.Set<T>().Update(entity);
+    }
 
-    //public async Task Delete(int id)
-    //{
-    //    T CurrentEntity = await GetByIdAsync(id);
-    //    _context.Set<T>().Remove(CurrentEntity);
-    //}
+    public async Task DeleteAsync(int id)
+    {
+        T CurrentEntity = await GetByIdAsync(id);
+        _context.Set<T>().Remove(CurrentEntity);
+    }
 }

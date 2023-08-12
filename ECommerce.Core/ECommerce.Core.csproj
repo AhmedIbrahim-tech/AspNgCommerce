@@ -7,7 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Enumerations\" />
     <Folder Include="Options\" />
   </ItemGroup>
 

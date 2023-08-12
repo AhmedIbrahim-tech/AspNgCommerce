@@ -1,4 +1,6 @@
-﻿namespace ECommerce.Infrastrucure;
+﻿using ECommerce.Infrastrucure.Services;
+
+namespace ECommerce.Infrastrucure;
 
 public static class ModuleInfrastructureDependencies
 {
@@ -16,6 +18,7 @@ public static class ModuleInfrastructureDependencies
 
         //Services
         services.AddTransient<IProductServices, ProductServices>();
+        services.AddTransient<IOrderService, OrderService>();
 
 
 

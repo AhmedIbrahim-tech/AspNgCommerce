@@ -1,4 +1,6 @@
-﻿namespace ECommerce.API.Controllers;
+﻿using ECommerce.Core.Identity;
+
+namespace ECommerce.API.Controllers;
 
 [ApiController]
 public class AccountController : BaseAPIController
