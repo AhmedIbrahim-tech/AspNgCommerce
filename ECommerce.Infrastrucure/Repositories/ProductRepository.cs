@@ -1,4 +1,6 @@
-﻿namespace ECommerce.Infrastrucure.Repositories;
+﻿using ECommerce.Core.Entities;
+
+namespace ECommerce.Infrastrucure.Repositories;
 
 public class ProductRepository : IProductRepository
 {
@@ -22,7 +24,7 @@ public class ProductRepository : IProductRepository
 
     public async Task<IReadOnlyList<Product>> GetProductsAsync()
     {
-        return await _context.Products.Include(x=>x.ProductBrand).Include(x=>x.ProductType).ToListAsync();
+        return await _context.Products.Include(x => x.ProductBrand).Include(x => x.ProductType).ToListAsync();
     }
 
     public async Task<IReadOnlyList<ProductType>> GetProductTypesAsync()

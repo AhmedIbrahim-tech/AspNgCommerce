@@ -1,4 +1,6 @@
-﻿namespace ECommerce.Infrastrucure.Data.Configurations;
+﻿using ECommerce.Core.Entities;
+
+namespace ECommerce.Infrastrucure.Data.Configurations;
 
 public class ProductTypesConfiguration : IEntityTypeConfiguration<ProductType>
 {

@@ -4,7 +4,7 @@ import { ShopRoutingModule } from './shop-routing.module';
 import { ShopComponent } from './Components/shop/shop.component';
 import { ProductItemComponent } from './Components/product-item/product-item.component';
 import { SharedModule } from '../shared/shared.module';
-import { ProductDetailsComponent } from './Components/product-details/product-details.component';
+import { ProductDetailsComponent } from './Components/product-details (Single-Product)/product-details.component';
 import { RouterModule } from '@angular/router';
 import { CarouselModule } from 'ngx-bootstrap/carousel';
 

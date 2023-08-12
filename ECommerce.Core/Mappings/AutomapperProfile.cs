@@ -10,9 +10,10 @@ public class AutoMapperProfile : Profile
             .ForMember(d => d.PictureURL, o => o.MapFrom<URLResolver>())
             .ReverseMap();
 
-        CreateMap<Address, AddressDto>().ReverseMap();
+        CreateMap<Identity.Address, AddressDto>().ReverseMap();
         CreateMap<CustomerBasketDto, CustomerBasket>().ReverseMap();
         CreateMap<BasketItemDto, BasketItem>().ReverseMap();
+        CreateMap<AddressDto, Entities.OrderAggregate.Address>().ReverseMap();
 
     }
 }

@@ -12,6 +12,13 @@ INSERT INTO ProductBrands(Name) VALUES ('Nike');
 INSERT INTO ProductBrands(Name) VALUES ('Babolat');
 
 
+INSERT INTO DeliveryMethods(ShortName , DeliveryTime , Description , Price ) VALUES ('UPS1' , '1-2 Days' , 'Fastest delivery time'  , 10);
+INSERT INTO DeliveryMethods(ShortName , DeliveryTime , Description , Price ) VALUES ('UPS2' , '2-5 Days' , 'Get it within 5 days'  , 5);
+INSERT INTO DeliveryMethods(ShortName , DeliveryTime , Description , Price ) VALUES ('UPS3' , '5-10 Days' , 'Slower but cheap'  , 2);
+INSERT INTO DeliveryMethods(ShortName , DeliveryTime , Description , Price ) VALUES ('FREE' , 'Free! You get what you pay for' , '1-2 Weeks'  , 0);
+
+
+
 INSERT INTO Products(Name,Description,Price,PictureUrl,ProductTypeId,ProductBrandId) VALUES ('Adidas Quick Force Indoor Badminton Shoes','Designed for professional as well as amateur badminton players. These indoor shoes are crafted with synthetic upper that provides natural fit, while the EVA midsole provides lightweight cushioning. The shoes can be used for Badminton and Squash',3500,'images/products/adidas_shoe-1.png',1,1);
 INSERT INTO Products(Name,Description,Price,PictureUrl,ProductTypeId,ProductBrandId) VALUES ('Adidas Quick Force Indoor Badminton Shoes','Designed for professional as well as amateur badminton players. These indoor shoes are crafted with synthetic upper that provides natural fit, while the EVA midsole provides lightweight cushioning. The shoes can be used for Badminton and Squash',3375,'images/products/adidas_shoe-2.png',1,1);
 INSERT INTO Products(Name,Description,Price,PictureUrl,ProductTypeId,ProductBrandId) VALUES ('Adidas Quick Force Indoor Badminton Shoes','Designed for professional as well as amateur badminton players. These indoor shoes are crafted with synthetic upper that provides natural fit, while the EVA midsole provides lightweight cushioning. The shoes can be used for Badminton and Squash',3375,'images/products/adidas_shoe-3.png',1,1);

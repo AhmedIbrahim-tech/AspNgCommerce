@@ -22,7 +22,7 @@ npm i xng-breadcrumb
 - ng g interceptor error    → To Handle Error 
 - npm i ngx-spinner@14.0.0
 - docker-compose up --detach
-
+- ng g --help 
 
 
 

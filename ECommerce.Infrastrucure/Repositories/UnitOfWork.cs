@@ -1,26 +1,31 @@
-﻿namespace ECommerce.Infrastrucure.Repositories;
+﻿using ECommerce.Core.Entities;
+
+namespace ECommerce.Infrastrucure.Repositories;
 
 public class UnitOfWork : IUnitOfWork
 {
     private readonly ApplicationDBContext _context;
-    private readonly IGenericRepository<Product> g_ProductRepository;
-    private readonly IGenericRepository<ProductBrand> g_ProductBrandRepository;
-    private readonly IGenericRepository<ProductType> g_ProductTypeRepository;
+    private readonly IConnectionMultiplexer redis;
+    private readonly IGenericRepository<Product> _GenericProductRepository;
+    private readonly IGenericRepository<ProductBrand> _GenericProductBrandRepository;
+    private readonly IGenericRepository<ProductType> _GenericProductTypeRepository;
     private readonly IProductRepository _productRepository;
     private readonly IProductsRepository _productsRepository;
 
     public UnitOfWork(ApplicationDBContext context)
     {
         _context = context;
+        this.redis = redis;
     }
     public IProductRepository ProductRepository => _productRepository ?? new ProductRepository(_context);
     public IProductsRepository ProductsRepository => _productsRepository ?? new ProductsRepository(_context);
 
-    public IGenericRepository<Product> GProductRepository => g_ProductRepository ?? new GenericRepository<Product>(_context);
+    public IGenericRepository<Product> GenericProductRepository => _GenericProductRepository ?? new GenericRepository<Product>(_context);
 
-    public IGenericRepository<ProductBrand> GProductBrandRepository => g_ProductBrandRepository ?? new GenericRepository<ProductBrand>(_context);
+    public IGenericRepository<ProductBrand> GenericProductBrandRepository => _GenericProductBrandRepository ?? new GenericRepository<ProductBrand>(_context);
 
-    public IGenericRepository<ProductType> GProductTypeRepository => g_ProductTypeRepository ?? new GenericRepository<ProductType>(_context);
+    public IGenericRepository<ProductType> GenericProductTypeRepository => _GenericProductTypeRepository ?? new GenericRepository<ProductType>(_context);
+
 
     public void Dispose()
     {
@@ -40,4 +45,3 @@ public class UnitOfWork : IUnitOfWork
         await _context.SaveChangesAsync();
     }
 }
-

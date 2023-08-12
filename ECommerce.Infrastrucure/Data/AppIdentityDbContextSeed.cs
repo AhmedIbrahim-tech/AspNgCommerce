@@ -1,5 +1,4 @@
-﻿using ECommerce.Core.Identity;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 
 namespace ECommerce.Infrastrucure.Data;
 
@@ -21,7 +20,7 @@ public class AppIdentityDbContextSeed
                     Street = "Musa bin Nasser",
                     City = "Cairo",
                     State = "EG",
-                    ZipCode = "71111"
+                    Zipcode = "71111"
                 }
             };
 

@@ -1,4 +1,5 @@
-﻿using System.Text.Json;
+﻿using ECommerce.Core.Entities;
+using System.Text.Json;
 
 namespace ECommerce.Infrastrucure.Repositories
 {
@@ -26,5 +27,6 @@ namespace ECommerce.Infrastrucure.Repositories
         {
             return await _database.KeyDeleteAsync(basketId);
         }
+
     }
 }

@@ -1,4 +1,6 @@
-﻿namespace ECommerce.Core.Services;
+﻿using ECommerce.Core.Interfaces.UnitOfWork;
+
+namespace ECommerce.Core.Services;
 
 public class ProductServices : BaseGenericResultHandler, IProductServices
 {
@@ -20,9 +22,9 @@ public class ProductServices : BaseGenericResultHandler, IProductServices
         {
             var Spec = new ProductWithTypesAndBrandsSpecification(productSpecParams);
             var countSpec = new ProductWithFiltersForCountSpecification(productSpecParams);
-            var totalItems = await _unitOfWork.GProductRepository.CountAsync(countSpec);
+            var totalItems = await _unitOfWork.GenericProductRepository.CountAsync(countSpec);
 
-            var result = await _unitOfWork.GProductRepository.ListAsync(Spec);
+            var result = await _unitOfWork.GenericProductRepository.ListAsync(Spec);
             var ListDto = _mapper.Map<IReadOnlyList<ProductDTo>>(result);
 
             var pageList = new Pagination<ProductDTo>(productSpecParams.PageIndex, productSpecParams.PageSize, totalItems, ListDto);
@@ -43,7 +45,7 @@ public class ProductServices : BaseGenericResultHandler, IProductServices
         try
         {
             var Spec = new ProductWithTypesAndBrandsSpecification(id);
-            var result = await _unitOfWork.GProductRepository.GetEntityWithSpec(Spec);
+            var result = await _unitOfWork.GenericProductRepository.GetEntityWithSpec(Spec);
             var Dto = _mapper.Map<ProductDTo>(result);
             return Success(Dto);
 

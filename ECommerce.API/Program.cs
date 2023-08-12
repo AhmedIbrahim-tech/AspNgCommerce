@@ -95,16 +95,19 @@ builder.Services.AddSwaggerGen(options =>
 #region Dependency Injection
 
 builder.Services.AddCoreDependencies().AddInfrastructureDependencies();
-
-//Redis
-builder.Services.AddSingleton<IConnectionMultiplexer>(c =>
-{
-    var options = ConfigurationOptions.Parse(builder.Configuration.GetConnectionString("Redis"));
-    return ConnectionMultiplexer.Connect(options);
-});
+builder.Services.AddScoped<ITokenService, TokenService>();
 #endregion
 
-builder.Services.AddScoped<ITokenService, TokenService>();
+#region Redis
+builder.Services.AddSingleton<IConnectionMultiplexer>(ConnectionMultiplexer.Connect(builder.Configuration.GetConnectionString("Redis")));
+
+//builder.Services.AddSingleton<IConnectionMultiplexer>(c =>
+//{
+//    var options = ConfigurationOptions.Parse(builder.Configuration.GetConnectionString("Redis"));
+//    return ConnectionMultiplexer.Connect(options);
+//});
+
+#endregion
 
 
 #region CORS Support
@@ -113,7 +116,7 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("CorsPolicy", policy =>
     {
-        policy.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:4200"); //AllowAnyOrigin
+        policy.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin(); //.WithOrigins("http://localhost:4200");
     });
 });
 
@@ -152,16 +155,20 @@ app.MapControllers();
 
 using var scope = app.Services.CreateScope();
 var Services = scope.ServiceProvider;
-var loggerFactory = Services.GetRequiredService<ILoggerFactory>();
 var context = Services.GetRequiredService<ApplicationDBContext>();
-//var userManager = Services.GetRequiredService<UserManager<AppUser>>();
+
+
+// Logger 
 var logger = Services.GetRequiredService<ILogger<Program>>();
+
+var loggerFactory = Services.GetRequiredService<ILoggerFactory>();
+var userManager = Services.GetRequiredService<UserManager<AppUser>>();
 
 try
 {
     await context.Database.MigrateAsync();
     await StoreContextSeed.SeedAsync(context);
-    //await UserIdentitySeed.SeedUserAsync(userManager);
+    await UserIdentitySeed.SeedUserAsync(userManager);
 }
 catch (Exception ex)
 {

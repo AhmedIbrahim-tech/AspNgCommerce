@@ -1,4 +1,6 @@
-﻿namespace ECommerce.Infrastrucure.Specifications;
+﻿using ECommerce.Core.Entities;
+
+namespace ECommerce.Infrastrucure.Specifications;
 
 public class SpecificationEvaluator<TEntity> where TEntity : BaseEntity
 {

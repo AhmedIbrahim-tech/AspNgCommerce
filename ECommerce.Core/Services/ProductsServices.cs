@@ -1,4 +1,6 @@
-﻿namespace ECommerce.Core.Services;
+﻿using ECommerce.Core.Interfaces.UnitOfWork;
+
+namespace ECommerce.Core.Services;
 
 public class ProductsServices : IProductsServices
 {

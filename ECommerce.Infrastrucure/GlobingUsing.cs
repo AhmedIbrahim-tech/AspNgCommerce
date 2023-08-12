@@ -1,10 +1,10 @@
-﻿global using ECommerce.Core.Entities;
-global using ECommerce.Core.Exceptions;
+﻿global using ECommerce.Core.Exceptions;
 global using ECommerce.Core.Identity;
 global using ECommerce.Core.Interfaces.Repository;
 global using ECommerce.Core.Interfaces.Services;
 global using ECommerce.Core.Interfaces.Specifications;
 global using ECommerce.Core.Interfaces.Token;
+global using ECommerce.Core.Interfaces.UnitOfWork;
 global using ECommerce.Core.Services;
 global using ECommerce.Infrastrucure.Data;
 global using ECommerce.Infrastrucure.Repositories;

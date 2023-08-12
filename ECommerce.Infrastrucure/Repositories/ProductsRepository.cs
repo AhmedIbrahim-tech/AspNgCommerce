@@ -1,4 +1,6 @@
-﻿namespace ECommerce.Infrastrucure.Repositories;
+﻿using ECommerce.Core.Entities;
+
+namespace ECommerce.Infrastrucure.Repositories;
 
 public class ProductsRepository : IProductsRepository
 {

@@ -12,6 +12,7 @@ import { TestErrorComponent } from './Components/test-error/test-error.component
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { SharedModule } from '../shared/shared.module';
 // import { BreadcrumbModule } from 'xng-breadcrumb';
+// import { BreadcrumbsModule } from '@exalif/ngx-breadcrumbs';
 
 
 @NgModule({
@@ -26,13 +27,14 @@ import { SharedModule } from '../shared/shared.module';
     CommonModule,
     CoreRoutingModule,
     RouterModule,
-    // BreadcrumbModule,
+    // BreadcrumbsModule,
     ToastrModule.forRoot({
       positionClass:'toast-top-right',
       preventDuplicates: true,
     }),
     NgxSpinnerModule,
     SharedModule
+    
   ],
   exports: [
     NavBarComponent,
