@@ -11,8 +11,7 @@ import { ServerErrorComponent } from './Components/server-error/server-error.com
 import { TestErrorComponent } from './Components/test-error/test-error.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { SharedModule } from '../shared/shared.module';
-// import { BreadcrumbModule } from 'xng-breadcrumb';
-// import { BreadcrumbsModule } from '@exalif/ngx-breadcrumbs';
+import { BreadcrumbModule } from 'xng-breadcrumb';
 
 
 @NgModule({
@@ -27,10 +26,11 @@ import { SharedModule } from '../shared/shared.module';
     CommonModule,
     CoreRoutingModule,
     RouterModule,
-    // BreadcrumbsModule,
+    BreadcrumbModule,
     ToastrModule.forRoot({
       positionClass:'toast-top-right',
       preventDuplicates: true,
+      timeOut: 2000,
     }),
     NgxSpinnerModule,
     SharedModule

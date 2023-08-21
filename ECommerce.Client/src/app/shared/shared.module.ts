@@ -11,6 +11,7 @@ import { BasketSummaryComponent } from './Components/basket-summary/basket-summa
 import { ReactiveFormsModule } from '@angular/forms';
 import { TextInputComponent } from './Components/text-input/text-input.component';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
     PaginationModule.forRoot(),
     CarouselModule.forRoot(),
     ReactiveFormsModule,
-    BsDropdownModule.forRoot()
+    BsDropdownModule.forRoot(),
+    NgxSpinnerModule
   ],
   exports: [
     PaginationModule,
@@ -35,7 +37,8 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
     CarouselModule,
     OrderTotalsComponent,
     ReactiveFormsModule,
-    BsDropdownModule
+    BsDropdownModule,
+    NgxSpinnerModule
 
   ]
 })

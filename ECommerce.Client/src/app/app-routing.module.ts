@@ -7,7 +7,7 @@ import { TestErrorComponent } from './core/Components/test-error/test-error.comp
 import { AuthGuard } from './core/Guards/auth.guard';
 
 const routes: Routes = [
-  { path: '', component: HomeComponent },
+  { path: '', component: HomeComponent, data: { breadcrumb: 'Home' } },
   {
     path: 'shop',
     loadChildren: () => import('./shop/shop.module').then(m => m.ShopModule)
@@ -18,7 +18,7 @@ const routes: Routes = [
   },
   {
     path: 'checkout',
-    canActivate:[AuthGuard],
+    canActivate: [AuthGuard],
     loadChildren: () => import('./checkout/checkout.module').then(m => m.CheckoutModule)
   },
   {

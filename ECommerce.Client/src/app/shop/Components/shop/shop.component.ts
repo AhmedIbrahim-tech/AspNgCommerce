@@ -5,6 +5,8 @@ import { retry } from 'rxjs';
 import { IBrand } from 'src/app/shared/Models/brand';
 import { IType } from 'src/app/shared/Models/type';
 import { ShopParams } from 'src/app/shared/Models/ShopParams';
+import { NgxSpinnerService } from "ngx-spinner";
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-shop',
@@ -32,7 +34,7 @@ export class ShopComponent implements OnInit {
   //#endregion
 
 
-  constructor(private _serives: ShopService) { }
+  constructor(private _serives: ShopService, private spinner: NgxSpinnerService,private toastr: ToastrService) { }
 
   ngOnInit(): void {
     this.GetListOfProducts();
@@ -41,18 +43,22 @@ export class ShopComponent implements OnInit {
   }
 
   //#region retrieves a list
-  
+
   /**
    * The function `GetListOfProducts()` retrieves a list of products from a service, handles the
    * response, and updates the necessary variables.
    */
   GetListOfProducts() {
+    this.spinner.show();
     this._serives.GetListOfProducts(this.shopparam).pipe(retry(3)).subscribe({
       next: (response: any) => {
         this.products = response.data.data;
         this.shopparam.pageNumber = response.data.pageIndex;
         this.shopparam.pageSize = response.data.pageSize;
         this.TotalCount = response.data.count;
+        this.spinner.hide();
+        this.showSuccess()
+        
       },
       error: (error) => console.log(error),
       // complete: () => { console.log("Data is Completed"); }
@@ -162,5 +168,10 @@ export class ShopComponent implements OnInit {
     this.GetListOfProducts();
   }
   //#endregion
+
+
+  showSuccess() {
+    this.toastr.success('Data Loading Successfully', 'Success');
+  }
 
 }
