@@ -14,7 +14,6 @@ export class AccountService {
   currentUser$ = this.currentUserSource.asObservable();
   constructor(private http: HttpClient, private router: Router) { }
 
-
   //#region Get Cruuent User
   loadCurrentUser(token: string | null) {
     if (token === null) {
