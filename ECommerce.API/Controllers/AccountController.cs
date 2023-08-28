@@ -30,7 +30,7 @@ public class AccountController : BaseAPIController
     public async Task<ActionResult<UserDto>> login([FromBody] LoginDto loginDto)
     {
         var user = await _userManager.FindByEmailAsync(loginDto.Email);
-        if (user == null) return Unauthorized(new BaseQueryResult(401));
+        if (user == null) return Unauthorized(new BaseQueryResult(600));
 
         var result = await _signInManager.CheckPasswordSignInAsync(user, loginDto.Password, false);
         if (!result.Succeeded) return Unauthorized(new BaseQueryResult(401));

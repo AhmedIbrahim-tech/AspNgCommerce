@@ -27,10 +27,13 @@ export class ErrorInterceptor implements HttpInterceptor {
           if (error.status === 500) {
             this.router.navigateByUrl('/server-error');
           }
-
+          if (error.status === 600) {
+            this.toastr.error(error.error.message, "Error");
+          }
           if (error.status === 401) {
             this.toastr.error(error.error.message, error.status.toString());
           }
+          
           if (error.status === 400) {
             this.toastr.error(error.error.message, error.status.toString());
           }

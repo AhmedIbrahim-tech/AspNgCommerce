@@ -42,10 +42,12 @@ export class LoginComponent implements OnInit {
   onSubmit() {
     this.spinner.show();
     this.accountService.login(this.loginForm.value).subscribe({
-      next: user => this.router.navigateByUrl(this.returnUrl)
+      next: user => this.router.navigateByUrl(this.returnUrl).finally(
+        () => this.SuccessMessage()
+      )
     })
     this.spinner.hide();
-    this.SuccessMessage();
+    
   }
 
 

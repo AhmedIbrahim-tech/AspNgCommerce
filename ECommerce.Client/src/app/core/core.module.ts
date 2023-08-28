@@ -26,12 +26,12 @@ import { BreadcrumbModule } from 'xng-breadcrumb';
     CommonModule,
     CoreRoutingModule,
     RouterModule,
-    BreadcrumbModule,
     ToastrModule.forRoot({
       positionClass:'toast-top-right',
       preventDuplicates: true,
       timeOut: 2000,
     }),
+    BreadcrumbModule,
     NgxSpinnerModule,
     SharedModule
     
@@ -39,7 +39,8 @@ import { BreadcrumbModule } from 'xng-breadcrumb';
   exports: [
     NavBarComponent,
     SectionHeaderComponent,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    BreadcrumbModule
   ]
 })
 export class CoreModule { }

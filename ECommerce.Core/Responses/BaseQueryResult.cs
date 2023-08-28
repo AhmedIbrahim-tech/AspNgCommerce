@@ -28,6 +28,7 @@ public class BaseQueryResult
             401 => "Authorized you are not",
             404 => "Response found it is not",
             500 => "Server error occurred",
+            600 => "Email Or Password is incorrect",
             _ => null
         };
     }
