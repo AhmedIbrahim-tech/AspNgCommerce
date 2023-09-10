@@ -1,0 +1,12 @@
+.credits-list {
+  @apply py-4;
+  @apply list-disc;
+  @apply pl-10;
+  li {
+    @apply py-2;
+  }
+  svg {
+    height: 15px;
+    width: 15px;
+  }
+}

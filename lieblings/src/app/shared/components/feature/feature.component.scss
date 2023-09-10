@@ -1,0 +1,28 @@
+.ll-feature {
+  margin-top: 150px;
+}
+._title {
+  padding: 40px;
+  font-size: 2rem;
+  &-wrap {
+    margin-top: -100px;
+  }
+}
+._feature {
+  h2 {
+    font-size: 1.1rem;
+    line-height: 28px;
+    letter-spacing: 0.3px;
+  }
+}
+
+@media (min-width: 768px) {
+  ._title {
+    font-size: 2.5rem;
+  }
+  ._feature {
+    h2 {
+      font-size: 1.2rem;
+    }
+  }
+}

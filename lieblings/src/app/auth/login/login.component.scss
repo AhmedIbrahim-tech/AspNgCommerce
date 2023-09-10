@@ -1,0 +1,31 @@
+.login {
+  background-color: #ffffff;
+  &__page {
+    background-attachment: scroll;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+    &:before {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      right: 0;
+      left: 0;
+      background-color: rgba(0, 0, 0, 0.4);
+    }
+  }
+  &__row {
+    position: relative;
+    z-index: 2;
+  }
+}
+@media (min-width: 768px) {
+  .login {
+    &__row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+}

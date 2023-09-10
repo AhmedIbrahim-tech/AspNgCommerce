@@ -1,0 +1,52 @@
+* {
+  margin: 0;
+  padding: 0;
+  outline: 0;
+}
+html {
+  font-size: 14px;
+}
+
+h1 {
+  font-size: 2.5rem;
+  line-height: 3.2rem;
+  font-weight: 700;
+}
+h2 {
+  font-size: 2rem;
+  line-height: 3rem;
+  font-weight: 700;
+}
+h3 {
+  font-size: 1.75rem;
+  line-height: 3rem;
+  font-weight: 600;
+}
+h4 {
+  font-size: 1.5rem;
+  line-height: 2rem;
+  font-weight: 600;
+}
+h5 {
+  font-size: 1.25rem;
+  line-height: 1.9rem;
+  font-weight: 600;
+}
+h6 {
+  font-size: 1rem;
+  line-height: 1.5rem;
+  font-weight: 600;
+}
+p {
+  font-size: 1rem;
+  line-height: 1.5rem;
+  color: #787878;
+}
+button {
+  &:focus {
+    outline: none;
+  }
+}
+svg {
+  display: inline-block;
+}

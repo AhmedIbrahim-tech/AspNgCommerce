@@ -1,0 +1,69 @@
+{
+  "name": "lieblings",
+  "version": "0.0.0",
+  "scripts": {
+    "ng": "ng",
+    "prettier": "prettier --write \"**/*.{js,json,css,scss,less,ts,html,component.html}\"",
+    "start": "ng serve",
+    "build": "ng build",
+    "test": "ng test",
+    "lint": "ng lint",
+    "e2e": "ng e2e",
+    "prod": "ng build --base-href=https://ng.techincent.com/lieblings/ --configuration production --source-map=false"
+  },
+  "private": true,
+  "dependencies": {
+    "@angular/animations": "~12.0.3",
+    "@angular/cdk": "^12.0.3",
+    "@angular/common": "~12.0.3",
+    "@angular/compiler": "~12.0.3",
+    "@angular/core": "~12.0.3",
+    "@angular/forms": "~12.0.3",
+    "@angular/google-maps": "^11.2.12",
+    "@angular/material": "^12.0.3",
+    "@angular/platform-browser": "~12.0.3",
+    "@angular/platform-browser-dynamic": "~12.0.3",
+    "@angular/router": "~12.0.3",
+    "@ngneat/tailwind": "^7.0.3",
+    "ng-particles": "^2.7.3",
+    "ngx-skeleton-loader": "^2.10.0",
+    "rxjs": "~6.6.0",
+    "tslib": "^2.0.0",
+    "tsparticles": "^1.24.3",
+    "zone.js": "~0.11.4"
+  },
+  "devDependencies": {
+    "@angular-builders/custom-webpack": "11.1.1",
+    "@angular-devkit/build-angular": "~12.0.3",
+    "@angular/cli": "~12.0.3",
+    "@angular/compiler-cli": "~12.0.3",
+    "@schuchard/prettier": "^5.0.0",
+    "@tailwindcss/forms": "0.3.3",
+    "@tailwindcss/typography": "0.4.1",
+    "@types/jasmine": "~3.6.0",
+    "@types/node": "^12.11.1",
+    "codelyzer": "^6.0.0",
+    "husky": "6.0.0",
+    "jasmine-core": "~3.6.0",
+    "jasmine-spec-reporter": "~5.0.0",
+    "karma": "~6.3.3",
+    "karma-chrome-launcher": "~3.1.0",
+    "karma-coverage": "~2.0.3",
+    "karma-jasmine": "~4.0.0",
+    "karma-jasmine-html-reporter": "^1.5.0",
+    "lint-staged": "10.5.4",
+    "postcss-ng-tailwind-in-components": "0.0.4",
+    "prettier": "^2.2.1",
+    "protractor": "~7.0.0",
+    "tailwindcss": "2.1.4",
+    "ts-node": "~8.3.0",
+    "tslint": "~6.1.0",
+    "tslint-config-prettier": "1.18.0",
+    "typescript": "~4.2.4"
+  },
+  "lint-staged": {
+    "*.{js,json,css,scss,less,md,ts,html,component.html}": [
+      "prettier --write --ignore-unknown"
+    ]
+  }
+}

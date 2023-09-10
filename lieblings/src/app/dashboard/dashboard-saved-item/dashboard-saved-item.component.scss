@@ -1,0 +1,19 @@
+::ng-deep {
+  .mat-card-header-text {
+    margin: 0 !important;
+  }
+}
+.view__btn,
+.action_icon__btn {
+  $btnSize: 30px;
+  $iconSize: 22px;
+  line-height: $btnSize;
+  width: $btnSize;
+  height: $btnSize;
+  .mat-icon {
+    font-size: $iconSize;
+    line-height: $iconSize;
+    width: $iconSize;
+    height: $iconSize;
+  }
+}

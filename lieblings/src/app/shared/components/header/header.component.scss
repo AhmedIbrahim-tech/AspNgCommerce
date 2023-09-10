@@ -1,0 +1,44 @@
+.ll_header {
+  padding: 15px 0;
+  @apply bg-gray-50;
+  &.top-fixed {
+    @apply fixed -inset-x-0 top-0;
+    padding: 15px 0;
+    z-index: 9999;
+    background-color: #ffffff;
+    transition: background-color 0.5s ease;
+  }
+}
+.logo {
+  max-width: 120px;
+}
+._sidenav__toggler {
+  $iconSize: 30px;
+  $buttonSize: 42px;
+  height: $buttonSize;
+  width: $buttonSize;
+  .mat-icon {
+    font-size: $iconSize;
+    height: $iconSize;
+    width: $iconSize;
+    line-height: $iconSize;
+  }
+}
+
+@media (min-width: 768px) {
+  .logo {
+    max-width: 145px;
+  }
+  ._sidenav__toggler {
+    $iconSize: 38px;
+    $buttonSize: 52px;
+    height: $buttonSize;
+    width: $buttonSize;
+    .mat-icon {
+      font-size: $iconSize;
+      height: $iconSize;
+      width: $iconSize;
+      line-height: $iconSize;
+    }
+  }
+}

@@ -1,0 +1,59 @@
+.table-inside {
+  overflow-x: auto;
+  table {
+    width: 100%;
+    color: #495058;
+    tr {
+      min-height: 40px;
+    }
+    td,
+    th {
+      @apply px-4;
+    }
+    th {
+      @apply font-medium;
+      @apply py-3;
+    }
+    td {
+      @apply py-2;
+    }
+  }
+  .action_icon__btn {
+    $btnSize: 30px;
+    $iconSize: 16px;
+    line-height: $btnSize;
+    width: $btnSize;
+    height: $btnSize;
+    .mat-icon {
+      font-size: $iconSize;
+      line-height: $iconSize;
+      width: $iconSize;
+      height: $iconSize;
+    }
+  }
+}
+@media (max-width: 1439px) {
+  .table-inside .ltXxl\:responsive {
+    width: 1439px;
+  }
+}
+@media (max-width: 1199px) {
+  .table-inside .ltXl\:responsive {
+    width: 1199px;
+  }
+}
+@media (max-width: 991px) {
+  .table-inside .ltLg\:responsive {
+    width: 991px;
+  }
+}
+@media (max-width: 767px) {
+  .table-inside .ltMd\:responsive {
+    width: 767px;
+  }
+}
+@media (max-width: 575px) {
+  .table-inside .ltSm\:responsive {
+    width: 575px;
+  }
+}

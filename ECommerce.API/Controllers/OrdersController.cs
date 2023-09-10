@@ -6,6 +6,7 @@ namespace ECommerce.API.Controllers
     [Authorize]
     public class OrdersController : BaseAPIController
     {
+        #region Constractor (s)
         private readonly IOrderService _orderService;
         private readonly IMapper _mapper;
 
@@ -13,9 +14,10 @@ namespace ECommerce.API.Controllers
         {
             _orderService = orderService;
             _mapper = mapper;
-        }
+        } 
+        #endregion
 
-
+        #region Create Order
         [HttpPost(Router.Order.Create)]
         public async Task<ActionResult> CreateOrder(OrderDto orderDto)
         {
@@ -30,7 +32,9 @@ namespace ECommerce.API.Controllers
             return Ok(order);
         }
 
+        #endregion
 
+        #region Get Orders For User
         [HttpGet(Router.Order.GetOrdersForUser)]
         public async Task<ActionResult> GetOrdersForUser()
         {
@@ -40,6 +44,9 @@ namespace ECommerce.API.Controllers
             return Ok(_mapper.Map<IReadOnlyList<OrderToReturnDto>>(orders));
         }
 
+        #endregion
+
+        #region Get Order By Id For User
         [HttpGet(Router.Order.GetOrderByIdForUser)]
         public async Task<ActionResult<OrderToReturnDto>> GetOrderByIdForUser(int id)
         {
@@ -49,12 +56,16 @@ namespace ECommerce.API.Controllers
             return _mapper.Map<OrderToReturnDto>(order);
         }
 
+        #endregion
+
+        #region Delivery Method
         [HttpGet(Router.Order.DeliveryMethod)]
         public async Task<ActionResult<IReadOnlyList<DeliveryMethod>>> GetDeliveryMethods()
         {
             return Ok(await _orderService.GetDeliveryMethodsAsync());
         }
 
+        #endregion
 
     }
 }

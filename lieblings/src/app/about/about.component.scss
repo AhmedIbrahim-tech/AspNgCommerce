@@ -1,0 +1,157 @@
+.about {
+  &__title {
+    max-width: 635px;
+  }
+  &__text {
+    p {
+      font-size: 17px;
+      line-height: 27px;
+      color: #6b7280;
+    }
+  }
+  &__img {
+    $iconSize: 90px;
+    .mat-icon {
+      font-size: $iconSize;
+      width: $iconSize;
+      height: $iconSize;
+      line-height: $iconSize;
+      opacity: 0.5;
+    }
+  }
+}
+.experience {
+  h2 {
+    font-size: 36px;
+    line-height: 46px;
+  }
+}
+@media (min-width: 1200px) and (max-width: 1439px) {
+  .experience {
+    h6 {
+      font-size: 15px;
+    }
+  }
+}
+@media (min-width: 992px) and (max-width: 1199px) {
+  .about {
+    &__title {
+      font-size: 2rem;
+      line-height: 3rem;
+      max-width: 512px;
+    }
+  }
+  .experience {
+    h2 {
+      font-size: 34px;
+      line-height: 42px;
+    }
+    h6 {
+      font-size: 15px;
+      line-height: 22px;
+    }
+  }
+}
+@media (max-width: 991px) {
+  .about {
+    &__title {
+      font-size: 2rem;
+      line-height: 3rem;
+    }
+    &__img {
+      display: block;
+      img {
+        width: 100%;
+      }
+    }
+  }
+  .experience {
+    h2 {
+      font-size: 34px;
+      line-height: 42px;
+    }
+    h6 {
+      font-size: 15px;
+      line-height: 22px;
+    }
+  }
+}
+// Teams
+.member {
+  @apply relative;
+  &__image {
+    img {
+      margin-left: auto;
+      margin-right: auto;
+    }
+    &:after {
+      z-index: 1;
+      content: '';
+      @apply absolute;
+      width: 100%;
+      height: 0;
+      bottom: 0;
+      left: 0;
+      z-index: 1;
+      transition: opacity 0.65s cubic-bezier(0.05, 0.2, 0.1, 1);
+      background: linear-gradient(180deg, transparent, var(--accent));
+      opacity: 0;
+    }
+  }
+  &__desc {
+    z-index: 2;
+    @apply absolute;
+    @apply text-white;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    .name {
+      opacity: 0;
+      visibility: hidden;
+      transition-delay: 0.25s;
+      transform: translateY(10px);
+      transition: all 0.45s cubic-bezier(0.23, 0.88, 0.34, 0.99);
+    }
+    .designation {
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.45s cubic-bezier(0.23, 0.88, 0.34, 0.99);
+      transform: translateY(10px);
+    }
+  }
+  &__social {
+    z-index: 2;
+    @apply absolute;
+    @apply text-white;
+    width: 100%;
+    top: 30px;
+    left: 0;
+    opacity: 0;
+    transition: opacity 0.65s cubic-bezier(0.05, 0.2, 0.1, 1);
+  }
+  &:hover {
+    .member__image {
+      &:after {
+        opacity: 1;
+        height: 85%;
+      }
+    }
+    .member__social {
+      opacity: 1;
+    }
+    .member__desc {
+      .name {
+        transition-delay: 0.25s;
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+      }
+      .designation {
+        transition-delay: 0.33s;
+        opacity: 0.7;
+        visibility: visible;
+        transform: translateY(0);
+      }
+    }
+  }
+}

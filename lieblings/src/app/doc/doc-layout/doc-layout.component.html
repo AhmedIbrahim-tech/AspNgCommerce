@@ -1,0 +1,46 @@
+<ll-loader></ll-loader>
+<div class="layout-container" [class.example-is-mobile]="isLessThenLargeDevice">
+  <mat-toolbar class="py-3">
+    <a class="inline-block" href=""><img src="assets/images/logo.png" alt="Lieblings" /></a>
+    <button mat-icon-button class="xl:hidden" (click)="sidenav.toggle()">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <span class="ml-auto"></span>
+    <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
+      <mat-icon>favorite</mat-icon>
+    </button>
+    <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
+      <mat-icon>share</mat-icon>
+    </button>
+  </mat-toolbar>
+  <mat-sidenav-container class="ll-sidenav-container">
+    <mat-sidenav
+      #sidenav
+      [opened]="isSidenavExpand"
+      [mode]="isLessThenLargeDevice ? 'over' : 'side'"
+      [fixedInViewport]="isLessThenLargeDevice"
+    >
+      <div class="sidenav">
+        <mat-nav-list>
+          <a
+            mat-list-item
+            routerLink="/doc"
+            routerLinkActive="bg-gray-200"
+            [routerLinkActiveOptions]="{ exact: true }"
+            class="font-semibold"
+            >Getting Started</a
+          >
+          <a mat-list-item routerLink="/doc/folder-structure" routerLinkActive="bg-gray-200" class="font-semibold">Folder Structure</a>
+          <a mat-list-item routerLink="/doc/components" routerLinkActive="bg-gray-200" class="font-semibold">Components</a>
+          <a mat-list-item routerLink="/doc/customizations" routerLinkActive="bg-gray-200" class="font-semibold">Customizations</a>
+          <a mat-list-item routerLink="/doc/credits" routerLinkActive="bg-gray-200" class="font-semibold">Credits</a>
+        </mat-nav-list>
+      </div>
+    </mat-sidenav>
+    <mat-sidenav-content>
+      <main class="main">
+        <router-outlet></router-outlet>
+      </main>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>

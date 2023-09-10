@@ -3,6 +3,7 @@
 public interface IUnitOfWork : IDisposable
 {
     // Generic Repository Pattern
+    IGenericRepository<TEntity> Repository<TEntity>() where TEntity : BaseEntity;
     IGenericRepository<Product> GenericProductRepository { get; }
     IGenericRepository<ProductBrand> GenericProductBrandRepository { get; }
     IGenericRepository<ProductType> GenericProductTypeRepository { get; }

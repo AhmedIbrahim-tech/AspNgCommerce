@@ -1,10 +1,12 @@
 ﻿using ECommerce.Core.Entities;
+using System.Collections;
 
 namespace ECommerce.Infrastrucure.Repositories;
 
 public class UnitOfWork : IUnitOfWork
 {
     private readonly ApplicationDBContext _context;
+    private Hashtable _repositories;
     private readonly IConnectionMultiplexer redis;
     private readonly IGenericRepository<Product> _GenericProductRepository;
     private readonly IGenericRepository<ProductBrand> _GenericProductBrandRepository;
@@ -16,6 +18,23 @@ public class UnitOfWork : IUnitOfWork
     {
         _context = context;
         this.redis = redis;
+    }
+
+    public IGenericRepository<TEntity> Repository<TEntity>() where TEntity : BaseEntity
+    {
+        if (_repositories == null) _repositories = new Hashtable();
+
+        var type = typeof(TEntity).Name;
+
+        if (!_repositories.ContainsKey(type))
+        {
+            var repositoryType = typeof(GenericRepository<>);
+            var repositoryInstance = Activator.CreateInstance(repositoryType.MakeGenericType(typeof(TEntity)), _context);
+
+            _repositories.Add(type, repositoryInstance);
+        }
+
+        return (IGenericRepository<TEntity>)_repositories[type];
     }
     public IProductRepository ProductRepository => _productRepository ?? new ProductRepository(_context);
     public IProductsRepository ProductsRepository => _productsRepository ?? new ProductsRepository(_context);

@@ -1,0 +1,26 @@
+$sidenavWidth: 260px;
+
+.layout-container {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+.main {
+  padding: 30px 15px;
+}
+.sidenav {
+  padding: 20px 18px;
+  width: $sidenavWidth;
+}
+.ll-sidenav-container {
+  flex: 1;
+}
+@media (min-width: 992px) {
+  .main {
+    padding: 30px;
+  }
+}

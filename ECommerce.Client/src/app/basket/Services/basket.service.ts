@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { Basket, BasketItem, BasketTotals } from 'src/app/shared/Models/Basket';
 import { IProduct } from 'src/app/shared/Models/Product';
+import { DeliveryMethod } from 'src/app/shared/Models/DeliveryMethod';
 
 @Injectable({
   providedIn: 'root'
@@ -28,6 +29,21 @@ export class BasketService {
         }
       }
     )
+  }
+
+
+  setShippingPrice(deliveryMethod:DeliveryMethod)
+  {
+    let basket = this.getCurrentBasketValue();
+    // basket = deliveryMethod.price;
+    
+    if(basket)
+    {
+      console.log("shipping price is ",deliveryMethod)
+      basket.deliveryMethodId=deliveryMethod.id;
+      this.setBasket(basket);
+    }
+    this.calculatorTotals();
   }
 
   setBasket(basket: Basket) {

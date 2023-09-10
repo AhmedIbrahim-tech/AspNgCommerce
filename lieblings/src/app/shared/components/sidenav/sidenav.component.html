@@ -1,0 +1,9 @@
+<div class="sidenav flex flex-col min-h-screen p-5">
+    <mat-nav-list>
+        <a mat-list-item [routerLink]="item?.path" *ngFor="let item of navList"> {{ item?.name }} </a>
+    </mat-nav-list>
+    <div class="flex items-center justify-between mt-auto">
+        <a [routerLink]="['/auth/login']" mat-raised-button color='warn' class="text-sm font-bold py-2 px-5 w-28">Login</a>
+        <a [routerLink]="['/auth/signup']" mat-raised-button color="accent" class="text-sm font-bold py-2 px-5 ml-2 w-28">Join Now</a>
+    </div>
+</div>

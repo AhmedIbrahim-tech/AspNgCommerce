@@ -1,0 +1,76 @@
+<div>
+  <div class="filter flex items-center mb-5">
+    <h5>Favorite products</h5>
+    <div class="flex items-center ml-auto">
+      <button [class.text-accent]="view === 'grid'" (click)="view = 'grid'" mat-icon-button class="view__btn"><mat-icon>grid_view</mat-icon></button>
+      <button [class.text-accent]="view === 'list'" (click)="view = 'list'" mat-icon-button class="view__btn"><mat-icon>list_alt</mat-icon></button>
+    </div>
+  </div>
+  <div>
+    <div *ngIf="view === 'list'" class="table-inside">
+      <div class="flex flex-col border ltLg:responsive">
+        <div class="flex items-center p-4 border-b hover:bg-blue-100">
+          <div class="w-6/12 font-medium"><div class="pl-16 ml-3">Product</div></div>
+          <div class="w-2/12 font-medium">Category</div>
+          <div class="w-2/12 font-medium text-center">Price</div>
+          <div class="w-2/12 font-medium">Rating</div>
+          <div class="w-1/12 font-medium">Feedback</div>
+          <div class="w-1/12"></div>
+        </div>
+        <div class="flex items-center p-4 border-b hover:bg-blue-100" *ngFor="let product of products | slice: 0:9">
+          <div class="w-6/12">
+            <a href="" class="flex hover:text-primary">
+              <div class="max-h-16 w-16 flex-none mr-3 border" *ngIf="product?.images">
+                <img [src]="product?.images[0]" alt="img">
+              </div>
+              <h6 class="flex-auto">{{ product?.name }}</h6>
+            </a>
+          </div>
+          <div class="w-2/12">{{product?.category}}</div>
+          <div class="w-2/12 text-center">${{product?.price}}</div>
+          <div class="w-2/12">
+            <div class="flex items-center">
+              <mat-icon class="mr-1 text-lg leading-4 h-4 w-4 text-yellow-500">star_rate</mat-icon>
+              {{product?.rating}}
+            </div>
+          </div>
+          <div class="w-1/12">
+            <div class="flex items-center">
+              <mat-icon class="mr-1 text-lg leading-4 h-4 w-4">feedback</mat-icon>
+              {{product?.feedback}}
+            </div>
+          </div>
+          <div class="w-1/12 text-right">
+            <button class="action_icon__btn" mat-icon-button [matMenuTriggerFor]="menu">
+              <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu" xposition="before">
+              <button mat-menu-item>
+                <mat-icon>dialpad</mat-icon>
+                <span>Details</span>
+              </button>
+              <button mat-menu-item>
+                <mat-icon>delete</mat-icon>
+                <span>Delete</span>
+              </button>
+            </mat-menu>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="grid grid-cols-12 gap-4" *ngIf="view === 'grid'">
+      <div class="col-span-4" *ngFor="let product of products | slice: 0:9">
+        <mat-card>
+          <img class="m-0 mb-4" mat-card-image [src]="product?.images[0]" alt="Photo of a Shiba Inu" />
+          <mat-card-header class="mx-0">
+            <h3 class="text-[15px] leading-[23px]">{{ product?.name }}</h3>
+          </mat-card-header>
+          <mat-card-actions>
+            <a mat-stroked-button [routerLink]="['/products', product.id]" class="px-5">View</a>
+            <button mat-button>SHARE</button>
+          </mat-card-actions>
+        </mat-card>
+      </div>
+    </div>  
+  </div>
+</div>

@@ -1,0 +1,83 @@
+<div class="pt-52 pb-32 bg-gray-100 text-center">
+  <div class="container">
+    <h3>Contact Us</h3>
+    <nav class="breadcrumb flex justify-center items-center">
+      <a class="px-1 mr-3 text-gray-500 hover:text-black" [routerLink]="'/'">Home</a>
+      <a class="px-1" href="javascript:void(0)" class="text-accent">Contact</a>
+    </nav>
+  </div>
+</div>
+<div class="pt-20">
+  <div class="container">
+    <div class="grid grid-cols-12 gap-4 lg:gap-8 xxl:gap-16">
+      <div class="contact__form col-span-12 lg:col-span-7">
+        <div class="mb-8">
+          <h3>Leave us a message</h3>
+          <p>You will receive a response within 24 hours from our team.</p>
+        </div>
+        <form>
+          <div class="flex flex-wrap sm:flex-nowrap sm:space-x-5 mt-3">
+            <input type="text" placeholder="Your Name" class="border border-gray-200 p-2 px-4 w-full sm:w-1/2 rounded-sm" />
+            <input
+              type="number"
+              placeholder="Your Number"
+              class="border border-gray-200 p-2 px-4 w-full sm:w-1/2 rounded-sm mt-3 sm:mt-0"
+            />
+          </div>
+          <input type="email" placeholder="Your Email" class="border border-gray-200 p-2 px-4 w-full rounded-sm mt-5" />
+          <input type="text" placeholder="Subject" class="border border-gray-200 p-2 px-4 w-full rounded-sm mt-5" />
+          <textarea
+            cols="10"
+            rows="3"
+            placeholder="Tell us about desired property"
+            [value]="''"
+            class="border border-gray-200 p-3 mt-5 w-full rounded-sm mt-5"
+          >
+          </textarea>
+          <button class="px-5 py-2 bg-accent text-white mt-5 rounded font-medium">Send Message</button>
+        </form>
+      </div>
+      <div class="col-span-12 lg:col-span-5 bg-black bg-opacity-90 text-white rounded p-8 xxl:px-16 mt-10 lg:mt-0">
+        <h3>Contact info</h3>
+        <div class="flex space-x-4 mt-14">
+          <div class="flex pt-1 bg-purple-600 rounded-lg">
+            <mat-icon color="accent">settings_phone</mat-icon>
+          </div>
+          <div class="flex-1">
+            <a href="callto:125512556523" class="text-gray-300 font-semibold hover:text-accent">+1255 - 1255 - 6523</a>
+            <br />
+            <a href="callto:125512556523" class="text-gray-300 font-semibold hover:text-accent mt-2 inline-block">+1255 - 1255 - 6523</a>
+          </div>
+        </div>
+        <div class="flex space-x-4 mt-8">
+          <div class="flex pt-1 bg-purple-600 rounded-lg">
+            <mat-icon color="accent">mail_outline</mat-icon>
+          </div>
+          <div class="flex-1">
+            <a href="mailto:mail@example.com" class="text-gray-300 font-semibold hover:text-accent">mail@example.com</a>
+            <br />
+            <a href="mailto:mail@example.com" class="text-gray-300 font-semibold hover:text-accent mt-2 inline-block">mail@example.com</a>
+          </div>
+        </div>
+        <div class="flex space-x-4 mt-8">
+          <div class="flex pt-1 bg-purple-600 rounded-lg">
+            <mat-icon color="accent">map</mat-icon>
+          </div>
+          <div class="flex-1">
+            <a
+              target="_blank"
+              href="https://www.google.com/maps/@23.6982376,90.3462922,19.25z"
+              class="text-gray-300 hover:text-accent font-semibold"
+            >
+              Bowery St, New York, <br />
+              NY 10013, USA
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="col-span-12 mt-5">
+        <ll-google-location-map></ll-google-location-map>
+      </div>
+    </div>
+  </div>
+</div>

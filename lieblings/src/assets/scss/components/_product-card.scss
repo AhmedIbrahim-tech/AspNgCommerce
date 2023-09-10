@@ -1,0 +1,39 @@
+.ll-product {
+    &__name {
+        font-weight: 600;
+        font-size: 18px;
+        line-height: 28px;
+        min-height: 55px;
+        a {
+            color: #666666;
+            &:hover {
+                color: var(--accent);
+                transition: all .3s ease-out;
+            }
+        }
+    }
+    &__creator {
+        font-weight: 400;
+        font-size: 1rem;
+        line-height: 21px;
+        color: #666666;
+        margin-bottom: 12px;
+    }
+    &__price {
+        font-size: 20px;
+        line-height: 30px;
+    }
+    &__price-label {
+        font-size: 18px;
+        line-height: 19px;
+        color: #848484;
+    }
+    &__action {
+        border-top: 1px solid #D6D6D6;
+        div {
+            &:first-child {
+                border-right: 1px solid #D6D6D6 
+            }
+        }
+    }
+}

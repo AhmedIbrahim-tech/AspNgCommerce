@@ -1,0 +1,105 @@
+<div>
+  <!-- Color start -->
+  <div>
+    <h3 class="border-b mb-3 pb-2" id="edit_menu_item">#. Change Color</h3>
+    <h5>1. Change material colors</h5>
+    <p>In src/styles.scss file, line no. [15, 16, 17] contain [primary, accent, warn]. <a class="text-blue-400" href="https://material.io/archive/guidelines/style/color.html#" target="_blank">Check material color palette</a>, and change it'</p>
+    <pre class="bg-black text-white mt-2">
+      <code>
+        // ---
+        $lieb-primary: mat.define-palette(mat.$green-palette, 700, A400, A700);
+        $lieb-accent: mat.define-palette(mat.$deep-orange-palette, 500, 400, A700);
+        $lieb-warn: mat.define-palette(mat.$yellow-palette, 700, 500, A700);
+        // ---
+      </code>
+    </pre>
+    <h5 class="mt-6">2. Change Tailwindcss colors</h5>
+    <p>In your project-directory/tailwind.config.ts file, line no. 22 contain colors object, change color primary, accent, warn color with colors code. you can add more color by tailwindcss colors, <a class="text-blue-400" href="https://tailwindcss.com/docs/customizing-colors" target="_blank">Check Tailwindcss color customization</a></p>
+    <pre class="bg-black text-white mt-2">
+      <code>
+        {{
+          "theme: {
+            // ---
+            colors: {
+              primary: '#58B57D',
+              accent: '#EE5E36',
+              warn: '#FDE300',
+              black: colors.black,
+              white: colors.white,
+              gray: colors.coolGray,
+              red: colors.red,
+              blue: colors.blue
+            }
+          }"
+        }}
+      </code>
+    </pre>
+    <h5 class="mt-6">3. Change theme colors</h5>
+    <p>In src/assets/scss/_variables.scss file, line no. 1, 2, 3 contain primary, accent, warn colors</p>
+    <pre class="bg-black text-white mt-2">
+      <code>
+        $primary: #00BCD4;
+        $accent: #FF5722;
+        $warn: #FBC02D;
+      </code>
+    </pre>
+  </div>
+  <!-- Color end -->
+  <!-- Menu start -->
+  <div class="mt-10">
+    <h3 id="edit_menu_item">#. Change or Add menu items</h3>
+    <p>In File src/shared/data/menus.ts contain Menu Items</p>
+    <p>Note: Keep in mind manu item used in small device convas menu.</p>
+    <pre class="bg-black text-white mt-3">
+      <code>
+     {{"
+     export const menuList: Menu[] = [
+      {
+        path: '/products',
+        name: 'Products'
+      },
+      {
+        path: '/about',
+        name: 'About'
+      },
+      {
+        path: '/contact',
+        name: 'Contact'
+      },
+      {
+        path: '/dashboard',
+        name: 'Dashboard'
+      },
+      {
+        path: '/doc',
+        name: 'Doc'
+      }
+    ];
+     "}}
+      </code>
+    </pre>
+  
+  </div>
+  <!-- Menu End -->
+
+  <!-- Table Start -->
+  <div class="mt-10">
+    <h3 id="edit_menu_item">#. Table</h3>
+    <pre class="bg-black text-white mt-3">
+      <code>
+      &lt;div class="table-inside"&gt;
+        &lt;table class="your-classes ltLg:responsive"&gt;
+            
+        &lt;/table&gt;
+      &lt;/div&gt;
+      </code>
+    </pre>
+    <h5 class="mt-5">Table Responsive class</h5>
+    <pre class="bg-black text-white mt-3">
+      <code>
+        LtSm:responsive, LtMd:responsive, LtLg:responsive, LtXl:responsive, LtXxl:responsive
+      </code>
+    </pre>
+  </div>
+  <!-- Table End -->
+</div>

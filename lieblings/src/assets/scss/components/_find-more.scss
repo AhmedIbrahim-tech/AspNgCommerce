@@ -1,0 +1,23 @@
+.ll-find-more {
+    .container {
+        background-color: #E9D0F9;
+        padding: 60px;
+    }
+    &__heading {
+        font-weight: 500;
+        font-size: 28px;
+        line-height: 38px;
+    }
+    ._card {
+        max-width: 450px;
+        padding: 40px;
+        &__title {
+            font-size: 25px;
+            line-height: 35px;
+        }
+        &__subtitle {
+            font-size: 24px;
+            line-height: 42px;
+        }
+    }
+}

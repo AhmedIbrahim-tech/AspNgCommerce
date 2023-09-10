@@ -1,0 +1,26 @@
+.ll-dataset {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  &__label {
+    width: 100%;
+    max-width: 100%;
+    font-weight: 600;
+    color: #333;
+  }
+  &__value {
+    width: 100%;
+    max-width: 100%
+  }
+}
+
+@media (min-width: 768px) {
+  .ll-dataset {
+    &__label {
+      max-width: 170px;
+    }
+    &__value {
+      max-width: calc(100% - 170px);
+    }
+  }
+}

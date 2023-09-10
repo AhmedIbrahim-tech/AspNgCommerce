@@ -1,0 +1,92 @@
+<div class="grid grid-cols-12 gap-4 lg:gap-8">
+  <div class="col-span-6 md:col-span-4 border rounded px-4 lg:px-8 py-8 lg:py-16">
+    <mat-icon class="text-accent mb-5">favorite_border</mat-icon>
+    <h6>Favorites</h6>
+    <div class="count mb-3 mt-5">10</div>
+    <a [routerLink]="'/dashboard/saved-items'" class="font-semibold" mat-flat-button color="warn">View All</a>
+  </div>
+  <div class="col-span-6 md:col-span-4 border rounded px-4 lg:px-8 py-8 lg:py-16">
+    <mat-icon class="text-accent mb-5">sync</mat-icon>
+    <h6>Number of ongoing orders</h6>
+    <div class="count mb-3 mt-5">10</div>
+    <a [routerLink]="'/dashboard/orders'" class="font-semibold" mat-flat-button color="warn">View All</a>
+  </div>
+  <div class="col-span-6 md:col-span-4 border rounded px-4 lg:px-8 py-8 lg:py-16">
+    <mat-icon class="text-accent mb-5">task_alt</mat-icon>
+    <h6>Completed orders</h6>
+    <div class="count mb-3 mt-5">10</div>
+    <a [routerLink]="'/dashboard/orders'" class="font-semibold" mat-flat-button color="warn">View All</a>
+  </div>
+</div>
+<div class="mt-8">
+  <h5 class="mb-1 font-normal">Latest Orders</h5>
+	<div class="table-inside">
+		<table class="order-table table-auto ltMd:responsive">
+			<thead>
+				<tr class="border text-left">
+					<th>
+						<span class="text-gray-800">Id</span>
+					</th>
+					<th>
+						<span class="text-gray-800">Name</span>
+					</th>
+					<th>
+						<span class="text-gray-800">Price</span>
+					</th>
+	
+					<th>
+						<span class="text-gray-800">Created</span>
+					</th>
+	
+					<th>
+						<span class="text-gray-800">Status</span>
+					</th>
+					<th class="text-right">Action</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr *ngFor="let order of orders" class="border">
+					<td>
+						<a class="text-primary" href="/">#{{order?.id}}</a>
+					</td>
+					<td>
+						{{order?.orderBy | titlecase }}
+					</td>
+					<td>
+						<span>${{order?.price}}</span>
+					</td>
+					<td>
+						<span>{{order?.created}}</span>
+					</td>
+					<td>
+						<div [ngClass]="{
+							'bg-blue-500 text-blue-500': order?.status === 'complated',
+							'bg-red-500 text-red-500': order?.status === 'rejected',
+							'bg-yellow-500 text-yellow-900': order?.status === 'pending',
+							'bg-primary text-primary': order?.status === 'initialized'
+							}" 
+							class="text-[12px] bg-opacity-20 rounded-full px-3 inline-block font-bold py-[3px]"
+						>
+							{{ order?.status | titlecase }}
+						</div>
+					</td>
+					<td class="text-right">
+						<button class="action_icon__btn" mat-icon-button [matMenuTriggerFor]="menu">
+							<mat-icon>more_vert</mat-icon>
+						</button>
+						<mat-menu #menu="matMenu" xposition="before">
+							<button mat-menu-item>
+								<mat-icon>dialpad</mat-icon>
+								<span>Details</span>
+							</button>
+							<button mat-menu-item>
+								<mat-icon>delete</mat-icon>
+								<span>Delete</span>
+							</button>
+						</mat-menu>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>

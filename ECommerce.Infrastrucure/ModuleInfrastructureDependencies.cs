@@ -19,6 +19,7 @@ public static class ModuleInfrastructureDependencies
         //Services
         services.AddTransient<IProductServices, ProductServices>();
         services.AddTransient<IOrderService, OrderService>();
+        services.AddTransient<IPaymentServices, PaymentServices>();
 
 
 
