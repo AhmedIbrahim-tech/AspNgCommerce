@@ -1,9 +1,7 @@
-![.NET Core](https://camo.githubusercontent.com/f36a579a7440dd2cd03da4903249f86d0d44cb7020fd902512bccd139784b363/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f2e4e45542d3543324439313f7374796c653d666f722d7468652d6261646765266c6f676f3d2e6e6574266c6f676f436f6c6f723d7768697465)
-
 # Ecommerce App using ASP.NET Core and Angular
 
 
-Hi Friends,
+Greetings,
 
 During this lock-down period; I spent some time writing one full stack project using ASP.NET Core and Angular with other best practices as explained below. I hope you like it.
 
@@ -102,8 +100,6 @@ You can also follow docs here https://stripe.com/docs/testing
 ![13th](https://user-images.githubusercontent.com/3886381/80680373-3f708b80-8adc-11ea-9fa6-f9cf557c96a1.png)
 
 ## Peek from the workshop
-
-Demo Link:- https://sports-center.azurewebsites.net/
 
 ![1st](https://user-images.githubusercontent.com/3886381/80680036-b35e6400-8adb-11ea-8dc4-94ca34a1c222.png)
 
