@@ -65,7 +65,7 @@ export class ProductListComponent implements OnInit {
         this.shopparam.pageSize = response.data.pageSize;
         this.TotalCount = response.data.count;
         // this.spinner.hide();
-        this.showSuccess()
+        //this.showSuccess()
 
       },
       error: (error) => console.log(error),

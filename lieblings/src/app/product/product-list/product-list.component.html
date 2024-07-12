@@ -28,21 +28,21 @@
               placeholder="End price" />
           </div> -->
           <div class="col-span-6 sm:col-span-3">
-            <select name="rating" (change)="OnSortSelected($event)"
+            <select name="Sort" (change)="OnSortSelected($event)"
               class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
               <option *ngFor="let item of sortOptions" [value]="item.value">{{item.name}}</option>
 
             </select>
           </div>
           <div class="col-span-6 sm:col-span-3">
-            <select name="categories" (click)="onBrandSelected($event)"
+            <select name="brands" (click)="onBrandSelected($event)"
               class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
               <option *ngFor="let item of brands" [class.active]="item.id === shopparam.brandId" [value]="item.id">
                 {{item.name}} </option>
             </select>
           </div>
           <div class="col-span-6 sm:col-span-3">
-            <select name="rating" (click)="onBrandSelected($event)"
+            <select name="types" (click)="onTypeSelected($event)"
               class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
               <option *ngFor="let item of types" [class.active]="item.id === shopparam.brandId" [value]="item.id">
                 {{item.name}}</option>
@@ -99,6 +99,13 @@
     </div>
   </div>
 </div>
+
+<!-- #region Pager -->
+<div class="d-flex justify-content-center" *ngIf="TotalCount > 0">
+  <app-pager [PageSize]="shopparam.pageSize" [TotalCount]="TotalCount"
+    (pageChanged)="onPageChanged($event)"></app-pager>
+</div>
+<!-- #endregion -->
 
 <div class="ll-find-more mt-10 mb-36">
   <div class="container rounded-md">
