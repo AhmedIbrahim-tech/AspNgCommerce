@@ -49,10 +49,16 @@
             </div>
             <!-- #endregion -->
 
-            <!-- #region Pager -->
-            <div class="d-flex justify-content-center" *ngIf="TotalCount > 0">
-                <app-pager [PageSize]="shopparam.pageSize" [TotalCount]="TotalCount" (pageChanged)="onPageChanged($event)"></app-pager>
+
+            <div class="d-flex justify-content-center">
+                <pagination [boundaryLinks]="true" [totalItems]="77" [maxSize]="shopparam.pageSize" [totalItems]=""
+                previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;">
+                </pagination>
             </div>
+            <!-- #region Pager -->
+            <!-- <div class="d-flex justify-content-center" *ngIf="TotalCount > 0">
+                <app-pager [PageSize]="shopparam.pageSize" [TotalCount]="TotalCount" (pageChanged)="onPageChanged($event)"></app-pager>
+            </div> -->
             <!-- #endregion -->
 
         </section>
