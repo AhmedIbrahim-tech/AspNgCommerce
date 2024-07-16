@@ -7,6 +7,7 @@ import { IType } from 'src/app/shared/Models/type';
 import { ShopParams } from 'src/app/shared/Models/ShopParams';
 import { NgxSpinnerService } from "ngx-spinner";
 import { ToastrService } from 'ngx-toastr';
+import { PageChangedEvent } from 'ngx-bootstrap/pagination';
 
 @Component({
   selector: 'app-shop',
@@ -99,21 +100,7 @@ export class ShopComponent implements OnInit {
 
   //#endregion
 
-  //#region pagination 
 
-  onPageChanged(event: any) {
-    if (this.shopparam.pageNumber !== event.page) {
-      this.shopparam.pageNumber = event.page;
-      this.GetListOfProducts();
-    }
-  }
-
-  //#endregion
-
-
-
-
-  
   OnSearch() {
     this.shopparam.Search = this.searchTerms?.nativeElement.value;
     this.shopparam.pageNumber = 1;
