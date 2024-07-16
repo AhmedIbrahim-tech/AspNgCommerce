@@ -7,7 +7,6 @@ import { IType } from 'src/app/shared/Models/type';
 import { ShopParams } from 'src/app/shared/Models/ShopParams';
 import { NgxSpinnerService } from "ngx-spinner";
 import { ToastrService } from 'ngx-toastr';
-import { PageChangedEvent } from 'ngx-bootstrap/pagination';
 
 @Component({
   selector: 'app-shop',
