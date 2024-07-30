@@ -1,4 +1,3 @@
-using ECommerce.Infrastrucure.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using StackExchange.Redis;
@@ -26,30 +25,6 @@ builder.Services.AddDbContext<ApplicationDBContext>(option =>
     option.UseSqlServer(
         builder.Configuration.GetConnectionString("DefaultConnection"),
             b => b.MigrationsAssembly(typeof(ApplicationDBContext).Assembly.FullName)));
-
-builder.Services.AddIdentityCore<AppUser>(opt =>
-{
-
-})
-    .AddEntityFrameworkStores<ApplicationDBContext>()
-    .AddSignInManager<SignInManager<AppUser>>();
-
-var jwt = builder.Configuration.GetSection("Token");
-
-builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-    .AddJwtBearer(options =>
-    {
-        options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
-        {
-            ValidateIssuerSigningKey = true,
-            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwt["key"])),
-            ValidIssuer = jwt["Issuer"],
-            ValidateIssuer = true,
-            ValidateAudience = false
-        };
-    });
-
-builder.Services.AddAuthorization();
 #endregion
 
 #region Swagger Doc
@@ -61,33 +36,7 @@ builder.Services.AddSwaggerGen(options =>
         Version = "v1",
         Title = "ECommerce"
     });
-    // Swagger 2.+ support
-    options.AddSecurityDefinition("Bearer", new Microsoft.OpenApi.Models.OpenApiSecurityScheme
-    {
-        Name = "Authorization",
-        Type = SecuritySchemeType.ApiKey,
-        Scheme = "Bearer",
-        BearerFormat = "JWT",
-        In = ParameterLocation.Header,
-        Description = "JWT Authorization header using the Bearer scheme. Example: \"Authorization: Bearer {token}\""
-    });
-    options.AddSecurityRequirement(new OpenApiSecurityRequirement()
-    {
-        {
-            new OpenApiSecurityScheme
-            {
-                Reference = new OpenApiReference
-                {
-                    Type = ReferenceType.SecurityScheme,
-                    Id = "Bearer"
-                },
-                //Scheme = "oauth2",
-                Name = "Bearer",
-                In = ParameterLocation.Header,
-            },
-            new string[] {}
-        }
-    });
+   
 });
 
 #endregion
@@ -95,18 +44,6 @@ builder.Services.AddSwaggerGen(options =>
 #region Dependency Injection
 
 builder.Services.AddCoreDependencies().AddInfrastructureDependencies();
-builder.Services.AddScoped<ITokenService, TokenService>();
-#endregion
-
-#region Redis
-builder.Services.AddSingleton<IConnectionMultiplexer>(ConnectionMultiplexer.Connect(builder.Configuration.GetConnectionString("Redis")));
-
-//builder.Services.AddSingleton<IConnectionMultiplexer>(c =>
-//{
-//    var options = ConfigurationOptions.Parse(builder.Configuration.GetConnectionString("Redis"));
-//    return ConnectionMultiplexer.Connect(options);
-//});
-
 #endregion
 
 
@@ -162,13 +99,11 @@ var context = Services.GetRequiredService<ApplicationDBContext>();
 var logger = Services.GetRequiredService<ILogger<Program>>();
 
 var loggerFactory = Services.GetRequiredService<ILoggerFactory>();
-var userManager = Services.GetRequiredService<UserManager<AppUser>>();
 
 try
 {
     await context.Database.MigrateAsync();
     await StoreContextSeed.SeedAsync(context);
-    await UserIdentitySeed.SeedUserAsync(userManager);
 }
 catch (Exception ex)
 {

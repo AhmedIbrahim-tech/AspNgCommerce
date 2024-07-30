@@ -7,6 +7,18 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Extensions\**" />
+    <Compile Remove="Identity\**" />
+    <Compile Remove="Validators\**" />
+    <EmbeddedResource Remove="Extensions\**" />
+    <EmbeddedResource Remove="Identity\**" />
+    <EmbeddedResource Remove="Validators\**" />
+    <None Remove="Extensions\**" />
+    <None Remove="Identity\**" />
+    <None Remove="Validators\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="FluentValidation.AspNetCore" Version="11.3.0" />
     <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.7.1" />
     <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.2.0" />
@@ -29,12 +41,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ECommerce.Core\ECommerce.Core.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Extensions\" />
-    <Folder Include="Identity\" />
-    <Folder Include="Validators\" />
   </ItemGroup>
 
 </Project>
