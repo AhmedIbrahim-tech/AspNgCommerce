@@ -25,6 +25,44 @@ public static class Router
     }
     #endregion
 
+
+    #region Basket
+    public static class Basket
+    {
+        public const string Prefix = Rule + "Basket/";
+
+        public const string GetBasket = Prefix + "GetBasket";
+        public const string UpdateBasket = Prefix + "UpdateBasket";
+        public const string DeleteBasket = Prefix + "DeleteBasket";
+    }
+    #endregion
+
+    #region Account
+    public static class Account
+    {
+        public const string Prefix = Rule + "Account/";
+
+        public const string Login = Prefix + "login";
+        public const string Register = Prefix + "register";
+        public const string CurrentUser = Prefix + "CurrentUser";
+        public const string EmailExists = Prefix + "emailexists";
+        public const string InitializationAddress = Prefix + "address";
+        public const string UpdateAddress = Prefix + "UpdateAddress";
+    }
+    #endregion
+
+    #region Order
+    public static class Order
+    {
+        public const string Prefix = Rule + "Order/";
+
+        public const string Create = Prefix + "CreateOrder";
+        public const string GetOrdersForUser = Prefix + "GetOrdersForUser";
+        public const string GetOrderByIdForUser = Prefix + "GetOrderByIdForUser" + "/" + SingleRoute;
+        public const string DeliveryMethod = Prefix + "DeliveryMethod";
+    }
+    #endregion
+
     #region Error
     public static class Error
     {

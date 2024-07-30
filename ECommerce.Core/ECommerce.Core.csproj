@@ -7,9 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Options\**" />
-    <EmbeddedResource Remove="Options\**" />
-    <None Remove="Options\**" />
+    <Folder Include="Options\" />
   </ItemGroup>
 
   <ItemGroup>
