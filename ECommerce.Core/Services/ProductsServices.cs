@@ -45,32 +45,12 @@ public class ProductsServices : IProductsServices
             {
                 result = result.Where(x => x.Name.ToLower().Contains(filter.Name.ToLower()));
             }
-
-            if (filter.Search != null)
+            if (filter.Description != null)
             {
-                result = result.Where(x =>
-                   x.Description.ToLower().Contains(filter.Search.ToLower())
-                || x.Name.ToLower().Contains(filter.Name.ToLower()));
-            }
-            #endregion
-
-            #region Sorting
-
-            switch (filter.Sort)
-            {
-                case "priceAsc":
-                    result = result.OrderBy(x => x.Price);
-                    break;
-                case "priceDesc":
-                    result = result.OrderByDescending(x => x.Price);
-                    break;
-                default:
-                    result = result.OrderBy(x => x.Name);
-                    break;
+                result = result.Where(x => x.Description.ToLower() == filter.Description.ToLower());
             }
 
             #endregion
-
 
             var pagedProducts = PagedList<Product>.Create(result, filter.PageNumber, filter.PageSize);
 

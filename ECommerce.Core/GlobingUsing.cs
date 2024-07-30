@@ -2,11 +2,13 @@
 global using ECommerce.Core.CustomEntities;
 global using ECommerce.Core.DTOS;
 global using ECommerce.Core.Entities;
+global using ECommerce.Core.Identity;
 global using ECommerce.Core.Interfaces.Repository;
 global using ECommerce.Core.Interfaces.Services;
 global using ECommerce.Core.Interfaces.Specifications;
 global using ECommerce.Core.QueryFilters;
 global using ECommerce.Core.Responses;
+global using Microsoft.AspNetCore.Identity;
 global using Microsoft.Extensions.Configuration;
 global using System.ComponentModel.DataAnnotations;
 global using System.Linq.Expressions;
