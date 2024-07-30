@@ -1,29 +1,50 @@
-.cart-no {
-    position: absolute;
-    min-height: 25px;
-    min-width: 25px;
-    border-radius: 50%;
-    background: blue;
-    color: white;
-    text-align: center;
-    top: -12px;
-    right: 32px;
+
+header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #2c3e50;
+    padding: 10px 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
-
-a {
-    text-decoration: none;
-    color: #343a40;
-
-    &.active {
-        color: orange
-    }
-}
-
 .logo {
-    cursor: pointer;
+    max-height: 70px;
 }
-
-
-.nav-auth{
-    padding-right: 20px;
+nav {
+    display: flex;
+    gap: 15px;
+}
+nav a {
+    text-decoration: none;
+    color: white;
+    font-size: 1.2em;
+    text-transform: uppercase;
+    position: relative;
+    padding: 5px 0;
+}
+nav a::before {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: #3498db;
+    visibility: hidden;
+    transition: all 0.3s ease-in-out;
+}
+nav a:hover::before {
+    visibility: visible;
+    width: 100%;
+}
+.nav-auth {
+    display: flex;
+    align-items: center;
+}
+.nav-auth i {
+    color: white;
+    font-size: 1.5em;
+    margin-left: 20px;
+    cursor: pointer;
 }
