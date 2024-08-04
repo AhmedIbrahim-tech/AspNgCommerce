@@ -7,6 +7,7 @@ public interface IUnitOfWork : IDisposable
     IGenericRepository<Product> GenericProductRepository { get; }
     IGenericRepository<ProductBrand> GenericProductBrandRepository { get; }
     IGenericRepository<ProductType> GenericProductTypeRepository { get; }
+    IGenericRepository<Category> GenericCategoryRepository { get; }
 
     // Specification Pattern
     IProductRepository ProductRepository { get; }

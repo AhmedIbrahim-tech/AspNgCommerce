@@ -25,6 +25,19 @@ public static class Router
     }
     #endregion
 
+    #region Product
+    public static class Category
+    {
+        public const string Prefix = Rule + "Category/";
+        public const string ListCategory = Prefix + "ListCategory";
+        public const string GetById = Prefix + "GetByID" + "/" + SingleRoute;
+        public const string Create = Prefix + "Create";
+        public const string Edit = Prefix + "Edit";
+        public const string Delete = Prefix + "Delete" + "/" + SingleRoute;
+
+    }
+    #endregion
+
 
     #region Basket
     public static class Basket

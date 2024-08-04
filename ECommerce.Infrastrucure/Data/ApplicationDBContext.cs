@@ -9,6 +9,7 @@ public class ApplicationDBContext : IdentityDbContext<AppUser>
     {
     }
     public DbSet<Product> Products { get; set; }
+    public DbSet<Category> Categories { get; set; }
     public DbSet<ProductBrand> ProductBrands { get; set; }
     public DbSet<ProductType> ProductTypes { get; set; }
     public DbSet<Core.Entities.OrderAggregate.Order> Orders { get; set; }
