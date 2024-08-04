@@ -1,5 +1,4 @@
-﻿using ECommerce.Core.Entities;
-using System.Collections;
+﻿using System.Collections;
 
 namespace ECommerce.Infrastrucure.Repositories;
 
@@ -13,6 +12,7 @@ public class UnitOfWork : IUnitOfWork
     private readonly IGenericRepository<ProductType> _GenericProductTypeRepository;
     private readonly IProductRepository _productRepository;
     private readonly IProductsRepository _productsRepository;
+    private readonly IGenericRepository<Category> _GenericCategoryRepository;
 
     public UnitOfWork(ApplicationDBContext context)
     {
@@ -44,6 +44,7 @@ public class UnitOfWork : IUnitOfWork
     public IGenericRepository<ProductBrand> GenericProductBrandRepository => _GenericProductBrandRepository ?? new GenericRepository<ProductBrand>(_context);
 
     public IGenericRepository<ProductType> GenericProductTypeRepository => _GenericProductTypeRepository ?? new GenericRepository<ProductType>(_context);
+    public IGenericRepository<Category> GenericCategoryRepository => _GenericCategoryRepository ?? new GenericRepository<Category>(_context);
 
 
     public void Dispose()

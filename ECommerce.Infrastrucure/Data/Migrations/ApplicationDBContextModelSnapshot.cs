@@ -17,10 +17,51 @@ namespace ECommerce.Infrastrucure.Data.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "7.0.9")
+                .HasAnnotation("ProductVersion", "7.0.10")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("ECommerce.Core.Entities.Category", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Description")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("Name")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Categories");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Description = "description 1",
+                            Name = "category 1"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Description = "description 2",
+                            Name = "category 2"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Description = "description 3",
+                            Name = "category 3"
+                        });
+                });
 
             modelBuilder.Entity("ECommerce.Core.Entities.OrderAggregate.DeliveryMethod", b =>
                 {
@@ -45,6 +86,40 @@ namespace ECommerce.Infrastrucure.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("DeliveryMethods");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            DeliveryTime = "1-2 Days",
+                            Description = "Fastest delivery time",
+                            Price = 10m,
+                            ShortName = "UPS1"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            DeliveryTime = "2-5 Days",
+                            Description = "Get it within 5 days",
+                            Price = 5m,
+                            ShortName = "UPS2"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            DeliveryTime = "5-10 Days",
+                            Description = "Slower but cheap",
+                            Price = 2m,
+                            ShortName = "UPS3"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            DeliveryTime = "Free! You get what you pay for",
+                            Description = "1-2 Weeks",
+                            Price = 0m,
+                            ShortName = "FREE"
+                        });
                 });
 
             modelBuilder.Entity("ECommerce.Core.Entities.OrderAggregate.Order", b =>
