@@ -1,0 +1,14 @@
+<div class=" {{products.categoryName}}  ">
+    <div class="product discount product_filter">
+        <div class="product_image">
+            <img routerLink="/shop/{{products.id}}"  src="{{products.productPicture}}"  style="max-height: 245px;"  alt="{{products.name}}">
+        </div>
+        <div class="favorite favorite_left"></div>
+     
+        <div class="product_info">
+            <h6 class="product_name"><a  routerLink="/shop/{{products.id}}" >{{products.name}}</a></h6>
+            <div class="product_price">${{products.price}}</div>
+        </div>
+    </div>
+    <div class="red_button add_to_cart_button"><a routerLink="/basket" (click)="addItemToBasket()" >add to cart</a></div>
+</div>
