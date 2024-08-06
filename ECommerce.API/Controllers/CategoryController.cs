@@ -1,7 +1,4 @@
-﻿using ECommerce.Core.Services;
-using ECommerce.Infrastrucure.Services;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using ECommerce.Infrastrucure.Services;
 
 namespace ECommerce.API.Controllers
 {
@@ -25,11 +22,10 @@ namespace ECommerce.API.Controllers
         [HttpGet(Router.Category.ListCategory)]
         public async Task<IActionResult> GetListCategoryAsync()
         {
-            var result = await categoryService.GetAllCategoryAsync();
+            var result = await categoryService.GetAllCategoriesAsync();
             return StatusCode(result.StatusCode, result);
         }
         #endregion
-
 
         #region Display One Category By Using Id
         [HttpGet(Router.Category.GetById)]

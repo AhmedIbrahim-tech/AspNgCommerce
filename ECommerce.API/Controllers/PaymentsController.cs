@@ -1,8 +1,4 @@
-﻿using Azure.Core;
-using ECommerce.Core.Entities.OrderAggregate;
-using ECommerce.Core.Interfaces.Services;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using ECommerce.Core.Entities.OrderAggregate;
 using Stripe;
 
 namespace ECommerce.API.Controllers;

@@ -1,9 +1,8 @@
-﻿using ECommerce.Core.Entities;
-using System.Text.Json;
+﻿using System.Text.Json;
 
 namespace ECommerce.Infrastrucure.Data;
 
-public class StoreContextSeed
+public static class StoreContextSeed
 {
     public static async Task SeedAsync(ApplicationDBContext context)
     {

@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ECommerce.Infrastrucure.Repositories;
+﻿namespace ECommerce.Infrastrucure.Repositories;
 
 public interface ICategoryRepository : IGenericRepository<Category>
 {
@@ -12,7 +6,11 @@ public interface ICategoryRepository : IGenericRepository<Category>
 
 public class CategoryRepository : GenericRepository<Category>, ICategoryRepository
 {
+    private readonly ApplicationDBContext _context;
+
     public CategoryRepository(ApplicationDBContext context) : base(context)
     {
+        _context = context;
     }
+
 }

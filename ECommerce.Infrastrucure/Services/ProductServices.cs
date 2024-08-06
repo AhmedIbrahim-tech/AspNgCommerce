@@ -1,6 +1,10 @@
-﻿using ECommerce.Core.Interfaces.UnitOfWork;
+﻿
+using AutoMapper;
+using ECommerce.Core.CustomEntities;
+using ECommerce.Core.DTOS;
+using ECommerce.Core.Responses;
 
-namespace ECommerce.Core.Services;
+namespace ECommerce.Infrastrucure.Services;
 
 public class ProductServices : BaseGenericResultHandler, IProductServices
 {
@@ -16,7 +20,7 @@ public class ProductServices : BaseGenericResultHandler, IProductServices
     #endregion
 
     #region Get All Products
-    public async Task<BaseGenericResult<Pagination<ProductDTo>>> GetAllProductsAsync(ProductSpecParams productSpecParams)
+    public async Task<BaseGenericResult<Pagination<ProductDto>>> GetAllProductsAsync(ProductSpecParams productSpecParams)
     {
         try
         {
@@ -25,34 +29,34 @@ public class ProductServices : BaseGenericResultHandler, IProductServices
             var totalItems = await _unitOfWork.GenericProductRepository.CountAsync(countSpec);
 
             var result = await _unitOfWork.GenericProductRepository.ListAsync(Spec);
-            var ListDto = _mapper.Map<IReadOnlyList<ProductDTo>>(result);
+            var ListDto = _mapper.Map<IReadOnlyList<ProductDto>>(result);
 
-            var pageList = new Pagination<ProductDTo>(productSpecParams.PageIndex, productSpecParams.PageSize, totalItems, ListDto);
+            var pageList = new Pagination<ProductDto>(productSpecParams.PageIndex, productSpecParams.PageSize, totalItems, ListDto);
 
             return Success(pageList);
 
         }
         catch (Exception ex)
         {
-            return InternalServer<Pagination<ProductDTo>>(ex.Message);
+            return InternalServer<Pagination<ProductDto>>(ex.Message);
         }
     }
     #endregion
 
     #region Get Product By Id
-    public async Task<BaseGenericResult<ProductDTo>> GetProductByIdAsync(int id)
+    public async Task<BaseGenericResult<ProductDto>> GetProductByIdAsync(int id)
     {
         try
         {
             var Spec = new ProductWithTypesAndBrandsSpecification(id);
             var result = await _unitOfWork.GenericProductRepository.GetEntityWithSpec(Spec);
-            var Dto = _mapper.Map<ProductDTo>(result);
+            var Dto = _mapper.Map<ProductDto>(result);
             return Success(Dto);
 
         }
         catch (Exception ex)
         {
-            return InternalServer<ProductDTo>(ex.Message);
+            return InternalServer<ProductDto>(ex.Message);
         }
     }
     #endregion

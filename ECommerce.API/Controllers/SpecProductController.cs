@@ -3,14 +3,14 @@ namespace ECommerce.API.Controllers;
 
 [ApiController]
 
-public class ProductController : BaseAPIController
+public class SpecProductController : BaseAPIController
 {
     #endregion
 
     #region Contractor (s)
 
     private readonly IProductServices productServices;
-    public ProductController(IProductServices productServices)
+    public SpecProductController(IProductServices productServices)
     {
         this.productServices = productServices;
     }
