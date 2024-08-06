@@ -13,11 +13,15 @@ public static class ModuleInfrastructureDependencies
         services.AddTransient(typeof(IGenericRepository<>), typeof(GenericRepository<>));
         services.AddTransient<IProductRepository, ProductRepository>();
         services.AddTransient<IProductsRepository, ProductsRepository>();
+        services.AddTransient<IProductBrandRepository, ProductBrandRepository>();
+        services.AddTransient<IProductTypeRepository, ProductTypeRepository>();
         services.AddTransient<IProductsServices, ProductsServices>();
         services.AddTransient<IBasketRepository, BasketRepository>();
 
         //Services
         services.AddTransient<IProductServices, ProductServices>();
+        services.AddTransient<IProductBrandService, ProductBrandService>();
+        services.AddTransient<IProductTypeService, ProductTypeService>();
         services.AddTransient<ICategoryService, CategoryService>();
         services.AddTransient<IOrderService, OrderService>();
         services.AddTransient<IPaymentServices, PaymentServices>();

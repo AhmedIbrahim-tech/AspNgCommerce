@@ -61,7 +61,7 @@ namespace ECommerce.Infrastrucure.Services
 
         }
 
-        public async Task<IReadOnlyList<DeliveryMethod>> GetDeliveryMethodsAsync()
+        public async Task<IEnumerable<DeliveryMethod>> GetDeliveryMethodsAsync()
         {
             return await _deliveryMethods.ListAllAsync();
         }

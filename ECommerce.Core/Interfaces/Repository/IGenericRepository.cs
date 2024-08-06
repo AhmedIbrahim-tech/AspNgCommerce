@@ -2,7 +2,7 @@
 
 public interface IGenericRepository<T> where T : BaseEntity
 {
-    Task<IReadOnlyList<T>> ListAllAsync();
+    Task<IEnumerable<T>> ListAllAsync();
     Task<T> GetByIdAsync(int id);
     Task<T> GetEntityWithSpec(ISpecification<T> specification);
     Task<IReadOnlyList<T>> ListAsync(ISpecification<T> specification);

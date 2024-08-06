@@ -1,4 +1,6 @@
-﻿namespace ECommerce.Infrastrucure.Services;
+﻿using System.Security.Cryptography;
+
+namespace ECommerce.Infrastrucure.Services;
 
 public class TokenService : ITokenService
 {
@@ -33,5 +35,23 @@ public class TokenService : ITokenService
 
         return tokenHandler.WriteToken(token);
     }
+
+
+
+    public RefreshToken GenerateRefreshToken()
+    {
+        var randomBytes = new byte[32];
+        using (var rng = RandomNumberGenerator.Create())
+        {
+            rng.GetBytes(randomBytes);
+        }
+        return new RefreshToken
+        {
+            Token = Convert.ToBase64String(randomBytes),
+            Expires = DateTime.UtcNow.AddDays(7),
+            Created = DateTime.UtcNow
+        };
+    }
+
 }
 

@@ -1,6 +1,6 @@
 ﻿namespace ECommerce.Core.DTOS;
 
-public class ProductDTo
+public class ProductDto
 {
     public int Id { get; set; }
     public string Name { get; set; }

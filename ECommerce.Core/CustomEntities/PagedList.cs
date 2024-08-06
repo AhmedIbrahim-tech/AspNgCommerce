@@ -1,4 +1,6 @@
-﻿namespace ECommerce.Core.CustomEntities;
+﻿using Microsoft.EntityFrameworkCore;
+
+namespace ECommerce.Core.CustomEntities;
 
 public class PagedList<T> : List<T>
 {
@@ -29,5 +31,13 @@ public class PagedList<T> : List<T>
 
         return new PagedList<T>(items, count, pageNumber, pageSize);
     }
+
+    public static async Task<PagedList<T>> CreateAsync(IQueryable<T> source, int pageNumber, int pageSize)
+    {
+        var count = await source.CountAsync();
+        var items = await source.Skip((pageNumber - 1) * pageSize).Take(pageSize).ToListAsync();
+        return new PagedList<T>(items, count, pageNumber, pageSize);
+    }
+
 }
 
