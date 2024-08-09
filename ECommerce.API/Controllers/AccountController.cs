@@ -1,7 +1,5 @@
-﻿using ECommerce.Infrastrucure.Data;
-using ECommerce.Infrastrucure.Services;
+﻿using ECommerce.Infrastrucure.Services;
 using Microsoft.AspNetCore.Identity.UI.Services;
-using Stripe.FinancialConnections;
 
 namespace ECommerce.API.Controllers;
 
