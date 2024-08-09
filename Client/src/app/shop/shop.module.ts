@@ -4,6 +4,7 @@ import { ShopComponent } from './Components/shop/shop.component';
 import { ProductDetailsComponent } from './Components/product-details/product-details.component';
 import { ShopsItemComponent } from './Components/shops-item/shops-item.component';
 import { RouterModule } from '@angular/router';
+import { CoreModule } from '../Core/core.module';
 
 
 
@@ -15,7 +16,8 @@ import { RouterModule } from '@angular/router';
   ],
   imports: [
     CommonModule,
-    RouterModule
+    RouterModule,
+    CoreModule
   ],
   exports : [ShopComponent]
 })

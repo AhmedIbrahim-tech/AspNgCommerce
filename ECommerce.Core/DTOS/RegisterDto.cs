@@ -5,3 +5,6 @@ public class RegisterDto : LoginDto
     [Required]
     public string DisplayName { get; set; }
 }
+
+
+

@@ -65,6 +65,23 @@ public class ProductsServices : IProductsServices
                 productsQuery = productsQuery.Where(x => x.Description.Contains(filter.Description, StringComparison.OrdinalIgnoreCase));
             }
 
+
+            if (!string.IsNullOrEmpty(filter.Sort))
+            {
+                switch (filter.Sort)
+                {
+                    case "priceAsc":
+                        productsQuery = productsQuery.OrderBy(p => p.Price);
+                        break;
+                    case "priceDesc":
+                        productsQuery = productsQuery.OrderByDescending(p => p.Price);
+                        break;
+                    default:
+                        productsQuery = productsQuery.OrderBy(p => p.Name);
+                        break;
+                }
+            }
+
             // Pagination
             filter.PageNumber = filter.PageNumber <= 0 ? 1 : filter.PageNumber;
             filter.PageSize = filter.PageSize <= 0 ? 10 : filter.PageSize;
@@ -72,7 +89,9 @@ public class ProductsServices : IProductsServices
             var pagedProducts = await PagedList<Product>.CreateAsync(productsQuery, filter.PageNumber, filter.PageSize);
 
             var productDtos = _mapper.Map<IEnumerable<ProductDto>>(pagedProducts).ToList();
-            return new(true, (int)HttpStatusCode.OK, "Data Loaded Successfully", new PagedList<ProductDto>(productDtos, pagedProducts.TotalCount, pagedProducts.CurrentPage, pagedProducts.PageSize));
+            
+            return new(true, (int)HttpStatusCode.OK, "Data Loaded Successfully", 
+                new PagedList<ProductDto>(productDtos, pagedProducts.TotalCount, pagedProducts.CurrentPage, pagedProducts.PageSize));
         }
         catch (Exception ex)
         {

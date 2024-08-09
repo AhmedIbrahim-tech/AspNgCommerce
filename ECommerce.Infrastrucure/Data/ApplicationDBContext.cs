@@ -15,11 +15,15 @@ public class ApplicationDBContext : IdentityDbContext<AppUser>
     public DbSet<Core.Entities.OrderAggregate.Order> Orders { get; set; }
     public DbSet<OrderItem> OrderItems { get; set; }
     public DbSet<DeliveryMethod> DeliveryMethods { get; set; }
+    public DbSet<RefreshToken> RefreshTokens { get; set; }
+    public DbSet<OtpDetails> OtpDetails { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
 
         base.OnModelCreating(modelBuilder);
+        modelBuilder.Entity<RefreshToken>().HasKey(rt => rt.Id);
+
         modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
     }
 }

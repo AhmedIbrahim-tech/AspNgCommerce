@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { ShopParams } from '../../shared/Models/ShopParams';
 import { environment } from '../../../environments/environment.development';
 import { map } from 'rxjs';
-import { IPagination } from '../../shared/Models/Paginations';
+import { IBaseResponse, IPagination } from '../../shared/Models/Paginations';
 import { IProduct } from '../../shared/Models/product';
 import { ICategorys } from '../../shared/Models/Categorys';
 
@@ -26,7 +26,7 @@ export class ShopService {
     if (shopparam.search) {
       params = params.append('Search', shopparam.search);
     }
-    return this.http.get<IPagination>(environment.baseURL + 'Product/get-all-products', { observe: 'response', params })
+    return this.http.get<IPagination<IProduct>>(environment.baseURL + 'EagerProduct/ListProduct', { observe: 'response', params })
       .pipe(map(response => { return response.body }));
   }
 
@@ -39,12 +39,12 @@ export class ShopService {
   // }
 
   getSingleProduct(id: number) {
-    return this.http.get<IProduct>(environment.baseURL + '/SpecificationsProduct/GetByID/' + id);
+    return this.http.get<IBaseResponse<IProduct>>(environment.baseURL + '/EagerProduct/GetByID/' + id);
   }
 
 
   getcategorys() {
-    return this.http.get<ICategorys[]>(environment.baseURL + 'Category/get-all-category');
+    return this.http.get<IBaseResponse<ICategorys[]>>(environment.baseURL + 'Category/ListCategory');
   }
 
 }

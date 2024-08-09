@@ -101,10 +101,15 @@ public static class Router
         public const string Register = Prefix + "register";
         public const string CurrentUser = Prefix + "CurrentUser";
         public const string EmailExists = Prefix + "emailexists";
-        public const string ConfirmEmail = Prefix + "/confirmemail";
+        public const string VerifyEmail = Prefix + "/VerifyEmail";
         public const string InitializationAddress = Prefix + "address";
         public const string UpdateAddress = Prefix + "UpdateAddress";
-        public const string RefreshToken = Prefix + "/refreshtoken";
+        public const string RefreshToken = Prefix + "refreshtoken";
+        public const string isUserEmailFound = Prefix + "isUserEmailFound";
+        public const string forgetpassword = Prefix + "forgetpassword";
+        public const string resendotp = Prefix + "resendotp";
+        public const string RetrievePassword = Prefix + "RetrievePassword";
+        public const string ChangePassword = Prefix + "ChangePassword";
 
     }
 

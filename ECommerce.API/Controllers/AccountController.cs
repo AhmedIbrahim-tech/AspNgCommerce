@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNetCore.Identity.UI.Services;
+﻿using ECommerce.Infrastrucure.Data;
+using ECommerce.Infrastrucure.Services;
+using Microsoft.AspNetCore.Identity.UI.Services;
+using Stripe.FinancialConnections;
 
 namespace ECommerce.API.Controllers;
 
@@ -47,12 +50,23 @@ public class AccountController : BaseAPIController
             return Unauthorized(new BaseQueryResult(401, "Invalid credentials"));
         }
 
-        return Ok(new UserDto
+        var roles = await _userManager.GetRolesAsync(user);
+        var token = _tokenService.CreateToken(user);
+        var refreshToken = _tokenService.GenerateRefreshToken();
+
+        var userDto = new UserDto
         {
+            Id = user.Id,
+            Name = user.UserName,
             Email = user.Email,
-            Token = _tokenService.CreateToken(user),
-            DisplayName = user.DisplayName
-        });
+            EmailVerified = user.EmailConfirmed,
+            AccessToken = token,
+            RefreshToken = refreshToken,
+            Roles = roles
+        };
+
+        return Ok(userDto);
+
     }
 
     #endregion
@@ -62,9 +76,9 @@ public class AccountController : BaseAPIController
     [HttpPost(Router.Account.Register)]
     public async Task<ActionResult<UserDto>> Register([FromBody] RegisterDto registerDto)
     {
-        if (await EmailExistsAsync(registerDto.Email))
+        if (await _userManager.FindByEmailAsync(registerDto.Email) != null)
         {
-            return BadRequest(new BaseQueryResult(400, "Email address is already in use"));
+            return BadRequest(new { message = "Email address is already in use" });
         }
 
         var user = new AppUser
@@ -74,25 +88,39 @@ public class AccountController : BaseAPIController
             UserName = registerDto.Email
         };
 
-        var result = await _userManager.CreateAsync(user, registerDto.Password);
-        if (!result.Succeeded)
+        var createUserResult = await _userManager.CreateAsync(user, registerDto.Password);
+        if (!createUserResult.Succeeded)
         {
             return BadRequest(new BaseQueryResult(400, "Problem registering user"));
         }
 
+        // Assigning a role to the user
+        var roleName = "Regular"; // Default role or based on some logic
+        var addToRoleResult = await _userManager.AddToRoleAsync(user, roleName);
+        if (!addToRoleResult.Succeeded)
+        {
+            return BadRequest(addToRoleResult.Errors);
+        }
+
+
         // Generate email confirmation token
         var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+        var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, token = token }, protocol: HttpContext.Request.Scheme);
+        await _emailSender.SendEmailAsync(registerDto.Email, "Confirm your registration",
+            $"Please confirm your account by clicking this link: <a href='{callbackUrl}'>link</a>");
 
-        // Send email with confirmation link
-        var confirmationLink = Url.Action(nameof(ConfirmEmail), Router.Account.Prefix, new { userId = user.Id, token }, Request.Scheme);
-        await _emailSender.SendEmailAsync(user.Email, "Confirm your email", $"Please confirm your account by clicking this link: {confirmationLink}");
+        var tokenString = _tokenService.CreateToken(user); // Simplified token creation
 
-        return Ok(new UserDto
+        return Ok(new UserResponseDto
         {
-            DisplayName = user.DisplayName,
-            Token = _tokenService.CreateToken(user),
-            Email = user.Email
+            //Id = user.Id,
+            Email = user.Email,
+            Name = user.DisplayName,
+            EmailVerified = user.EmailConfirmed,
+            Token = tokenString,
+            Roles = new List<RoleDto> { new RoleDto { Name = roleName } }
         });
+
     }
 
     #endregion
@@ -102,6 +130,13 @@ public class AccountController : BaseAPIController
     [HttpPost(Router.Account.RefreshToken)]
     public async Task<ActionResult<UserDto>> RefreshToken([FromBody] string refreshToken)
     {
+
+        if (string.IsNullOrEmpty(refreshToken))
+        {
+            return BadRequest("Refresh token is required");
+        }
+
+        // Find the user by the refresh token
         var user = await _userManager.Users.Include(u => u.RefreshTokens)
             .SingleOrDefaultAsync(u => u.RefreshTokens.Any(t => t.Token == refreshToken));
 
@@ -118,40 +153,55 @@ public class AccountController : BaseAPIController
         user.RefreshTokens.Add(newRefreshToken);
         await _userManager.UpdateAsync(user);
 
-        return Ok(new UserDto
+        var userDto = new UserDto
         {
+            Id = user.Id,
+            Name = user.UserName,
             Email = user.Email,
-            Token = _tokenService.CreateToken(user),
-            DisplayName = user.DisplayName,
-            RefreshToken = newRefreshToken.Token
-        });
+            EmailVerified = user.EmailConfirmed,
+            AccessToken = _tokenService.CreateToken(user),
+            RefreshToken = newRefreshToken,
+        };
+
+
+        return Ok(userDto);
     }
 
     #endregion
 
     #region Confirm Email
 
-    [HttpGet(Router.Account.ConfirmEmail)]
-    public async Task<ActionResult> ConfirmEmail(string userId, string token)
+    [HttpPost(Router.Account.VerifyEmail)]
+    public async Task<ActionResult> VerifyEmail(VerifyEmailDto verifyEmailDto)
     {
-        if (string.IsNullOrEmpty(userId) || string.IsNullOrEmpty(token))
+        if (string.IsNullOrEmpty(verifyEmailDto.Email) || string.IsNullOrEmpty(verifyEmailDto.Otp))
         {
-            return BadRequest(new BaseQueryResult(400, "Invalid email confirmation request"));
+            return BadRequest(new BaseQueryResult(400, "Email and OTP are required"));
         }
 
-        var user = await _userManager.FindByIdAsync(userId);
+        var user = await _userManager.FindByEmailAsync(verifyEmailDto.Email);
         if (user == null)
         {
             return NotFound(new BaseQueryResult(404, "User not found"));
         }
 
-        var result = await _userManager.ConfirmEmailAsync(user, token);
-        if (!result.Succeeded)
+        // Assume GetOtpDetailsAsync gets the OTP details for validation
+        var otpDetails = await _tokenService.GetOtpDetailsAsync(verifyEmailDto.Email, verifyEmailDto.Otp);
+        if (otpDetails == null || !otpDetails.IsValid)
         {
-            return BadRequest(new BaseQueryResult(400, "Email confirmation failed"));
+            return BadRequest(new BaseQueryResult(400, "Invalid OTP or OTP expired"));
         }
 
-        return Ok(new BaseQueryResult(200, "Email confirmed successfully"));
+        var result = await _userManager.ConfirmEmailAsync(user, otpDetails.Token);
+        if (!result.Succeeded)
+        {
+            return BadRequest(new BaseQueryResult(400, "Email verification failed"));
+        }
+
+        // Optionally, invalidate the OTP after successful verification
+        await _tokenService.InvalidateOtpAsync(otpDetails);
+
+        return Ok(new BaseQueryResult(200, "Email verified successfully"));
     }
 
     #endregion
@@ -169,12 +219,175 @@ public class AccountController : BaseAPIController
             return Unauthorized(new BaseQueryResult(401, "User not found"));
         }
 
-        return Ok(new UserDto
+
+        var roles = await _userManager.GetRolesAsync(user);
+        var token = _tokenService.CreateToken(user);
+        var refreshToken = _tokenService.GenerateRefreshToken();
+
+        var userDto = new UserDto
         {
+            Id = user.Id,
+            Name = user.UserName,
             Email = user.Email,
-            Token = _tokenService.CreateToken(user),
-            DisplayName = user.DisplayName
-        });
+            EmailVerified = user.EmailConfirmed,
+            AccessToken = token,
+            RefreshToken = refreshToken,
+            Roles = roles
+        };
+
+        return Ok(userDto);
+    }
+
+    #endregion
+
+    #region Forget password
+    [HttpPost(Router.Account.forgetpassword)]
+    public async Task<IActionResult> ForgetPassword([FromBody] EmailCheckDto forgetPasswordDto)
+    {
+        var user = await _userManager.FindByEmailAsync(forgetPasswordDto.Email);
+        if (user == null)
+        {
+            return NotFound(new { message = "User with the given email does not exist." });
+        }
+
+        // Generate OTP
+        var otp = GenerateOtp();
+
+        // Store the OTP details in the database or cache
+        var otpDetails = new OtpDetails
+        {
+            Email = forgetPasswordDto.Email,
+            Otp = otp,
+            ExpiresAt = DateTime.UtcNow.AddMinutes(15) // OTP expires after 15 minutes
+        };
+        await _tokenService.SaveOtpDetailsAsync(otpDetails);
+
+        // Send the OTP via email
+        await _emailSender.SendEmailAsync(forgetPasswordDto.Email, "Password Reset OTP", $"Your OTP for password reset is: {otp}");
+
+        return Ok(new { success = true, message = "OTP has been sent to your email." });
+    }
+
+    private string GenerateOtp()
+    {
+        Random random = new Random();
+        return random.Next(100000, 999999).ToString(); // Generates a 6-digit OTP
+    } 
+    #endregion
+
+    #region is User Email Found
+    [HttpGet(Router.Account.isUserEmailFound)]
+    public async Task<IActionResult> IsUserEmailFound([FromBody] EmailCheckDto emailCheck)
+    {
+        var user = await _userManager.FindByEmailAsync(emailCheck.Email);
+        bool isUserFound = user != null;
+        return Ok(new { IsUserFound = isUserFound });
+    }
+    #endregion
+
+    #region Resend Otp
+    [HttpPost(Router.Account.resendotp)]
+    public async Task<IActionResult> ResendOtp([FromBody] EmailCheckDto request)
+    {
+        if (string.IsNullOrEmpty(request.Email))
+        {
+            return BadRequest("Email is required.");
+        }
+
+        // Verify if the user exists
+        var user = await _userManager.FindByEmailAsync(request.Email);
+        if (user == null)
+        {
+            return NotFound("User not found.");
+        }
+
+        // Generate a new OTP
+        var otp = GenerateOtp();
+
+        // Save OTP details
+        var otpDetails = new OtpDetails
+        {
+            Email = request.Email,
+            Otp = otp,
+            ExpiresAt = DateTime.UtcNow.AddMinutes(15)  // OTP expires in 15 minutes
+        };
+
+        await _tokenService.SaveOtpDetailsAsync(otpDetails);
+
+        // Send OTP via email
+        await _emailSender.SendEmailAsync(request.Email, "Your OTP", $"Your OTP is: {otp}");
+
+        return Ok(new { success = true, message = "OTP resent successfully." });
+    }
+    #endregion
+
+    #region Retrieve Password
+    [HttpPost(Router.Account.RetrievePassword)]
+    public async Task<IActionResult> RetrievePassword([FromBody] RetrievePasswordRequestDto request)
+    {
+        if (string.IsNullOrEmpty(request.Email) || string.IsNullOrEmpty(request.Password) || string.IsNullOrEmpty(request.Otp))
+        {
+            return BadRequest("Email, new password, and OTP are required.");
+        }
+
+        // Verify if the user exists
+        var user = await _userManager.FindByEmailAsync(request.Email);
+        if (user == null)
+        {
+            return NotFound("User not found.");
+        }
+
+        // Verify the OTP
+        var otpDetails = await _tokenService.GetOtpDetailsAsync(request.Email, request.Otp);
+        if (otpDetails == null || !otpDetails.IsValid || otpDetails.ExpiresAt < DateTime.UtcNow)
+        {
+            return BadRequest("Invalid or expired OTP.");
+        }
+
+        // Update the password
+        var resetPassResult = await _userManager.ResetPasswordAsync(user, otpDetails.Token, request.Password);
+        if (!resetPassResult.Succeeded)
+        {
+            return BadRequest("Error resetting password.");
+        }
+
+        // Optionally invalidate the OTP after successful usage
+        await _tokenService.InvalidateOtpAsync(otpDetails);
+
+        return Ok(new { success = true, message = "Password updated successfully." });
+    }
+    #endregion
+
+    #region Change Password
+    [HttpPost(Router.Account.ChangePassword)]
+    public async Task<IActionResult> ChangePassword([FromBody] ChangePasswordDto changePasswordDto)
+    {
+        if (User.Identity == null || !User.Identity.IsAuthenticated)
+        {
+            return Unauthorized("User is not authenticated");
+        }
+
+        var user = await _userManager.GetUserAsync(User);
+        if (user == null)
+        {
+            return NotFound("User not found");
+        }
+
+        // Check if the old password is correct
+        var checkOldPassword = await _userManager.CheckPasswordAsync(user, changePasswordDto.OldPassword);
+        if (!checkOldPassword)
+        {
+            return BadRequest("Incorrect old password");
+        }
+
+        // Change the password
+        var result = await _userManager.ChangePasswordAsync(user, changePasswordDto.OldPassword, changePasswordDto.NewPassword);
+        if (!result.Succeeded)
+        {
+            return BadRequest(result.Errors);
+        }
+
+        return Ok(new { message = "Password changed successfully" });
     }
 
     #endregion
