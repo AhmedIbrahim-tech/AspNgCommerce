@@ -4,6 +4,7 @@ public class ProductsQueryFilter
 {
     public string Name { get; set; }
     public int? BrandId { get; set; }
+    public int? Categoryid { get; set; }
     public int? TypeId { get; set; }
     public string Description { get; set; }
     private string _search;

@@ -8,6 +8,10 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { ServerErrorComponent } from './server-error/server-error.component';
 import { SectionHeaderComponent } from './section-header/section-header.component';
 import { DemoPageComponent } from './demo-page/demo-page.component';
+import { SliderComponent } from './Layouts/slider/slider.component';
+import { BannerComponent } from './Layouts/banner/banner.component';
+import { SidebarComponent } from './Layouts/sidebar/sidebar.component';
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -21,19 +25,24 @@ import { DemoPageComponent } from './demo-page/demo-page.component';
     NotFoundComponent,
     ServerErrorComponent,
     SectionHeaderComponent,
-    DemoPageComponent
+    DemoPageComponent,
+    SliderComponent,
+    BannerComponent,
+    SidebarComponent
  
   ],
   imports: [
     CommonModule,
-    RouterModule
+    RouterModule,
+    FormsModule
   ],
   exports:
   [    
     VarBarComponent,
     FooterBarComponent,
     SectionHeaderComponent,
-    DemoPageComponent
+    DemoPageComponent,
+    SidebarComponent
   ]
 })
 export class CoreModule { }

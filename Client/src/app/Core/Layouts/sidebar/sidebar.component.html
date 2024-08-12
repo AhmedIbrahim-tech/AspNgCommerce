@@ -1,0 +1,46 @@
+<div class="sidebar">
+    <!-- Categories Section -->
+    <div class="sidebar_section">
+      <div class="sidebar_title">
+        <h5>Product Category</h5>
+      </div>
+      <ul class="sidebar_categories">
+        <li
+          *ngFor="let item of categories"
+          [class.active]="item.id === selectedCategoryId"
+          (click)="onCategorySelect(item.id)"
+        >
+          <a style="cursor: pointer;">{{ item.name }}</a>
+        </li>
+      </ul>
+    </div>
+  
+    <!-- Search Section -->
+    <div class="sidebar_section">
+      <div class="sidebar_title">
+        <h5>Search</h5>
+      </div>
+      <div class="input-group">
+        <input
+          type="text"
+          [(ngModel)]="searchValue"
+          class="form-control"
+          placeholder="Product name"
+          (keyup.enter)="onSearch()"
+        />
+      </div>
+      <div style="text-align: center; padding-top: 1px;">
+        <button
+          type="button"
+          (click)="onSearch()"
+          style="height: 30px;"
+          class="filter_button"
+        >
+          <span>
+            <i class="fa fa-search"></i> Search
+          </span>
+        </button>
+      </div>
+    </div>
+  </div>
+  

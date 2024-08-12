@@ -1,5 +1,4 @@
-﻿using ECommerce.Infrastrucure.Repositories.Permissions;
-using System.Collections;
+﻿using System.Collections;
 
 namespace ECommerce.Infrastrucure.Repositories;
 public interface IUnitOfWork : IDisposable
@@ -18,7 +17,6 @@ public interface IUnitOfWork : IDisposable
     ICategoryRepository CategoryRepository { get; }
     IProductTypeRepository ProductTypeRepository { get; }
     IProductBrandRepository ProductBrandRepository { get; }
-    IPermissionsRepository PermissionsRepository { get; }
 
     void SaveChanges();
     Task<int> SaveChangesAsync();
@@ -38,7 +36,6 @@ public class UnitOfWork : IUnitOfWork
     private readonly ICategoryRepository _categoryRepository;
     private IProductTypeRepository _productTypeRepository;
     private IProductBrandRepository _productBrandRepository;
-    private IPermissionsRepository _permissionsRepository;
 
     public UnitOfWork(ApplicationDBContext context)
     {
@@ -67,7 +64,6 @@ public class UnitOfWork : IUnitOfWork
     public ICategoryRepository CategoryRepository => _categoryRepository ?? new CategoryRepository(_context);
     public IProductTypeRepository ProductTypeRepository => _productTypeRepository ??= new ProductTypeRepository(_context);
     public IProductBrandRepository ProductBrandRepository => _productBrandRepository ??= new ProductBrandRepository(_context);
-    public IPermissionsRepository PermissionsRepository => _permissionsRepository ??= new PermissionsRepository(_context);
 
     public IGenericRepository<Product> GenericProductRepository => _GenericProductRepository ?? new GenericRepository<Product>(_context);
     public IGenericRepository<ProductBrand> GenericProductBrandRepository => _GenericProductBrandRepository ?? new GenericRepository<ProductBrand>(_context);

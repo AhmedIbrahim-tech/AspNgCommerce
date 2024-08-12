@@ -80,6 +80,7 @@ public static class Router
     } 
     #endregion
 
+
     #region Basket
     public static class Basket
     {
@@ -100,10 +101,15 @@ public static class Router
         public const string Register = Prefix + "register";
         public const string CurrentUser = Prefix + "CurrentUser";
         public const string EmailExists = Prefix + "emailexists";
-        public const string ConfirmEmail = Prefix + "/confirmemail";
+        public const string VerifyEmail = Prefix + "/VerifyEmail";
         public const string InitializationAddress = Prefix + "address";
         public const string UpdateAddress = Prefix + "UpdateAddress";
-        public const string RefreshToken = Prefix + "/refreshtoken";
+        public const string RefreshToken = Prefix + "refreshtoken";
+        public const string isUserEmailFound = Prefix + "isUserEmailFound";
+        public const string forgetpassword = Prefix + "forgetpassword";
+        public const string resendotp = Prefix + "resendotp";
+        public const string RetrievePassword = Prefix + "RetrievePassword";
+        public const string ChangePassword = Prefix + "ChangePassword";
 
     }
 
@@ -145,19 +151,5 @@ public static class Router
         public const string GetBadRequestById = Prefix + "BadRequest" + "/" + SingleRoute;
     }
     #endregion
-
-    #region Permissions
-    public static class Permissions
-    {
-        public const string Prefix = Rule + "Permissions/";
-
-        public const string GetAllPermissions = Prefix + "GetAll";
-        public const string GetPermissionById = Prefix + "GetById" + "/" + SingleRoute;
-        public const string CreatePermission = Prefix + "Create";
-        public const string UpdatePermission = Prefix + "Edit" + "/" + SingleRoute;
-        public const string DeletePermission = Prefix + "Delete" + "/" + SingleRoute;
-    }
-    #endregion
-
 }
 

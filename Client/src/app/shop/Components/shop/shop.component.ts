@@ -1,9 +1,5 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { IProduct } from '../../../shared/Models/product';
-import { environment } from '../../../../environments/environment.development';
-import { IPagination } from '../../../shared/Models/Paginations';
-import { map } from 'rxjs';
 import { ICategorys } from '../../../shared/Models/Categorys';
 import { ShopParams } from '../../../shared/Models/ShopParams';
 import { ShopService } from '../../services/shop.service';
@@ -18,11 +14,11 @@ export class ShopComponent implements OnInit {
   categories!: ICategorys[];
   @ViewChild('search') searchterms!:ElementRef;
   ShopParam = new ShopParams;
-  soreOptions =
+  sortOptions =
     [
       { name: 'Name', value: 'Name' },
-      { name: 'Price : Low to High', value: 'PriceAsc' },
-      { name: 'Price : high to low', value: 'PriceDesc' }
+      { name: 'Price : Low to High', value: 'priceAsc' },
+      { name: 'Price : high to low', value: 'priceDesc' }
     ]
 
 
@@ -38,6 +34,7 @@ export class ShopComponent implements OnInit {
 
   getproducts() {
     this._shopservice.GetListOfProducts(this.ShopParam).subscribe((res:any) => {
+      console.log("services" , res);
       this.products = res.data
       this.ShopParam.totalCount = res.pageCount;
       this.ShopParam.pageNumber = res.pageNumber;
@@ -48,15 +45,15 @@ export class ShopComponent implements OnInit {
 
 
   getcategoryes() {
-    this._shopservice.getcategorys().subscribe(res => { this.categories = [{ id: 0, name: 'All', description: '' }, ...res] })
+    this._shopservice.getcategorys().subscribe(res => { this.categories = [{ id: 0, name: 'All', description: '' }, ...res.data!] })
   }
-  oncategoryselect(categoryid: number) {
+  onCategorySelect(categoryid: number) {
     //   this.ShopParams.pageNumber=1;
     this.ShopParam.categoryid = categoryid;
 
     this.getproducts();
   }
-  onsortSeleted(sort: Event) {
+  onSortSelected(sort: Event) {
     let sortValue = (sort.target as HTMLInputElement).value;
 
     this.ShopParam.sorting = sortValue;
@@ -70,13 +67,13 @@ export class ShopComponent implements OnInit {
       this.getproducts(); 
     }
   }
-  onsearch(Searchterm:any)
+  onSearch(Searchterm:any)
   {
     this.ShopParam.search=Searchterm;
     console.log(Searchterm);
     this.getproducts();
   }
-  onsearchinput()
+  onSearchInput()
   {
 
     this.ShopParam.search=this.searchterms.nativeElement.value;
