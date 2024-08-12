@@ -1,4 +1,5 @@
 ﻿using ECommerce.Infrastrucure.Services;
+using ECommerce.Infrastrucure.Services.Permissions;
 
 namespace ECommerce.Infrastrucure;
 
@@ -25,6 +26,7 @@ public static class ModuleInfrastructureDependencies
         services.AddTransient<ICategoryService, CategoryService>();
         services.AddTransient<IOrderService, OrderService>();
         services.AddTransient<IPaymentServices, PaymentServices>();
+        services.AddTransient<IPermissionsService, PermissionsService>();
 
 
 

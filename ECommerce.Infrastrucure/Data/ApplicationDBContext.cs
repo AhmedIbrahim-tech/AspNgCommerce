@@ -1,5 +1,6 @@
 ﻿using ECommerce.Core.Entities;
 using ECommerce.Core.Entities.OrderAggregate;
+using ECommerce.Core.Identity.Permission;
 
 namespace ECommerce.Infrastrucure.Data;
 
@@ -15,6 +16,7 @@ public class ApplicationDBContext : IdentityDbContext<AppUser>
     public DbSet<Core.Entities.OrderAggregate.Order> Orders { get; set; }
     public DbSet<OrderItem> OrderItems { get; set; }
     public DbSet<DeliveryMethod> DeliveryMethods { get; set; }
+    public DbSet<PermissionDto> Permissions { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
