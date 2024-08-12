@@ -6,4 +6,10 @@ export class ShopParams
     pageSize:number=8;
     totalCount?:number;
     search?:string;
+    BrandId:number = 0;
+    TypeId:number = 0;
+    Name?:string;
+    Description?:string;
+
+
 }

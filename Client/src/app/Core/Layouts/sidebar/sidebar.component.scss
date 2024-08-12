@@ -1,0 +1,42 @@
+.sidebar {
+    width: 100%;
+    max-width: 250px;
+    background-color: #f4f4f4;
+    padding: 15px;
+    box-sizing: border-box;
+  }
+  
+  .sidebar_section {
+    margin-bottom: 20px;
+  }
+  
+  .sidebar_title {
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+  
+  .sidebar_categories {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .sidebar_categories li {
+    margin-bottom: 5px;
+  }
+  
+  .sidebar_categories li.active a {
+    font-weight: bold;
+    color: #f6931f;
+  }
+  
+  .input-group {
+    margin-bottom: 10px;
+  }
+  
+  .filter_button {
+    background-color: #f6931f;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+  }
+  
