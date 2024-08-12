@@ -80,7 +80,6 @@ public static class Router
     } 
     #endregion
 
-
     #region Basket
     public static class Basket
     {
@@ -146,5 +145,19 @@ public static class Router
         public const string GetBadRequestById = Prefix + "BadRequest" + "/" + SingleRoute;
     }
     #endregion
+
+    #region Permissions
+    public static class Permissions
+    {
+        public const string Prefix = Rule + "Permissions/";
+
+        public const string GetAllPermissions = Prefix + "GetAll";
+        public const string GetPermissionById = Prefix + "GetById" + "/" + SingleRoute;
+        public const string CreatePermission = Prefix + "Create";
+        public const string UpdatePermission = Prefix + "Edit" + "/" + SingleRoute;
+        public const string DeletePermission = Prefix + "Delete" + "/" + SingleRoute;
+    }
+    #endregion
+
 }
 

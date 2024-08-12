@@ -70,11 +70,12 @@ public class EagerProductsController : ControllerBase
         var result = await _productsServices.UpdateProductAsync(id, productDto);
         if (result.Status)
         {
-            return StatusCode(result.StatusCode, result);
+            return Ok(result);
         }
-        return StatusCode(result.StatusCode, result.Message);
+        return BadRequest(result.Message);
     }
     #endregion
+
 
     #region Delete Product
     [HttpDelete(Router.EagerProducts.Delete)]
