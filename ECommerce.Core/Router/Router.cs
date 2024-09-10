@@ -109,7 +109,9 @@ public static class Router
         public const string forgetpassword = Prefix + "forgetpassword";
         public const string resendotp = Prefix + "resendotp";
         public const string RetrievePassword = Prefix + "RetrievePassword";
+        public const string ConfirmEmail = Prefix + "ConfirmEmail";
         public const string ChangePassword = Prefix + "ChangePassword";
+
 
     }
 
@@ -139,6 +141,19 @@ public static class Router
         public const string DeliveryMethod = Prefix + "DeliveryMethod";
     }
     #endregion
+
+    #region Permissions
+    public static class Permissions
+    {
+        public const string Prefix = Rule + "Permissions/";
+        public const string ListPermissions = Prefix + "ListPermissions";
+        public const string GetById = Prefix + "GetPermissionByID" + "/" + SingleRoute;
+        public const string Create = Prefix + "CreatePermission";
+        public const string Edit = Prefix + "EditPermission" + "/" + SingleRoute;
+        public const string Delete = Prefix + "DeletePermission" + "/" + SingleRoute;
+    }
+    #endregion
+
 
     #region Error
     public static class Error

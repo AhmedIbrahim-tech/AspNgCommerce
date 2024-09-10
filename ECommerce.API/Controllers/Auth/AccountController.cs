@@ -1,15 +1,6 @@
 ﻿using ECommerce.API.Controllers.APIControllers;
 using ECommerce.Infrastrucure.Services.Permissions;
 using Microsoft.AspNetCore.Identity.UI.Services;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using Microsoft.EntityFrameworkCore;
-using System.Threading.Tasks;
-using ECommerce.Core.Identity;
-using ECommerce.Core.DTOS;
-using System.Collections.Generic;
-using Microsoft.AspNetCore.Authorization;
-using System.Linq;
 
 namespace ECommerce.API.Controllers.Auth
 {
@@ -23,7 +14,7 @@ namespace ECommerce.API.Controllers.Auth
         private readonly ITokenService _tokenService;
         private readonly IEmailSender _emailSender;
         private readonly ILogger<AccountController> _logger;
-        private readonly Mapper _mapper;
+        private readonly IMapper _mapper;
 
         public AccountController(
             UserManager<AppUser> userManager,
@@ -31,7 +22,7 @@ namespace ECommerce.API.Controllers.Auth
             ITokenService tokenService,
             IEmailSender emailSender,
             ILogger<AccountController> logger,
-            Mapper mapper)
+            IMapper mapper)
         {
             _userManager = userManager;
             _signInManager = signInManager;
@@ -40,6 +31,7 @@ namespace ECommerce.API.Controllers.Auth
             _logger = logger;
             _mapper = mapper;
         }
+
 
         #endregion
 
@@ -110,7 +102,7 @@ namespace ECommerce.API.Controllers.Auth
 
             await _userManager.AddToRoleAsync(user, "Regular");
             var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-            var confirmationLink = Url.Action(nameof(ConfirmEmail), Router.Account.Prefix, new { userId = user.Id, token }, Request.Scheme);
+            var confirmationLink = Url.Action(nameof(ConfirmEmail), "account", new { userId = user.Id, token }, Request.Scheme);
             await _emailSender.SendEmailAsync(user.Email, "Confirm your email", $"Please confirm your account by clicking this link: {confirmationLink}");
 
             return Ok(new UserDto

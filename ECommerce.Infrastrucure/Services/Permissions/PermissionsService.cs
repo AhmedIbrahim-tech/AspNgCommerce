@@ -1,4 +1,4 @@
-﻿using ECommerce.Core.Identity.Permission;
+﻿using ECommerce.Core.Identity.Authorization;
 using ECommerce.Core.Responses;
 using System.Net;
 
@@ -7,10 +7,10 @@ namespace ECommerce.Infrastrucure.Services.Permissions;
 #region Interface
 public interface IPermissionsService
 {
-    Task<BaseGenericResult<List<PermissionDto>>> GetAllPermissionsAsync();
-    Task<BaseGenericResult<PermissionDto>> GetPermissionByIdAsync(int id);
-    Task<BaseGenericResult<PermissionDto>> AddPermissionAsync(PermissionDto permissionDto);
-    Task<BaseGenericResult<PermissionDto>> UpdatePermissionAsync(int id, PermissionDto permissionDto);
+    Task<BaseGenericResult<List<Permission>>> GetAllPermissionsAsync();
+    Task<BaseGenericResult<Permission>> GetPermissionByIdAsync(int id);
+    Task<BaseGenericResult<Permission>> AddPermissionAsync(Permission permission);
+    Task<BaseGenericResult<Permission>> UpdatePermissionAsync(int id, Permission permission);
     Task<BaseGenericResult<int>> DeletePermissionAsync(int id);
 }
 #endregion
@@ -24,36 +24,36 @@ public class PermissionsService : IPermissionsService
         _unitOfWork = unitOfWork;
     }
 
-    public async Task<BaseGenericResult<List<PermissionDto>>> GetAllPermissionsAsync()
+    public async Task<BaseGenericResult<List<Permission>>> GetAllPermissionsAsync()
     {
-        var permissionDtos = await _unitOfWork.PermissionsRepository.GetAllPermissionsAsync();
-        return new BaseGenericResult<List<PermissionDto>>(true, (int)HttpStatusCode.OK, "Permissions fetched successfully", permissionDtos.ToList());
+        var permissions = await _unitOfWork.PermissionsRepository.GetAllPermissionsAsync();
+        return new BaseGenericResult<List<Permission>>(true, (int)HttpStatusCode.OK, "Permissions fetched successfully", permissions.ToList());
     }
 
-    public async Task<BaseGenericResult<PermissionDto>> GetPermissionByIdAsync(int id)
+    public async Task<BaseGenericResult<Permission>> GetPermissionByIdAsync(int id)
     {
-        var permissionDto = await _unitOfWork.PermissionsRepository.GetPermissionByIdAsync(id);
-        if (permissionDto == null)
-            return new BaseGenericResult<PermissionDto>(false, (int)HttpStatusCode.NotFound, "Permission not found");
+        var permission = await _unitOfWork.PermissionsRepository.GetPermissionByIdAsync(id);
+        if (permission == null)
+            return new BaseGenericResult<Permission>(false, (int)HttpStatusCode.NotFound, "Permission not found");
 
-        return new BaseGenericResult<PermissionDto>(true, (int)HttpStatusCode.OK, "Permission fetched successfully", permissionDto);
+        return new BaseGenericResult<Permission>(true, (int)HttpStatusCode.OK, "Permission fetched successfully", permission);
     }
 
-    public async Task<BaseGenericResult<PermissionDto>> AddPermissionAsync(PermissionDto permissionDto)
+    public async Task<BaseGenericResult<Permission>> AddPermissionAsync(Permission permission)
     {
-        _unitOfWork.PermissionsRepository.AddPermission(permissionDto);
+        _unitOfWork.PermissionsRepository.AddPermission(permission);
         await _unitOfWork.SaveChangesAsync();
 
-        return new BaseGenericResult<PermissionDto>(true, (int)HttpStatusCode.Created, "Permission added successfully", permissionDto);
+        return new BaseGenericResult<Permission>(true, (int)HttpStatusCode.Created, "Permission added successfully", permission);
     }
 
-    public async Task<BaseGenericResult<PermissionDto>> UpdatePermissionAsync(int id, PermissionDto permissionDto)
+    public async Task<BaseGenericResult<Permission>> UpdatePermissionAsync(int id, Permission permission)
     {
-        var success = await _unitOfWork.PermissionsRepository.UpdatePermission(id, permissionDto);
+        var success = await _unitOfWork.PermissionsRepository.UpdatePermission(id, permission);
         if (!success)
-            return new BaseGenericResult<PermissionDto>(false, (int)HttpStatusCode.NotFound, "Permission not found");
+            return new BaseGenericResult<Permission>(false, (int)HttpStatusCode.NotFound, "Permission not found");
 
-        return new BaseGenericResult<PermissionDto>(true, (int)HttpStatusCode.OK, "Permission updated successfully", permissionDto);
+        return new BaseGenericResult<Permission>(true, (int)HttpStatusCode.OK, "Permission updated successfully", permission);
     }
 
     public async Task<BaseGenericResult<int>> DeletePermissionAsync(int id)
@@ -64,4 +64,5 @@ public class PermissionsService : IPermissionsService
 
         return new BaseGenericResult<int>(true, (int)HttpStatusCode.OK, "Permission deleted successfully");
     }
+
 }

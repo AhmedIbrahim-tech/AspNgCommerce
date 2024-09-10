@@ -4,7 +4,6 @@ using ECommerce.API.Controllers.APIControllers;
 namespace ECommerce.API.Controllers.Inventory;
 
 [ApiController]
-
 public class SpecProductController : BaseAPIController
 {
     #endregion

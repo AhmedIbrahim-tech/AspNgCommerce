@@ -1,15 +1,16 @@
-﻿using ECommerce.Core.Identity.Permission;
+﻿using ECommerce.Core.Identity.Authorization;
 
 namespace ECommerce.Infrastrucure.Repositories.Permissions;
 
 public interface IPermissionsRepository
 {
-    Task<PermissionDto> GetPermissionByIdAsync(int id);
-    Task<IEnumerable<PermissionDto>> GetAllPermissionsAsync();
-    void AddPermission(PermissionDto permission);
-    Task<bool> UpdatePermission(int id, PermissionDto permissionDto);
+    Task<Permission> GetPermissionByIdAsync(int id);
+    Task<IEnumerable<Permission>> GetAllPermissionsAsync();
+    void AddPermission(Permission permission);
+    Task<bool> UpdatePermission(int id, Permission permission);
     Task<bool> DeletePermission(int id);
 }
+
 
 
 public class PermissionsRepository : IPermissionsRepository
@@ -21,31 +22,29 @@ public class PermissionsRepository : IPermissionsRepository
         _context = context;
     }
 
-    public async Task<PermissionDto> GetPermissionByIdAsync(int id)
+    public async Task<Permission> GetPermissionByIdAsync(int id)
     {
-        var permission = await _context.Permissions.FindAsync(id);
-        return permission != null ? new PermissionDto { Id = permission.Id, Name = permission.Name, Description = permission.Description } : null;
+        return await _context.Permissions.FindAsync(id);
     }
 
-    public async Task<IEnumerable<PermissionDto>> GetAllPermissionsAsync()
+    public async Task<IEnumerable<Permission>> GetAllPermissionsAsync()
     {
-        return _context.Permissions.Select(p => new PermissionDto { Id = p.Id, Name = p.Name, Description = p.Description }).ToList();
+        return await _context.Permissions.ToListAsync();
     }
 
-    public void AddPermission(PermissionDto permissionDto)
+    public void AddPermission(Permission permission)
     {
-        var permission = new PermissionDto { Name = permissionDto.Name, Description = permissionDto.Description };
         _context.Permissions.Add(permission);
     }
 
-    public async Task<bool> UpdatePermission(int id, PermissionDto permissionDto)
+    public async Task<bool> UpdatePermission(int id, Permission permission)
     {
-        var permission = await _context.Permissions.FindAsync(id);
-        if (permission == null) return false;
+        var existingPermission = await _context.Permissions.FindAsync(id);
+        if (existingPermission == null) return false;
 
-        permission.Name = permissionDto.Name;
-        permission.Description = permissionDto.Description;
-        _context.Permissions.Update(permission);
+        existingPermission.Name = permission.Name;
+        existingPermission.Description = permission.Description;
+        _context.Permissions.Update(existingPermission);
         return true;
     }
 
@@ -57,4 +56,5 @@ public class PermissionsRepository : IPermissionsRepository
         _context.Permissions.Remove(permission);
         return true;
     }
+
 }
