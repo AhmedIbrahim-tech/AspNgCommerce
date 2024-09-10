@@ -117,15 +117,14 @@ public static class Router
 
     public static class Roles
     {
-        public const string Prefix = Rule + "roles";
-
-        public const string GetAll = Prefix;
-        public const string GetById = Prefix + "/{id}";
-        public const string Create = Prefix;
-        public const string Update = Prefix + "/{id}";
-        public const string Delete = Prefix + "/{id}";
+        public const string Prefix = Rule + "Roles/";
+        public const string ListRoles = Prefix + "ListRoles";
+        public const string GetById = Prefix + "GetRoleByID" + "/" + SingleRoute;
+        public const string Create = Prefix + "CreateRole";
+        public const string Edit = Prefix + "EditRole" + "/" + SingleRoute;
+        public const string Delete = Prefix + "DeleteRole" + "/" + SingleRoute;
         public const string Assign = Prefix + "/assign";
-        public const string Remove = Prefix + "/remove";
+        public const string RemoveRoleFromUser = Prefix + "/RemoveRoleFromUser";
     }
 
     #endregion

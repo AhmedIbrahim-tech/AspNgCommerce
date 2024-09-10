@@ -76,7 +76,6 @@ public class EagerProductsController : ControllerBase
     }
     #endregion
 
-
     #region Delete Product
     [HttpDelete(Router.EagerProducts.Delete)]
     public async Task<IActionResult> DeleteProduct(int id)

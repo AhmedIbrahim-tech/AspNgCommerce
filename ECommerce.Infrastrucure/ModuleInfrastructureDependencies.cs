@@ -1,4 +1,5 @@
-﻿using ECommerce.Infrastrucure.Services;
+﻿using ECommerce.Infrastrucure.Repositories.Transactions;
+using ECommerce.Infrastrucure.Services;
 using ECommerce.Infrastrucure.Services.Permissions;
 
 namespace ECommerce.Infrastrucure;
@@ -17,7 +18,8 @@ public static class ModuleInfrastructureDependencies
         services.AddTransient<IProductBrandRepository, ProductBrandRepository>();
         services.AddTransient<IProductTypeRepository, ProductTypeRepository>();
         services.AddTransient<IProductsServices, ProductsServices>();
-        services.AddTransient<IBasketRepository, BasketRepository>();
+        services.AddTransient<IBasketRepository, RedisBasketRepository>();
+        services.AddTransient<IBasketRepository, MemoryBasketRepository>();
 
         //Services
         services.AddTransient<IProductServices, ProductServices>();

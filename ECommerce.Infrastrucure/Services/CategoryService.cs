@@ -10,7 +10,7 @@ public interface ICategoryService
     Task<BaseGenericResult<IEnumerable<Category>>> GetAllCategoriesAsync();
     Task<BaseGenericResult<Category>> AddCategoryAsync(Category category);
     Task<BaseGenericResult<Category>> UpdateCategoryAsync(int id, Category category);
-    Task<BaseGenericResult<int>> DeleteCategoryAsync(int id);   
+    Task<BaseGenericResult<int>> DeleteCategoryAsync(int id);
 
 }
 public class CategoryService : ICategoryService

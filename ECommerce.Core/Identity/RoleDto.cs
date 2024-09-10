@@ -1,4 +1,6 @@
-﻿namespace ECommerce.Core.Identity;
+﻿using ECommerce.Core.Identity.Authorization;
+
+namespace ECommerce.Core.Identity;
 
 public class AssignRoleDto
 {
@@ -21,15 +23,9 @@ public class RoleDto
 {
     public string Id { get; set; }
     public string Name { get; set; }
-    public IEnumerable<PermissionDto> Permissions { get; set; }
+    public IEnumerable<Permission> Permissions { get; set; }
 }
 
-public class PermissionDto
-{
-    public int Id { get; set; }
-    public string Name { get; set; }
-    public string Description { get; set; }
-}
 
 
 public class VerifyEmailDto

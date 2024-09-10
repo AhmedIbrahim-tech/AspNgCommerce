@@ -1,12 +1,11 @@
-﻿using ECommerce.Core.Entities;
-using System.Text.Json;
+﻿using System.Text.Json;
 
-namespace ECommerce.Infrastrucure.Repositories
+namespace ECommerce.Infrastrucure.Repositories.Transactions
 {
-    public class BasketRepository : IBasketRepository
+    public class RedisBasketRepository : IBasketRepository
     {
         private readonly IDatabase _database;
-        public BasketRepository(IConnectionMultiplexer redis)
+        public RedisBasketRepository(IConnectionMultiplexer redis)
         {
             _database = redis.GetDatabase();
         }
