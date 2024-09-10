@@ -14,7 +14,7 @@ public class RolesController : ControllerBase
 
     #region Get All Roles
 
-    [HttpGet(Router.Roles.GetAll)]
+    [HttpGet(Router.Roles.ListRoles)]
     public ActionResult<IEnumerable<RoleDto>> GetAllRoles()
     {
         var roles = _roleManager.Roles.Select(r => new RoleDto { Id = r.Id, Name = r.Name }).ToList();
@@ -59,7 +59,7 @@ public class RolesController : ControllerBase
 
     #region Update Role
 
-    [HttpPut(Router.Roles.Update)]
+    [HttpPut(Router.Roles.Edit)]
     public async Task<ActionResult> UpdateRole(string id, [FromBody] RoleDto roleDto)
     {
         var role = await _roleManager.FindByIdAsync(id);
@@ -128,7 +128,7 @@ public class RolesController : ControllerBase
 
     #region Remove Role from User
 
-    [HttpPost(Router.Roles.Remove)]
+    [HttpPost(Router.Roles.RemoveRoleFromUser)]
     public async Task<ActionResult> RemoveRoleFromUser([FromBody] AssignRoleDto assignRoleDto)
     {
         var user = await _userManager.FindByEmailAsync(assignRoleDto.Email);

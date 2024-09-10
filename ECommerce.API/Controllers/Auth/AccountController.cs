@@ -1,5 +1,5 @@
 ﻿using ECommerce.API.Controllers.APIControllers;
-using ECommerce.Infrastrucure.Services.Permissions;
+using ECommerce.Infrastrucure.Services;
 using Microsoft.AspNetCore.Identity.UI.Services;
 
 namespace ECommerce.API.Controllers.Auth
@@ -183,7 +183,7 @@ namespace ECommerce.API.Controllers.Auth
         [HttpGet(Router.Account.CurrentUser)]
         public async Task<ActionResult<UserDto>> GetCurrentUser()
         {
-            var user = await _userManager.FindByEmailFromClaimsPrincipal(User);
+            var user = await _userManager.FindByEmailFromClaimsPrincipalAsync(User);
 
             if (user == null)
             {
@@ -225,7 +225,7 @@ namespace ECommerce.API.Controllers.Auth
         [HttpGet(Router.Account.InitializationAddress)]
         public async Task<ActionResult<AddressDto>> GetUserAddress()
         {
-            var user = await _userManager.FindUserByClaimsPrincipleWithAddress(User);
+            var user = await _userManager.FindUserByClaimsPrincipalWithAddressAsync(User);
 
             if (user?.Address == null)
             {
@@ -239,7 +239,7 @@ namespace ECommerce.API.Controllers.Auth
         [HttpPut(Router.Account.UpdateAddress)]
         public async Task<ActionResult<AddressDto>> UpdateUserAddress([FromBody] AddressDto addressDto)
         {
-            var user = await _userManager.FindUserByClaimsPrincipleWithAddress(User);
+            var user = await _userManager.FindUserByClaimsPrincipalWithAddressAsync(User);
 
             if (user == null)
             {

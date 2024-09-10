@@ -6,12 +6,12 @@ namespace ECommerce.API.Controllers.Inventory
     public class CategoryController : ControllerBase
     {
         #region Contractor (s)
-        private readonly ICategoryService categoryService;
+        private readonly ICategoryService _categoryService;
         private readonly IMapper _mapper;
 
         public CategoryController(ICategoryService categoryService, IMapper mapper)
         {
-            this.categoryService = categoryService;
+            _categoryService = categoryService;
             _mapper = mapper;
         }
 
@@ -21,7 +21,7 @@ namespace ECommerce.API.Controllers.Inventory
         [HttpGet(Router.Category.ListCategory)]
         public async Task<IActionResult> GetListCategoryAsync()
         {
-            var result = await categoryService.GetAllCategoriesAsync();
+            var result = await _categoryService.GetAllCategoriesAsync();
             return StatusCode(result.StatusCode, result);
         }
         #endregion
@@ -30,10 +30,32 @@ namespace ECommerce.API.Controllers.Inventory
         [HttpGet(Router.Category.GetById)]
         public async Task<IActionResult> GetCategoryById(int id)
         {
-            var result = await categoryService.GetCategoryByIdAsync(id);
+            var result = await _categoryService.GetCategoryByIdAsync(id);
             return StatusCode(result.StatusCode, result);
         }
         #endregion
+
+        [HttpPost(Router.Category.Create)]
+        public async Task<IActionResult> AddCategory([FromBody] Category category)
+        {
+            var result = await _categoryService.AddCategoryAsync(category);
+            return StatusCode(result.StatusCode, result);
+        }
+
+        [HttpPut(Router.Category.Edit)]
+        public async Task<IActionResult> UpdateCategory(int id, [FromBody] Category category)
+        {
+            var result = await _categoryService.UpdateCategoryAsync(id, category);
+            return StatusCode(result.StatusCode, result);
+        }
+
+        [HttpDelete(Router.Category.Delete)]
+        public async Task<IActionResult> DeleteCategory(int id)
+        {
+            var result = await _categoryService.DeleteCategoryAsync(id);
+            return StatusCode(result.StatusCode, result);
+        }
+
 
     }
 }
