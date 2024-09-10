@@ -2,7 +2,6 @@
 
 namespace ECommerce.API.Controllers.Inventory
 {
-    [Route("api/[controller]")]
     [ApiController]
     public class CategoryController : ControllerBase
     {

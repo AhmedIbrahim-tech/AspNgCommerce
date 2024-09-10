@@ -14,55 +14,22 @@ builder.Services.AddControllers().AddNewtonsoftJson(options =>
     options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
     options.SerializerSettings.NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore;
 });
+
 #endregion
 
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
 
-
-#region Connection Database
-
-builder.Services.AddDbContext<ApplicationDBContext>(option =>
-    option.UseSqlServer(
-        builder.Configuration.GetConnectionString("DefaultConnection"),
-            b => b.MigrationsAssembly(typeof(ApplicationDBContext).Assembly.FullName)));
-
-builder.Services.AddIdentityCore<AppUser>(opt =>
-{
-
-})
-    .AddEntityFrameworkStores<ApplicationDBContext>()
-    .AddSignInManager<SignInManager<AppUser>>();
-
-var jwt = builder.Configuration.GetSection("Token");
-
-builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-    .AddJwtBearer(options =>
-    {
-        options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
-        {
-            ValidateIssuerSigningKey = true,
-            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwt["key"])),
-            ValidIssuer = jwt["Issuer"],
-            ValidateIssuer = true,
-            ValidateAudience = false
-        };
-    });
-
-builder.Services.AddAuthorization();
-#endregion
-
-#region Swagger Doc
+#region Configure Swagger Doc
 
 builder.Services.AddSwaggerGen(options =>
 {
     options.SwaggerDoc("v1", new OpenApiInfo
     {
         Version = "v1",
-        Title = "ECommerce"
+        Title = "ECommerce API"
     });
-    // Swagger 2.+ support
-    options.AddSecurityDefinition("Bearer", new Microsoft.OpenApi.Models.OpenApiSecurityScheme
+
+    options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {
         Name = "Authorization",
         Type = SecuritySchemeType.ApiKey,
@@ -71,7 +38,8 @@ builder.Services.AddSwaggerGen(options =>
         In = ParameterLocation.Header,
         Description = "JWT Authorization header using the Bearer scheme. Example: \"Authorization: Bearer {token}\""
     });
-    options.AddSecurityRequirement(new OpenApiSecurityRequirement()
+
+    options.AddSecurityRequirement(new OpenApiSecurityRequirement
     {
         {
             new OpenApiSecurityScheme
@@ -80,26 +48,64 @@ builder.Services.AddSwaggerGen(options =>
                 {
                     Type = ReferenceType.SecurityScheme,
                     Id = "Bearer"
-                },
-                //Scheme = "oauth2",
-                Name = "Bearer",
-                In = ParameterLocation.Header,
+                }
             },
-            new string[] {}
+            new string[] { }
         }
     });
 });
 
 #endregion
 
-#region Dependency Injection
+#region Configure database and identity
+
+
+builder.Services.AddDbContext<ApplicationDBContext>(options =>
+    options.UseSqlServer(
+        builder.Configuration.GetConnectionString("DefaultConnection"),
+        b => b.MigrationsAssembly(typeof(ApplicationDBContext).Assembly.FullName)));
+
+builder.Services.AddIdentityCore<AppUser>()
+    .AddEntityFrameworkStores<ApplicationDBContext>()
+    .AddSignInManager<SignInManager<AppUser>>();
+#endregion
+
+#region Configure JWT authentication
+
+var jwt = builder.Configuration.GetSection("Token");
+
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options =>
+    {
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuerSigningKey = true,
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwt["Key"])),
+            ValidIssuer = jwt["Issuer"],
+            ValidateIssuer = true,
+            ValidateAudience = false
+        };
+    });
+
+builder.Services.AddAuthorization();
+
+#endregion
+
+#region Configure MemoryCache
+
+builder.Services.AddMemoryCache();
+
+#endregion
+
+#region Configure DI
 
 builder.Services.AddCoreDependencies().AddInfrastructureDependencies();
 builder.Services.AddScoped<ITokenService, TokenService>();
+
 #endregion
 
 #region Redis
-builder.Services.AddSingleton<IConnectionMultiplexer>(ConnectionMultiplexer.Connect(builder.Configuration.GetConnectionString("Redis")));
+//builder.Services.AddSingleton<IConnectionMultiplexer>(ConnectionMultiplexer.Connect(builder.Configuration.GetConnectionString("Redis")));
 
 //builder.Services.AddSingleton<IConnectionMultiplexer>(c =>
 //{
@@ -108,7 +114,6 @@ builder.Services.AddSingleton<IConnectionMultiplexer>(ConnectionMultiplexer.Conn
 //});
 
 #endregion
-
 
 #region CORS Support
 
@@ -131,11 +136,6 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-#region Error
-app.UseMiddleware<ExceptionMiddleware>();
-app.UseStatusCodePagesWithReExecute("/errors/{0}");
-#endregion
-
 app.UseHttpsRedirection();
 app.UseStaticFiles(); // It's Important To Add Images
 
@@ -150,6 +150,15 @@ app.UseAuthorization();
 #endregion
 
 app.MapControllers();
+
+#region Error
+app.UseMiddleware<ExceptionMiddleware>();
+app.UseStatusCodePagesWithReExecute("/errors/{0}");
+#endregion
+
+
+
+
 
 #region Update Database
 

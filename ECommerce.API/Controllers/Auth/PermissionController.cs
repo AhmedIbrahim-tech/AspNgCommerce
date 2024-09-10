@@ -1,4 +1,4 @@
-﻿using ECommerce.Core.Identity.Permission;
+﻿using ECommerce.Core.Identity.Authorization;
 using ECommerce.Infrastrucure.Services.Permissions;
 
 namespace ECommerce.API.Controllers.Auth;
@@ -18,7 +18,7 @@ public class PermissionsController : ControllerBase
     #region Handle of Functions
 
     #region Get List of Permissions
-    [HttpGet(Router.Permissions.GetAllPermissions)]
+    [HttpGet(Router.Permissions.ListPermissions)]
     public async Task<IActionResult> GetPermissions()
     {
         var result = await _permissionsService.GetAllPermissionsAsync();
@@ -31,7 +31,7 @@ public class PermissionsController : ControllerBase
     #endregion
 
     #region Get Single Permission
-    [HttpGet(Router.Permissions.GetPermissionById)]
+    [HttpGet(Router.Permissions.GetById)]
     public async Task<IActionResult> GetPermissionById(int id)
     {
         var result = await _permissionsService.GetPermissionByIdAsync(id);
@@ -44,15 +44,15 @@ public class PermissionsController : ControllerBase
     #endregion
 
     #region Create Permission
-    [HttpPost(Router.Permissions.CreatePermission)]
-    public async Task<IActionResult> CreatePermission([FromBody] PermissionDto permissionDto)
+    [HttpPost(Router.Permissions.Create)]
+    public async Task<IActionResult> CreatePermission([FromBody] Permission permission)
     {
         if (!ModelState.IsValid)
         {
             return BadRequest(ModelState);
         }
 
-        var result = await _permissionsService.AddPermissionAsync(permissionDto);
+        var result = await _permissionsService.AddPermissionAsync(permission);
         if (result.Status)
         {
             return StatusCode(201, result);
@@ -62,15 +62,15 @@ public class PermissionsController : ControllerBase
     #endregion
 
     #region Update Permission
-    [HttpPut(Router.Permissions.UpdatePermission)]
-    public async Task<IActionResult> UpdatePermission(int id, [FromBody] PermissionDto permissionDto)
+    [HttpPut(Router.Permissions.Edit)]
+    public async Task<IActionResult> UpdatePermission(int id, [FromBody] Permission permission)
     {
         if (!ModelState.IsValid)
         {
             return BadRequest(ModelState);
         }
 
-        var result = await _permissionsService.UpdatePermissionAsync(id, permissionDto);
+        var result = await _permissionsService.UpdatePermissionAsync(id, permission);
         if (result.Status)
         {
             return Ok(result);
@@ -80,7 +80,7 @@ public class PermissionsController : ControllerBase
     #endregion
 
     #region Delete Permission
-    [HttpDelete(Router.Permissions.DeletePermission)]
+    [HttpDelete(Router.Permissions.Delete)]
     public async Task<IActionResult> DeletePermission(int id)
     {
         var result = await _permissionsService.DeletePermissionAsync(id);
@@ -90,6 +90,7 @@ public class PermissionsController : ControllerBase
         }
         return StatusCode(result.StatusCode, result.Message);
     }
+
     #endregion
 
     #endregion

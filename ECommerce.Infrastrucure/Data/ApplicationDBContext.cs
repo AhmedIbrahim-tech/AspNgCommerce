@@ -1,5 +1,5 @@
-﻿using ECommerce.Core.Entities;
-using ECommerce.Core.Entities.OrderAggregate;
+﻿using ECommerce.Core.Entities.OrderAggregate;
+using ECommerce.Core.Identity.Authorization;
 
 namespace ECommerce.Infrastrucure.Data;
 
@@ -17,6 +17,7 @@ public class ApplicationDBContext : IdentityDbContext<AppUser>
     public DbSet<DeliveryMethod> DeliveryMethods { get; set; }
     public DbSet<RefreshToken> RefreshTokens { get; set; }
     public DbSet<OtpDetails> OtpDetails { get; set; }
+    public DbSet<Permission> Permissions { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
