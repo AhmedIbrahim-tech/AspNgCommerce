@@ -298,5 +298,5 @@ export class GoogleLocationMapComponent implements OnInit {
         catchError(() => of(false))
       );
   }
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 }

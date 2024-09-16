@@ -61,9 +61,9 @@ body {
 }
 
 /* Importing Bootstrap SCSS file. */
-@import "~bootstrap/scss/bootstrap";
+@import "bootstrap/scss/bootstrap";
 
 /* Importing Datepicker SCSS file. */
 @import "node_modules/ngx-bootstrap/datepicker/bs-datepicker";
 
-@import '~bootswatch/dist/united/bootstrap.min.css';
+@import 'bootswatch/dist/united/bootstrap.min.css';

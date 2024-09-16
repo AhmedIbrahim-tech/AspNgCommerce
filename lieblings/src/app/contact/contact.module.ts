@@ -6,11 +6,8 @@ import { ContactComponent } from './contact.component';
 import { SharedModule } from '../shared/shared.module';
 import { GoogleLocationMapComponent } from './google-location-map/google-location-map.component';
 import { GoogleMapsModule } from '@angular/google-maps';
-import { HttpClientJsonpModule } from '@angular/common/http';
+import { provideHttpClient, withJsonpSupport } from '@angular/common/http';
 
-@NgModule({
-  declarations: [ContactComponent, GoogleLocationMapComponent],
-  imports: [CommonModule, ContactRoutingModule, SharedModule, GoogleMapsModule, HttpClientJsonpModule],
-  exports: [GoogleLocationMapComponent]
-})
+@NgModule({ declarations: [ContactComponent, GoogleLocationMapComponent],
+    exports: [GoogleLocationMapComponent], imports: [CommonModule, ContactRoutingModule, SharedModule, GoogleMapsModule], providers: [provideHttpClient(withJsonpSupport())] })
 export class ContactModule {}
